@@ -123,7 +123,7 @@ const useOnboard = () => {
     balance,
     wallet,
     // Convenience
-    walletName: wallet.name,
+    walletName: wallet?.name,
     isWalletConnected: Boolean(wallet),
     // Functions
     connectWallet,
