@@ -12,13 +12,17 @@ A collection of various useful hooks used across the PoolTogether applications.
 
 Hooks that require other hooks also require their required hooks & environment variables.
 
-### useOnboard
+### useInitializeOnboard
 
-- `NEXT_JS_DOMAIN_NAME` ex. `'pooltogether.com'` or ''
+- `NEXT_JS_DOMAIN_NAME` ex. `'pooltogether.com'` or `''`
 - `NEXT_JS_INFURA_ID`
 - `NEXT_JS_FORTMATIC_API_KEY`
 - `NEXT_JS_PORTIS_API_KEY`
 - `NEXT_JS_DEFAULT_ETHEREUM_NETWORK_NAME` ex. `'homestead'`
+
+### useOnboard
+
+- useInitializeOnboard
 
 ### useIsWalletMetamask
 

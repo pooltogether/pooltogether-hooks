@@ -72,7 +72,7 @@ const useOnboard = () => {
     wallet,
     // Convenience
     walletName: wallet?.name,
-    isWalletConnected: Boolean(wallet),
+    isWalletConnected: Boolean(wallet) && Boolean(address),
     // Functions
     connectWallet,
     disconnectWallet
