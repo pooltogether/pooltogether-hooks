@@ -14,8 +14,6 @@ Hooks that require other hooks also require their required hooks & environment v
 
 ### useOnboard
 
-Environment Variables
-
 - `NEXT_JS_DOMAIN_NAME` ex. ``
 - `NEXT_JS_INFURA_ID`
 - `NEXT_JS_FORTMATIC_API_KEY`
@@ -24,19 +22,13 @@ Environment Variables
 
 ### useIsWalletMetamask
 
-Hooks
-
 - useOnboard
 
 ### useIsWalletOnNetwork
 
-Hooks
-
 - useOnboard
 
 ### useUsersAddress
-
-Hooks
 
 - useOnboard
 
