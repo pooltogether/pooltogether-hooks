@@ -1,13 +1,13 @@
 import Cookies from 'js-cookie'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { atom, useAtom } from 'jotai'
-import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from './constants'
+import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { ethers } from 'ethers'
 import { API, Wallet } from '@pooltogether/bnc-onboard/dist/src/interfaces'
 
 const onboardAtom = atom<API>(undefined as API)
 
-export const useOnboard = () => {
+const useOnboard = () => {
   const [onboard, setOnboard] = useAtom(onboardAtom)
   const [address, setAddress] = useState<string>()
   const [network, setNetwork] = useState<number>()
@@ -18,7 +18,7 @@ export const useOnboard = () => {
   // Initialize Onboard
 
   const getOnboard = async (): Promise<API> => {
-    const initOnboardModule = await import('./services/initOnboard')
+    const initOnboardModule = await import('../services/initOnboard')
 
     return initOnboardModule.initOnboard({
       address: setAddress,
@@ -122,8 +122,13 @@ export const useOnboard = () => {
     provider,
     balance,
     wallet,
+    // Convenience
+    walletName: wallet.name,
+    isWalletConnected: Boolean(wallet),
     // Functions
     connectWallet,
     disconnectWallet
   }
 }
+
+export default useOnboard

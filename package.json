@@ -11,29 +11,26 @@
     "dist"
   ],
   "scripts": {
-    "start": "tsc-watch --onSuccess \"node ./dist/index.js\" ",
-    "build": "tsc",
+    "start": "rm -rf dist && tsc-watch --onSuccess \"node ./dist/index.js\" ",
+    "build": "rm -rf dist && tsc",
     "reinstall": "rm -rf node_modules/ && yarn install",
-    "prepublish": "tsc",
+    "prepublish": "yarn build",
     "test": "jest",
     "testcov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
     "watch": "yarn run test --watch"
   },
   "dependencies": {
     "@pooltogether/bnc-onboard": "^1.25.0-b",
-    "@pooltogether/current-pool-data": "^3.4.3",
     "@pooltogether/utilities": "^0.0.17",
     "ethers": "^5.1.4",
     "jotai": "^0.16.5",
-    "js-cookie": "^2.2.1",
-    "lodash.clonedeep": "^4.5.0"
+    "js-cookie": "^2.2.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.14.2",
-    "@babel/preset-env": "^7.14.2",
-    "@babel/preset-react": "^7.13.13",
     "@types/jest": "^26.0.23",
+    "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",
+    "glob": "^7.1.7",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.6",
     "tsc-watch": "^4.2.9",
@@ -65,7 +62,7 @@
     ]
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
