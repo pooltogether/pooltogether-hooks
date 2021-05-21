@@ -6,14 +6,19 @@ import { ethers } from 'ethers'
 import { API, Wallet } from '@pooltogether/bnc-onboard/dist/src/interfaces'
 
 const onboardAtom = atom<API>(undefined as API)
+const addressAtom = atom<string>(undefined as string)
+const networkAtom = atom<number>(undefined as number)
+const providerAtom = atom<ethers.providers.Web3Provider>(undefined as ethers.providers.Web3Provider)
+const balanceAtom = atom<string>(undefined as string)
+const walletAtom = atom<Wallet>(undefined as Wallet)
 
 const useOnboard = () => {
   const [onboard, setOnboard] = useAtom(onboardAtom)
-  const [address, setAddress] = useState<string>()
-  const [network, setNetwork] = useState<number>()
-  const [provider, setProvider] = useState<ethers.providers.Web3Provider>()
-  const [balance, setBalance] = useState<string>()
-  const [wallet, setWallet] = useState<Wallet>()
+  const [address, setAddress] = useAtom(addressAtom)
+  const [network, setNetwork] = useAtom(networkAtom)
+  const [provider, setProvider] = useAtom(providerAtom)
+  const [balance, setBalance] = useAtom(balanceAtom)
+  const [wallet, setWallet] = useAtom(walletAtom)
 
   // Initialize Onboard
 
