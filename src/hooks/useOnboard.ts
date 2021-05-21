@@ -5,52 +5,22 @@ import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { ethers } from 'ethers'
 import { API, Wallet } from '@pooltogether/bnc-onboard/dist/src/interfaces'
 
-const onboardAtom = atom<API>(undefined as API)
-const addressAtom = atom<string>(undefined as string)
-const networkAtom = atom<number>(undefined as number)
-const providerAtom = atom<ethers.providers.Web3Provider>(undefined as ethers.providers.Web3Provider)
-const balanceAtom = atom<string>(undefined as string)
-const walletAtom = atom<Wallet>(undefined as Wallet)
+export const onboardAtom = atom<API>(undefined as API)
+export const addressAtom = atom<string>(undefined as string)
+export const networkAtom = atom<number>(undefined as number)
+export const providerAtom = atom<ethers.providers.Web3Provider>(
+  undefined as ethers.providers.Web3Provider
+)
+export const balanceAtom = atom<string>(undefined as string)
+export const walletAtom = atom<Wallet>(undefined as Wallet)
 
 const useOnboard = () => {
-  const [onboard, setOnboard] = useAtom(onboardAtom)
-  const [address, setAddress] = useAtom(addressAtom)
-  const [network, setNetwork] = useAtom(networkAtom)
-  const [provider, setProvider] = useAtom(providerAtom)
-  const [balance, setBalance] = useAtom(balanceAtom)
-  const [wallet, setWallet] = useAtom(walletAtom)
-
-  // Initialize Onboard
-
-  const getOnboard = async (): Promise<API> => {
-    const initOnboardModule = await import('../services/initOnboard')
-
-    return initOnboardModule.initOnboard({
-      address: setAddress,
-      network: setNetwork,
-      balance: setBalance,
-      wallet: (wallet) => {
-        if (wallet.provider) {
-          setWallet(wallet)
-          setProvider(new ethers.providers.Web3Provider(wallet.provider, 'any'))
-          Cookies.set(SELECTED_WALLET_COOKIE_KEY, wallet.name, COOKIE_OPTIONS)
-        } else {
-          setWallet(undefined)
-          setProvider(undefined)
-          Cookies.remove(SELECTED_WALLET_COOKIE_KEY, COOKIE_OPTIONS)
-        }
-      }
-    })
-  }
-
-  const handleLoadOnboard = async () => {
-    const onboard = await await getOnboard()
-    setOnboard(onboard)
-  }
-
-  useEffect(() => {
-    handleLoadOnboard()
-  }, [])
+  const [onboard] = useAtom(onboardAtom)
+  const [address] = useAtom(addressAtom)
+  const [network] = useAtom(networkAtom)
+  const [provider] = useAtom(providerAtom)
+  const [balance] = useAtom(balanceAtom)
+  const [wallet] = useAtom(walletAtom)
 
   // External Functions
 
@@ -90,34 +60,7 @@ const useOnboard = () => {
     }
   }, [onboard])
 
-  // Internal Functions
-
-  const setSelectedWallet = useCallback(
-    (selectedWallet) => {
-      try {
-        onboard.walletSelect(selectedWallet)
-      } catch (e) {
-        console.warn("Onboard isn't ready!")
-      }
-    },
-    [onboard]
-  )
-
   // Hooks
-
-  // Auto sign in
-  useEffect(() => {
-    const previouslySelectedWallet = Cookies.get(SELECTED_WALLET_COOKIE_KEY)
-    console.log(
-      'Auto sign in',
-      onboard && Boolean(previouslySelectedWallet),
-      previouslySelectedWallet
-    )
-    if (onboard && Boolean(previouslySelectedWallet)) {
-      disconnectWallet()
-      setSelectedWallet(previouslySelectedWallet)
-    }
-  }, [onboard])
 
   return {
     // Data
