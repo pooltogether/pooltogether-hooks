@@ -1063,10 +1063,10 @@
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.20.tgz#4c6823b7b68825a321e54d574dfa3392b345f993"
-  integrity sha512-8b8ks2noBjkzaAlJ/H20IT+qXa0T3j8p84hCg3HrL4WN73TnnhyP/5HijMPSvwEOd10N1PKe7H7HcWada1L3Jg==
+"@pooltogether/utilities@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.21.tgz#9b7e7fa1851d65b17138373c57980323624ed30b"
+  integrity sha512-P8BlQ8jMD2SuCSKjW+oKYEgw9RlLPebP/TWSh8cgbKR761tRpLhUJJenbaqoy8K2F6wNIzzaICNvnAlrToRc6Q==
   dependencies:
     "@pooltogether/current-pool-data" "^3.4.3"
     ethers "^5.1.2"
@@ -6842,7 +6842,7 @@ react-qr-reader@^2.2.1:
     prop-types "^15.7.2"
     webrtc-adapter "^7.2.1"
 
-react-query@^3.13.9:
+react-query@^3.13.0:
   version "3.16.0"
   resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.16.0.tgz#8de1556aabb3d200d0f8eeb74ce2b0b3dd0a0a51"
   integrity sha512-YOvI8mO9WG+r4XsyJinjlDMiV5IewUWUcTv2J7z6bIP3KOFvgT6k6HM8vQouz4hPnme7Ktq9j5e7LarUqgJXFQ==

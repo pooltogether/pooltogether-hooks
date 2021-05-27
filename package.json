@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "@pooltogether/bnc-onboard": "^1.25.0-b",
     "@pooltogether/etherplex": "^1.1.1",
     "@pooltogether/evm-chains-extended": "^0.4.3",
-    "@pooltogether/utilities": "^0.0.20",
+    "@pooltogether/utilities": "^0.0.21",
     "ethers": "^5.1.4",
     "jotai": "^0.16.5",
     "js-cookie": "^2.2.1"
@@ -66,6 +66,6 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.13.9"
+    "react-query": "^3.13.0"
   }
 }

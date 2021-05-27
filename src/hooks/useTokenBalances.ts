@@ -1,10 +1,11 @@
 import { batch, contract } from '@pooltogether/etherplex'
-import { default as ERC20Abi } from './../abis/ERC20Abi'
+import { default as ERC20Abi } from '../abis/ERC20Abi'
 import { formatUnits } from '@ethersproject/units'
 import useReadProvider from './useReadProvider'
 import { useQuery, useQueryClient } from 'react-query'
-import { QUERY_KEYS } from './../constants'
-import populatePerIdCache from './../utils/populatePerIdCache'
+import { QUERY_KEYS } from '../constants'
+import populatePerIdCache from '../utils/populatePerIdCache'
+import useRefetchInterval from './useRefetchInterval'
 
 /**
  * Returns a dictionary keyed by the token addresses filled with
@@ -15,6 +16,7 @@ import populatePerIdCache from './../utils/populatePerIdCache'
  * @returns
  */
 const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
+  const refetchInterval = useRefetchInterval()
   const { data: readProvider, isFetched: readProviderIsFetched } = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
@@ -32,6 +34,7 @@ const useTokenBalances = (chainId: number, address: string, tokenAddresses: stri
     async () => await getTokenBalances(readProvider, address, tokenAddresses),
     {
       enabled,
+      refetchInterval,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
   )
