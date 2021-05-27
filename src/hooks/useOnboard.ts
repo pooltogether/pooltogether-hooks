@@ -1,13 +1,15 @@
 import Cookies from 'js-cookie'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { atom, useAtom } from 'jotai'
-import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { ethers } from 'ethers'
 import { API, Wallet } from '@pooltogether/bnc-onboard/dist/src/interfaces'
+import { getNetworkNameAliasByChainId } from '@pooltogether/utilities'
+import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from '../constants'
 
 export const onboardAtom = atom<API>(undefined as API)
 export const addressAtom = atom<string>(undefined as string)
 export const networkAtom = atom<number>(undefined as number)
+export const networkNameAtom = atom<string>((get) => getNetworkNameAliasByChainId(get(networkAtom)))
 export const providerAtom = atom<ethers.providers.Web3Provider>(
   undefined as ethers.providers.Web3Provider
 )
@@ -18,6 +20,7 @@ const useOnboard = () => {
   const [onboard] = useAtom(onboardAtom)
   const [address] = useAtom(addressAtom)
   const [network] = useAtom(networkAtom)
+  const [networkName] = useAtom(networkNameAtom)
   const [provider] = useAtom(providerAtom)
   const [balance] = useAtom(balanceAtom)
   const [wallet] = useAtom(walletAtom)
@@ -71,6 +74,7 @@ const useOnboard = () => {
     balance,
     wallet,
     // Convenience
+    networkName,
     walletName: wallet?.name,
     isWalletConnected: Boolean(wallet) && Boolean(address),
     // Functions

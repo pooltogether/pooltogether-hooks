@@ -21,10 +21,13 @@
   },
   "dependencies": {
     "@pooltogether/bnc-onboard": "^1.25.0-b",
-    "@pooltogether/utilities": "^0.0.17",
+    "@pooltogether/etherplex": "^1.1.1",
+    "@pooltogether/evm-chains-extended": "^0.4.3",
+    "@pooltogether/utilities": "^0.0.20",
     "ethers": "^5.1.4",
     "jotai": "^0.16.5",
-    "js-cookie": "^2.2.1"
+    "js-cookie": "^2.2.1",
+    "react-query": "^3.16.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
