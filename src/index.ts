@@ -8,6 +8,7 @@ export { default as useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnS
 
 // Chain data
 export { default as useReadProvider } from './hooks/useReadProvider'
+export { default as useRefetchInterval } from './hooks/useRefetchInterval'
 
 // Token Related Hooks
 export { default as useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
