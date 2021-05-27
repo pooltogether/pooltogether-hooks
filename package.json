@@ -26,8 +26,7 @@
     "@pooltogether/utilities": "^0.0.20",
     "ethers": "^5.1.4",
     "jotai": "^0.16.5",
-    "js-cookie": "^2.2.1",
-    "react-query": "^3.16.0"
+    "js-cookie": "^2.2.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
@@ -66,6 +65,7 @@
   },
   "peerDependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-query": "^3.13.9"
   }
 }
