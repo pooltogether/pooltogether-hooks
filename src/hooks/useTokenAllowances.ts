@@ -1,10 +1,10 @@
 import { batch, contract } from '@pooltogether/etherplex'
-import ERC20Abi from '../abis/ERC20Abi'
+import { default as ERC20Abi } from './../abis/ERC20Abi'
 import { formatUnits } from '@ethersproject/units'
 import useReadProvider from './useReadProvider'
 import { useQuery, useQueryClient } from 'react-query'
-import { QUERY_KEYS } from '../constants'
-import populatePerIdCache from '../utils/populatePerIdCache'
+import { QUERY_KEYS } from './../constants'
+import populatePerIdCache from './../utils/populatePerIdCache'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
