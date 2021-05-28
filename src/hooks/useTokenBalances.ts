@@ -16,7 +16,7 @@ import useRefetchInterval from './useRefetchInterval'
  * @returns
  */
 const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
-  const refetchInterval = useRefetchInterval()
+  // const refetchInterval = useRefetchInterval()
   const { data: readProvider, isFetched: readProviderIsFetched } = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
@@ -34,7 +34,7 @@ const useTokenBalances = (chainId: number, address: string, tokenAddresses: stri
     async () => await getTokenBalances(readProvider, address, tokenAddresses),
     {
       enabled,
-      refetchInterval,
+      refetchInterval: process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
   )
@@ -60,20 +60,22 @@ const getTokenBalances = async (readProvider, address, tokenAddresses) => {
     batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol())
   })
   const response = await batch(readProvider, ...batchCalls)
-  return Object.keys(response).reduce((accumulator, current) => {
-    const amountUnformatted = response[current].balanceOf[0]
-    const decimals = response[current].decimals[0]
-    const name = response[current].name[0]
-    const symbol = response[current].symbol[0]
-    accumulator[current] = {
+  const result = {}
+  Object.keys(response).map((tokenAddress) => {
+    const amountUnformatted = response[tokenAddress].balanceOf[0]
+    const decimals = response[tokenAddress].decimals[0]
+    const name = response[tokenAddress].name[0]
+    const symbol = response[tokenAddress].symbol[0]
+    result[tokenAddress] = {
+      hasBalance: !amountUnformatted.isZero(),
       amount: formatUnits(amountUnformatted, decimals),
       amountUnformatted,
       decimals,
       name,
       symbol
     }
-    return accumulator
-  }, {})
+  })
+  return result
 }
 
 export default useTokenBalances

@@ -67,7 +67,6 @@ const useInitializeOnboard = () => {
   )
 
   const disconnectWallet = useCallback(() => {
-    console.log('disconnectWallet')
     try {
       onboard.walletReset()
       Cookies.remove(SELECTED_WALLET_COOKIE_KEY, COOKIE_OPTIONS)
@@ -81,11 +80,6 @@ const useInitializeOnboard = () => {
   // Auto sign in
   useEffect(() => {
     const previouslySelectedWallet = Cookies.get(SELECTED_WALLET_COOKIE_KEY)
-    console.log(
-      'Auto sign in',
-      onboard && Boolean(previouslySelectedWallet),
-      previouslySelectedWallet
-    )
     if (onboard && Boolean(previouslySelectedWallet)) {
       disconnectWallet()
       setSelectedWallet(previouslySelectedWallet)

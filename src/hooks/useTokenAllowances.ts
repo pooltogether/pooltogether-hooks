@@ -5,7 +5,6 @@ import useReadProvider from './useReadProvider'
 import { useQuery, useQueryClient } from 'react-query'
 import { QUERY_KEYS } from '../constants'
 import populatePerIdCache from '../utils/populatePerIdCache'
-import useRefetchInterval from './useRefetchInterval'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
@@ -22,7 +21,6 @@ const useTokenAllowances = (
   spenderAddress: string,
   tokenAddresses: string[]
 ) => {
-  const refetchInterval = useRefetchInterval(chainId)
   const { data: readProvider, isFetched: readProviderIsFetched } = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
@@ -48,7 +46,6 @@ const useTokenAllowances = (
       await getTokenAllowances(readProvider, usersAddress, spenderAddress, tokenAddresses),
     {
       enabled,
-      refetchInterval,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
   )
@@ -84,16 +81,18 @@ const getTokenAllowances = async (readProvider, usersAddress, spenderAddress, to
     batchCalls.push(tokenContract.allowance(usersAddress, spenderAddress).decimals())
   })
   const response = await batch(readProvider, ...batchCalls)
-  return Object.keys(response).reduce((accumulator, current) => {
-    const allowanceUnformatted = response[current].allowance[0]
-    const decimals = response[current].decimals[0]
-    accumulator[current] = {
+  const result = {}
+  Object.keys(response).map((tokenAddress) => {
+    const allowanceUnformatted = response[tokenAddress].allowance[0]
+    const decimals = response[tokenAddress].decimals[0]
+    result[tokenAddress] = {
+      isAllowed: !allowanceUnformatted.isZero(),
       allowance: formatUnits(allowanceUnformatted, decimals),
       allowanceUnformatted,
       decimals
     }
-    return accumulator
-  }, {})
+  })
+  return result
 }
 
 export default useTokenAllowances

@@ -39,3 +39,21 @@ Hooks that require other hooks also require their required hooks & environment v
 ## TODO:
 
 - jest tests
+
+## Local development
+
+TODO: Make this better...
+In the app you're importing pooltogether-hooks:
+`cd node_modules/react && yarn link`
+`cd node_modules/react-query && yarn link`
+
+In pooltogether-hooks:
+`yarn link react && yarn link react-query && cd dist && yarn link`
+
+Now you can run:
+`yarn start` and in a new tab `cp package.json dist/`
+
+In the app you're importing pooltogether-hooks:
+`yarn link "@pooltogether/hooks"`
+
+And your app will hot reload when changes are detected in the hooks folder!

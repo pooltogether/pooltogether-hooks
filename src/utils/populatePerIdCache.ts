@@ -14,10 +14,14 @@ const populatePerIdCache = (
   queryClient: QueryClient,
   getCacheKey: (id: (string | number)[]) => (string | number | (string | number)[])[],
   data: object
-) =>
-  Object.keys(data).forEach((id) => {
+) => {
+  const ids = Object.keys(data)
+  if (ids.length === 1) return
+
+  ids.forEach((id) => {
     const datum = data[id]
-    queryClient.setQueryData(getCacheKey([id]), datum)
+    queryClient.setQueryData(getCacheKey([id]), { [id]: datum })
   })
+}
 
 export default populatePerIdCache
