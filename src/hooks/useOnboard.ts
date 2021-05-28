@@ -29,18 +29,14 @@ const useOnboard = () => {
 
   const connectWallet = useCallback(
     async (postSignInCallback) => {
-      console.log('connectWallet')
       try {
         // Let user select wallet
-        console.log('pre walletSelected', onboard)
         const walletSelected = await onboard.walletSelect()
-        console.log('post walletSelected', walletSelected, onboard)
         if (!walletSelected) {
           return
         }
 
         const walletIsReady = await onboard.walletCheck()
-        console.log('post walletIsReady', walletIsReady, onboard)
         if (!walletIsReady) {
           return
         }
@@ -54,7 +50,6 @@ const useOnboard = () => {
   )
 
   const disconnectWallet = useCallback(() => {
-    console.log('disconnectWallet')
     try {
       onboard.walletReset()
       Cookies.remove(SELECTED_WALLET_COOKIE_KEY, COOKIE_OPTIONS)

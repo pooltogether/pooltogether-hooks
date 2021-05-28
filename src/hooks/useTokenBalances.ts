@@ -16,7 +16,7 @@ import useRefetchInterval from './useRefetchInterval'
  * @returns
  */
 const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
-  // const refetchInterval = useRefetchInterval()
+  const refetchInterval = useRefetchInterval()
   const { data: readProvider, isFetched: readProviderIsFetched } = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
@@ -34,7 +34,7 @@ const useTokenBalances = (chainId: number, address: string, tokenAddresses: stri
     async () => await getTokenBalances(readProvider, address, tokenAddresses),
     {
       enabled,
-      refetchInterval: process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000,
+      refetchInterval,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
   )
