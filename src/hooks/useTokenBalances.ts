@@ -17,11 +17,11 @@ import useRefetchInterval from './useRefetchInterval'
  */
 const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
   const refetchInterval = useRefetchInterval()
-  const { data: readProvider, isFetched: readProviderIsFetched } = useReadProvider(chainId)
+  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
   const enabled =
-    readProviderIsFetched &&
+    isReadProviderReady &&
     Boolean(address) &&
     tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
     Array.isArray(tokenAddresses) &&

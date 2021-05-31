@@ -21,11 +21,11 @@ const useTokenAllowances = (
   spenderAddress: string,
   tokenAddresses: string[]
 ) => {
-  const { data: readProvider, isFetched: readProviderIsFetched } = useReadProvider(chainId)
+  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
   const enabled =
-    readProviderIsFetched &&
+    isReadProviderReady &&
     Boolean(usersAddress) &&
     Boolean(spenderAddress) &&
     tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
