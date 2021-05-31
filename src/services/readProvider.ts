@@ -40,7 +40,7 @@ export const readProvider = async (chainId) => {
         if (!providerCache[net.name]) {
           providerCache[net.name] = ethers.providers.InfuraProvider.getWebSocketProvider(
             net.name,
-            process.env.NEXT_JS_INFURA_KEY
+            process.env.NEXT_JS_INFURA_ID
           )
         }
 
