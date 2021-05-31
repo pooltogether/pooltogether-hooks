@@ -11,8 +11,7 @@ import { ethers } from 'ethers'
 import { getChain } from '@pooltogether/evm-chains-extended'
 import { NETWORK, ETHEREUM_NETWORKS } from '@pooltogether/utilities'
 
-const POLYGON_QUIKNODE_RPC_URL =
-  'https://blue-wandering-sunset.matic.quiknode.pro/a18ea462a3952f814f2288f0430050ebd203cb35/'
+const POLYGON_INFURA_WEBSOCKETS_URL = `wss://polygon-mainnet.infura.io/ws/v3/${process.env.NEXT_JS_INFURA_ID}`
 const providerCache = {}
 
 export const readProvider = async (chainId) => {
@@ -27,7 +26,7 @@ export const readProvider = async (chainId) => {
         network = getChain(NETWORK.mainnet)
         provider = ethers.getDefaultProvider(network.network)
       } else if (chainId === 137) {
-        provider = new ethers.providers.JsonRpcProvider(POLYGON_QUIKNODE_RPC_URL)
+        provider = new ethers.providers.WebSocketProvider(POLYGON_INFURA_WEBSOCKETS_URL)
       } else if (chainId === 1234 || chainId === 31337) {
         provider = new ethers.providers.JsonRpcProvider()
       } else if (Boolean(jsonRpcProviderUrl)) {
@@ -39,7 +38,7 @@ export const readProvider = async (chainId) => {
       // If we're running against an Ethereum network
       if (net && net.name !== 'unknown') {
         if (!providerCache[net.name]) {
-          providerCache[net.name] = new ethers.providers.InfuraProvider(
+          providerCache[net.name] = ethers.providers.InfuraProvider.getWebSocketProvider(
             net.name,
             process.env.NEXT_JS_INFURA_KEY
           )
