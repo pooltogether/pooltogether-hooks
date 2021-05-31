@@ -1,3 +1,6 @@
+// Multi Chain Utilities
+export { default as useAppEnv, APP_ENVIRONMENT } from './hooks/useAppEnv'
+
 // Users Wallet Related Hooks
 export { default as useInitializeOnboard } from './hooks/useInitializeOnboard'
 export { default as useOnboard } from './hooks/useOnboard'
