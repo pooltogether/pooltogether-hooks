@@ -13,3 +13,10 @@ export const QUERY_KEYS = Object.freeze({
   tokenAllowances: 'tokenAllowances',
   readProvider: 'readProvider'
 })
+
+export const NO_REFETCH_QUERY_OPTIONS = Object.freeze({
+  refetchInterval: false,
+  refetchOnReconnect: false,
+  refetchOnWindowFocus: false,
+  staleTime: Infinity
+})

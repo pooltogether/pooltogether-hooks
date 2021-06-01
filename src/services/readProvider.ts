@@ -22,8 +22,10 @@ export const readProvider = async (chainId) => {
       let network = getChain(chainId)
       const jsonRpcProviderUrl = network?.rpc?.[0]
 
-      if (!network || (network && ETHEREUM_NETWORKS.includes(chainId))) {
+      if (!network) {
         network = getChain(NETWORK.mainnet)
+        provider = ethers.getDefaultProvider(network.network)
+      } else if (network && ETHEREUM_NETWORKS.includes(chainId)) {
         provider = ethers.getDefaultProvider(network.network)
       } else if (chainId === 137) {
         provider = new ethers.providers.WebSocketProvider(POLYGON_INFURA_WEBSOCKETS_URL)
