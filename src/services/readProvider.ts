@@ -37,8 +37,8 @@ export const readProvider = async (chainId) => {
 
       const net = await provider.getNetwork()
 
-      // If we're running against an Ethereum network
-      if (net && net.name !== 'unknown') {
+      // // If we're running against an Ethereum network
+      if (net && net.name !== 'unknown' && ETHEREUM_NETWORKS.includes(chainId)) {
         if (!providerCache[net.name]) {
           providerCache[net.name] = ethers.providers.InfuraProvider.getWebSocketProvider(
             net.name,
