@@ -21,7 +21,6 @@ const useReadProvider = (chainId) => {
       ...NO_REFETCH_QUERY_OPTIONS
     }
   )
-  console.log(chainId, _readProvider)
   const isReadProviderReady =
     isFetched && _readProvider?.network?.chainId === chainId && !isFetching
   return { readProvider: _readProvider, isReadProviderReady }
