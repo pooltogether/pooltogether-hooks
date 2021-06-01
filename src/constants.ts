@@ -1,4 +1,5 @@
 import { CookieAttributes } from 'js-cookie'
+import { UseQueryOptions } from 'react-query'
 
 export const SELECTED_WALLET_COOKIE_KEY = 'selectedWallet'
 
@@ -14,7 +15,12 @@ export const QUERY_KEYS = Object.freeze({
   readProvider: 'readProvider'
 })
 
-export const NO_REFETCH_QUERY_OPTIONS = Object.freeze({
+export const NO_REFETCH_QUERY_OPTIONS: {
+  refetchInterval: false
+  refetchOnReconnect: false
+  refetchOnWindowFocus: false
+  staleTime: number
+} = Object.freeze({
   refetchInterval: false,
   refetchOnReconnect: false,
   refetchOnWindowFocus: false,

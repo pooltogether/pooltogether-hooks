@@ -1,3 +1,4 @@
+import { ethers } from 'ethers'
 import { useQuery } from 'react-query'
 
 import { NO_REFETCH_QUERY_OPTIONS, QUERY_KEYS } from '../constants'
@@ -13,9 +14,13 @@ const useReadProvider = (chainId) => {
     data: _readProvider,
     isFetched,
     isFetching
-  } = useQuery([QUERY_KEYS.readProvider, chainId], () => readProvider(chainId), {
-    ...NO_REFETCH_QUERY_OPTIONS
-  })
+  } = useQuery<ethers.providers.BaseProvider, Error>(
+    [QUERY_KEYS.readProvider, chainId],
+    () => readProvider(chainId),
+    {
+      ...NO_REFETCH_QUERY_OPTIONS
+    }
+  )
   console.log(chainId, _readProvider)
   const isReadProviderReady =
     isFetched && _readProvider?.network?.chainId === chainId && !isFetching
