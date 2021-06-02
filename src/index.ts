@@ -19,7 +19,7 @@ export { default as useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnS
 
 // UI
 export { default as useReducedMotion } from './hooks/useReducedMotion'
-export { default as useScreenSize } from './hooks/useScreenSize'
+export { default as useScreenSize, ScreenSize } from './hooks/useScreenSize'
 
 // Constants
 export * as PT_HOOKS_CONSTANTS from './constants'

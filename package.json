@@ -17,28 +17,44 @@
     "prepublish": "yarn build",
     "test": "jest",
     "testcov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
-    "watch": "yarn run test --watch"
+    "watch": "yarn run test --watch",
+    "link-local": "yarn link react && yarn link react-query && yarn link react-dom && yarn link",
+    "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink"
   },
-  "dependencies": {
-    "@pooltogether/bnc-onboard": "^1.25.0-b",
-    "@pooltogether/etherplex": "^1.1.1",
-    "@pooltogether/evm-chains-extended": "^0.4.3",
-    "@pooltogether/utilities": "^0.0.21",
-    "ethers": "^5.1.4",
-    "framer-motion": "^4.1.17",
-    "jotai": "^0.16.5",
-    "js-cookie": "^2.2.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",
     "glob": "^7.1.7",
     "jest": "^26.6.3",
-    "react-query": "^3.13.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.16.0",
     "ts-jest": "^26.5.6",
     "tsc-watch": "^4.2.9",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "ethers": "^5.3.0",
+    "jotai": "^0.16.5",
+    "js-cookie": "^2.2.1",
+    "@pooltogether/bnc-onboard": "^1.25.0-c",
+    "@pooltogether/etherplex": "^1.1.1",
+    "@pooltogether/evm-chains-extended": "^0.4.3",
+    "@pooltogether/utilities": "^0.0.21",
+    "framer-motion": "^4.1.17"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.16.0",
+    "ethers": "^5.3.0",
+    "jotai": "^0.16.5",
+    "js-cookie": "^2.2.1",
+    "@pooltogether/bnc-onboard": "^1.25.0-c",
+    "@pooltogether/etherplex": "^1.1.1",
+    "@pooltogether/evm-chains-extended": "^0.4.3",
+    "@pooltogether/utilities": "^0.0.21",
+    "framer-motion": "^4.1.17"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -64,10 +80,5 @@
       "js",
       "json"
     ]
-  },
-  "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-query": "^3.13.9"
   }
 }
