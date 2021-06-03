@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,21 +22,22 @@
     "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink"
   },
   "dependencies": {
-    "@pooltogether/bnc-onboard": "^1.25.0-c"
-  },
-  "devDependencies": {
+    "@pooltogether/bnc-onboard": "^1.25.0-c",
     "@pooltogether/etherplex": "^1.1.1",
     "@pooltogether/evm-chains-extended": "^0.4.3",
     "@pooltogether/utilities": "^0.0.21",
+    "ethers": "^5.3.0",
+    "framer-motion": "^4.1.17",
+    "jotai": "^0.16.5",
+    "js-cookie": "^2.2.1"
+  },
+  "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",
-    "ethers": "^5.3.0",
-    "framer-motion": "^4.1.17",
     "glob": "^7.1.7",
     "jest": "^26.6.3",
     "jotai": "^0.16.5",
-    "js-cookie": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.16.0",
@@ -45,13 +46,6 @@
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
-    "@pooltogether/etherplex": "^1.1.1",
-    "@pooltogether/evm-chains-extended": "^0.4.3",
-    "@pooltogether/utilities": "^0.0.21",
-    "ethers": "^5.3.0",
-    "framer-motion": "^4.1.17",
-    "jotai": "^0.16.5",
-    "js-cookie": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.16.0"
