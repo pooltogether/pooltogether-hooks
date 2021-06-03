@@ -1,18 +1,22 @@
 import Cookies from 'js-cookie'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import { atom, useAtom } from 'jotai'
 import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { ethers } from 'ethers'
 import { API, Wallet } from '@pooltogether/bnc-onboard/dist/src/interfaces'
-import {
-  addressAtom,
-  balanceAtom,
-  networkAtom,
-  onboardAtom,
-  providerAtom,
-  walletAtom
-} from './useOnboard'
+
 import { initOnboard } from '../services/initOnboard'
+import { getNetworkNameAliasByChainId } from '@pooltogether/utilities'
+
+export const onboardAtom = atom<API>(undefined as API)
+export const addressAtom = atom<string>(undefined as string)
+export const networkAtom = atom<number>(undefined as number)
+export const networkNameAtom = atom<string>((get) => getNetworkNameAliasByChainId(get(networkAtom)))
+export const providerAtom = atom<ethers.providers.Web3Provider>(
+  undefined as ethers.providers.Web3Provider
+)
+export const balanceAtom = atom<string>(undefined as string)
+export const walletAtom = atom<Wallet>(undefined as Wallet)
 
 const useInitializeOnboard = () => {
   const [onboard, setOnboard] = useAtom(onboardAtom)
