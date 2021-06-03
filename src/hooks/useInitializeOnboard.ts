@@ -12,6 +12,7 @@ import {
   providerAtom,
   walletAtom
 } from './useOnboard'
+import { initOnboard } from '../services/initOnboard'
 
 const useInitializeOnboard = () => {
   const [onboard, setOnboard] = useAtom(onboardAtom)
@@ -24,9 +25,7 @@ const useInitializeOnboard = () => {
   // Initialize Onboard
 
   const getOnboard = async (): Promise<API> => {
-    const initOnboardModule = await import('../services/initOnboard')
-
-    return initOnboardModule.initOnboard({
+    return initOnboard({
       address: setAddress,
       network: setNetwork,
       balance: setBalance,

@@ -1,5 +1,4 @@
 import { CookieAttributes } from 'js-cookie'
-import { UseQueryOptions } from 'react-query'
 
 export const SELECTED_WALLET_COOKIE_KEY = 'selectedWallet'
 

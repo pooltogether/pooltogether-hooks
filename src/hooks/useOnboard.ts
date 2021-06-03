@@ -72,6 +72,7 @@ const useOnboard = () => {
     networkName,
     walletName: wallet?.name,
     isWalletConnected: Boolean(wallet) && Boolean(address),
+    isOnboardReady: Boolean(onboard),
     // Functions
     connectWallet,
     disconnectWallet
