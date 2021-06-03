@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,9 +21,10 @@
     "link-local": "yarn link react && yarn link react-query && yarn link react-dom && yarn link",
     "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@pooltogether/bnc-onboard": "^1.25.0-c"
+  },
   "devDependencies": {
-    "@pooltogether/bnc-onboard": "^1.25.0-c",
     "@pooltogether/etherplex": "^1.1.1",
     "@pooltogether/evm-chains-extended": "^0.4.3",
     "@pooltogether/utilities": "^0.0.21",
@@ -44,7 +45,6 @@
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
-    "@pooltogether/bnc-onboard": "^1.25.0-c",
     "@pooltogether/etherplex": "^1.1.1",
     "@pooltogether/evm-chains-extended": "^0.4.3",
     "@pooltogether/utilities": "^0.0.21",
