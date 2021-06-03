@@ -3,6 +3,7 @@ export { default as useAppEnv, APP_ENVIRONMENT } from './hooks/useAppEnv'
 
 // Common chain data
 export { default as useReadProvider } from './hooks/useReadProvider'
+export { default as useReadProviders } from './hooks/useReadProviders'
 export { default as useRefetchInterval } from './hooks/useRefetchInterval'
 
 // Token
