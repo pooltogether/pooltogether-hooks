@@ -13,11 +13,12 @@
   "scripts": {
     "start": "rm -rf dist && tsc-watch --onSuccess \"node ./dist/index.js\" ",
     "build": "rm -rf dist && tsc",
+    "watch": "yarn start",
     "reinstall": "rm -rf node_modules/ && yarn install",
     "prepublish": "yarn build",
     "test": "jest",
-    "testcov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
-    "watch": "yarn run test --watch",
+    "test:watch": "yarn run test --watch",
+    "test:cov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
     "link-local": "yarn link react && yarn link react-query && yarn link react-dom && yarn link jotai",
     "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink jotai && yarn install --force"
   },
