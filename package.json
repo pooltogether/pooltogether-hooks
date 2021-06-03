@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,8 +28,8 @@
     "@pooltogether/utilities": "^0.0.21",
     "ethers": "^5.3.0",
     "framer-motion": "^4.1.17",
-    "js-cookie": "^2.2.1",
-    "jotai": "^0.16.5"
+    "jotai": "^0.16.5",
+    "js-cookie": "^2.2.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
