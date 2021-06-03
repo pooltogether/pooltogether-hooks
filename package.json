@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
     "testcov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
     "watch": "yarn run test --watch",
     "link-local": "yarn link react && yarn link react-query && yarn link react-dom",
-    "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink && yarn install --force"
+    "unlink-local": "yarn unlink react && yarn unlink react-query && yarn install --force"
   },
   "dependencies": {
     "@pooltogether/bnc-onboard": "^1.25.0-c",
