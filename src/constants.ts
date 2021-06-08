@@ -11,7 +11,8 @@ export const COOKIE_OPTIONS: CookieAttributes = Object.freeze({
 export const QUERY_KEYS = Object.freeze({
   tokenBalances: 'tokenBalances',
   tokenAllowances: 'tokenAllowances',
-  readProvider: 'readProvider'
+  readProvider: 'readProvider',
+  getCoingeckoTokenData: 'getCoingeckoTokenData'
 })
 
 export const NO_REFETCH_QUERY_OPTIONS: {

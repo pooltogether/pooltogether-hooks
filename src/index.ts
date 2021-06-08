@@ -9,6 +9,8 @@ export { default as useRefetchInterval } from './hooks/useRefetchInterval'
 // Token
 export { default as useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
 export { default as useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
+export { default as useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
+export { default as useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 
 // Users Wallet
 export { default as useInitializeOnboard } from './hooks/useInitializeOnboard'
