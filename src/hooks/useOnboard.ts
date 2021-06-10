@@ -10,7 +10,8 @@ import {
   networkNameAtom,
   walletAtom
 } from './useInitializeOnboard'
-import { COOKIE_OPTIONS, SELECTED_WALLET_COOKIE_KEY } from '../constants'
+import { SELECTED_WALLET_COOKIE_KEY } from '../constants'
+import { useCookieOptions } from './useCookieOptions'
 
 const useOnboard = () => {
   const [onboard] = useAtom(onboardAtom)
@@ -20,6 +21,8 @@ const useOnboard = () => {
   const [provider] = useAtom(providerAtom)
   const [balance] = useAtom(balanceAtom)
   const [wallet] = useAtom(walletAtom)
+
+  const cookieOptions = useCookieOptions()
 
   // External Functions
 
@@ -48,11 +51,11 @@ const useOnboard = () => {
   const disconnectWallet = useCallback(() => {
     try {
       onboard.walletReset()
-      Cookies.remove(SELECTED_WALLET_COOKIE_KEY, COOKIE_OPTIONS)
+      Cookies.remove(SELECTED_WALLET_COOKIE_KEY, cookieOptions)
     } catch (e) {
       console.warn("Onboard isn't ready!")
     }
-  }, [onboard])
+  }, [onboard, cookieOptions])
 
   // Hooks
 

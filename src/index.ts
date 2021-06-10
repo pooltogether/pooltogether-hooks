@@ -2,6 +2,7 @@
 export { default as useAppEnv, APP_ENVIRONMENT } from './hooks/useAppEnv'
 
 // Common chain data
+export { default as useInitInfuraId } from './hooks/useInitInfuraId'
 export { default as useReadProvider } from './hooks/useReadProvider'
 export { default as useReadProviders } from './hooks/useReadProviders'
 export { default as useRefetchInterval } from './hooks/useRefetchInterval'
@@ -21,8 +22,9 @@ export { default as useUsersAddress } from './hooks/useUsersAddress'
 export { default as useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
 
 // UI
-export { default as useReducedMotion } from './hooks/useReducedMotion'
+export { default as useReducedMotion, useInitReducedMotion } from './hooks/useReducedMotion'
 export { default as useScreenSize, ScreenSize } from './hooks/useScreenSize'
+export { useCookieOptions, useInitCookieOptions } from './hooks/useCookieOptions'
 
 // Constants
 export * as PT_HOOKS_CONSTANTS from './constants'

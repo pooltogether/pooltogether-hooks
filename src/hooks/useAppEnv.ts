@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { atom, useAtom } from 'jotai'
-import { COOKIE_OPTIONS } from '../constants'
+import { useCookieOptions } from './useCookieOptions'
 
 const APP_ENVIRONMENT_KEY = '_app_env'
 
@@ -28,9 +28,10 @@ const appEnvAtom = atom(
  */
 const useAppEnv = () => {
   const [appEnv, setAppEnvState] = useAtom(appEnvAtom)
+  const cookieOptions = useCookieOptions()
 
   const setAppEnv = (appEnv) => {
-    Cookies.set(APP_ENVIRONMENT_KEY, appEnv, COOKIE_OPTIONS)
+    Cookies.set(APP_ENVIRONMENT_KEY, appEnv, cookieOptions)
     setAppEnvState(appEnv)
   }
 

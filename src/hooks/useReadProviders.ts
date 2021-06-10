@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 
 import { NO_REFETCH_QUERY_OPTIONS, QUERY_KEYS } from '../constants'
 import { readProvider } from '../services/readProvider'
+import { useInfuraId } from './useInitInfuraId'
 
 /**
  *
@@ -10,15 +11,17 @@ import { readProvider } from '../services/readProvider'
  * @returns Providers for the provided chain id
  */
 const useReadProviders = (chainIds) => {
+  const infuraId = useInfuraId()
   const {
     data: _readProviders,
     isFetched,
     isFetching
   } = useQuery<{ [chainId: string]: ethers.providers.BaseProvider }, Error>(
-    [QUERY_KEYS.readProvider, chainIds],
-    () => getReadProviders(chainIds),
+    [QUERY_KEYS.readProvider, chainIds, infuraId],
+    () => getReadProviders(chainIds, infuraId),
     {
-      ...NO_REFETCH_QUERY_OPTIONS
+      ...NO_REFETCH_QUERY_OPTIONS,
+      enabled: Boolean(infuraId)
     }
   )
 
@@ -31,10 +34,10 @@ const useReadProviders = (chainIds) => {
   return { readProviders: _readProviders, isReadProvidersReady }
 }
 
-const getReadProviders = async (chainIds) => {
+const getReadProviders = async (chainIds, infuraId) => {
   const readProviders = {}
   for (const chainId of chainIds) {
-    readProviders[chainId] = await readProvider(chainId)
+    readProviders[chainId] = await readProvider(chainId, infuraId)
   }
   return readProviders
 }

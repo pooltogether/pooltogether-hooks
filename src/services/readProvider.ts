@@ -14,7 +14,7 @@ import { NETWORK, ETHEREUM_NETWORKS } from '@pooltogether/utilities'
 const POLYGON_INFURA_WEBSOCKETS_URL = `wss://polygon-mainnet.infura.io/ws/v3/${process.env.NEXT_JS_INFURA_ID}`
 const providerCache = {}
 
-export const readProvider = async (chainId) => {
+export const readProvider = async (chainId, infuraId) => {
   let provider: ethers.providers.BaseProvider
 
   try {
@@ -42,7 +42,7 @@ export const readProvider = async (chainId) => {
         if (!providerCache[net.name]) {
           providerCache[net.name] = ethers.providers.InfuraProvider.getWebSocketProvider(
             net.name,
-            process.env.NEXT_JS_INFURA_ID
+            infuraId
           )
         }
 
