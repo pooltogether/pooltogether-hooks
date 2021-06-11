@@ -19,12 +19,14 @@ const useCoingeckoTokenData = (chainId, contractAddress) => {
 
   const assetPlatform = COINGECKO_ASSET_PLATFORMS[chainId]
 
+  const enabled = Boolean(contractAddress) && _isValidAddress && isValidNetwork && Boolean(chainId)
+
   return useQuery(
     [QUERY_KEYS.getCoingeckoTokenData, contractAddress, chainId],
     async () => await getCoingeckoTokenData(assetPlatform, contractAddress),
     {
       staleTime: Infinity,
-      enabled: Boolean(contractAddress) && _isValidAddress && isValidNetwork,
+      enabled,
       refetchInterval: false,
       refetchOnMount: false,
       refetchOnReconnect: false,

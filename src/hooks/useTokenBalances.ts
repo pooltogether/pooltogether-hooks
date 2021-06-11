@@ -25,7 +25,8 @@ const useTokenBalances = (chainId: number, address: string, tokenAddresses: stri
     Boolean(address) &&
     tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
     Array.isArray(tokenAddresses) &&
-    tokenAddresses.length > 0
+    tokenAddresses.length > 0 &&
+    Boolean(chainId)
 
   const getCacheKey = (id: (string | number)[]) => [QUERY_KEYS.tokenBalances, chainId, address, id]
 

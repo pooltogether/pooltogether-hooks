@@ -21,7 +21,7 @@ const useReadProvider = (chainId) => {
     () => readProvider(chainId, infuraId),
     {
       ...NO_REFETCH_QUERY_OPTIONS,
-      enabled: Boolean(infuraId)
+      enabled: Boolean(infuraId) && Boolean(chainId)
     }
   )
   const isReadProviderReady =

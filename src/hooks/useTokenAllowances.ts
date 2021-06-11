@@ -30,7 +30,8 @@ const useTokenAllowances = (
     Boolean(spenderAddress) &&
     tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
     Array.isArray(tokenAddresses) &&
-    tokenAddresses.length > 0
+    tokenAddresses.length > 0 &&
+    Boolean(chainId)
 
   const getCacheKey = (id: (string | number)[]) => [
     QUERY_KEYS.tokenAllowances,
