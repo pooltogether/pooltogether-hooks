@@ -25,7 +25,7 @@ const useReadProvider = (chainId) => {
     }
   )
   const isReadProviderReady =
-    isFetched && _readProvider?.network?.chainId === chainId && !isFetching
+    isFetched && Boolean(chainId) && _readProvider?.network?.chainId === chainId && !isFetching
   return { readProvider: _readProvider, isReadProviderReady }
 }
 

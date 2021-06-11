@@ -21,13 +21,15 @@ const useReadProviders = (chainIds) => {
     () => getReadProviders(chainIds, infuraId),
     {
       ...NO_REFETCH_QUERY_OPTIONS,
-      enabled: Boolean(infuraId)
+      enabled: Boolean(infuraId) && Boolean(chainIds)
     }
   )
 
-  const areProvidersForAllChainIdsRequestedReady = chainIds.reduce((allReady, chainId) => {
-    return _readProviders?.[chainId]?.network?.chainId === chainId && allReady
-  }, true)
+  const areProvidersForAllChainIdsRequestedReady = chainIds
+    ? chainIds.reduce((allReady, chainId) => {
+        return _readProviders?.[chainId]?.network?.chainId === chainId && allReady
+      }, true)
+    : false
 
   const isReadProvidersReady = isFetched && areProvidersForAllChainIdsRequestedReady && !isFetching
 

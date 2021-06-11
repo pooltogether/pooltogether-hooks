@@ -12,10 +12,19 @@ export const APP_ENVIRONMENT = Object.freeze({
   production: 'production'
 })
 
+const storedAppEnv = Cookies.get(APP_ENVIRONMENT_KEY)
+
+/**
+ * Overwrite 'production' with 'mainnets'
+ * If there's something stored, use it
+ * Otherwise set the atom to 'mainnets' and update the cache in useAppEnv mount hook
+ */
 const appEnvAtom = atom(
-  Cookies.get(APP_ENVIRONMENT_KEY) === APP_ENVIRONMENT.production
-    ? APP_ENVIRONMENT.mainnets
-    : Cookies.get(APP_ENVIRONMENT_KEY)
+  storedAppEnv
+    ? storedAppEnv === APP_ENVIRONMENT.production
+      ? APP_ENVIRONMENT.mainnets
+      : storedAppEnv
+    : APP_ENVIRONMENT.mainnets
 )
 
 /**
@@ -37,8 +46,9 @@ const useAppEnv = () => {
 
   // On mount, if never set before, set in storage
   useEffect(() => {
-    if (!appEnv || Cookies.get(APP_ENVIRONMENT_KEY) === APP_ENVIRONMENT.production) {
-      setAppEnv(APP_ENVIRONMENT.mainnets)
+    const storedAppEnv = Cookies.get(APP_ENVIRONMENT_KEY)
+    if (!storedAppEnv || storedAppEnv === APP_ENVIRONMENT.production) {
+      Cookies.set(APP_ENVIRONMENT_KEY, APP_ENVIRONMENT.mainnets, cookieOptions)
     }
   }, [])
 
