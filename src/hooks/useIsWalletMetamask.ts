@@ -3,7 +3,7 @@ import useOnboard from './useOnboard'
 
 const METAMASK_KEY = 'MetaMask'
 
-const useIsWalletMetamask = () => {
+const useIsWalletMetamask = (): Boolean => {
   const { wallet } = useOnboard()
   const [isWalletMetamask, setIsWalletMetamask] = useState<boolean>()
 
