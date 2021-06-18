@@ -6,6 +6,7 @@ export { default as useInitInfuraId } from './hooks/useInitInfuraId'
 export { default as useReadProvider } from './hooks/useReadProvider'
 export { default as useReadProviders } from './hooks/useReadProviders'
 export { default as useRefetchInterval } from './hooks/useRefetchInterval'
+export { default as useGovernanceChainId } from './hooks/useGovernanceChainId'
 
 // Token
 export { default as useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
