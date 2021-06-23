@@ -25,7 +25,7 @@
   "dependencies": {
     "@pooltogether/bnc-onboard": "^1.25.0-c",
     "@pooltogether/etherplex": "^1.1.1",
-    "@pooltogether/evm-chains-extended": "^0.4.3",
+    "@pooltogether/evm-chains-extended": "^0.4.4",
     "@pooltogether/utilities": "^0.0.26",
     "ethers": "^5.3.0",
     "framer-motion": "^4.1.17",
