@@ -11,7 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "start": "rm -rf dist && tsc-watch --onSuccess \"node ./dist/index.js\" ",
+    "start": "rm -rf dist && tsc-watch --onSuccess \"yalc push\"",
     "build": "rm -rf dist && tsc",
     "watch": "yarn start",
     "reinstall": "rm -rf node_modules/ && yarn install",
