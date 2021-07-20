@@ -1,5 +1,6 @@
 // Multi Chain Utilities
 export { default as useAppEnv, APP_ENVIRONMENT } from './hooks/useAppEnv'
+export { default as usePodChainIds } from './hooks/usePodChainIds'
 
 // Common chain data
 export { default as useInitInfuraId } from './hooks/useInitInfuraId'
