@@ -5,6 +5,7 @@ import useReadProvider from './useReadProvider'
 import { useQuery, useQueryClient } from 'react-query'
 import { QUERY_KEYS } from '../constants'
 import populatePerIdCache from '../utils/populatePerIdCache'
+import { sToMs } from '@pooltogether/utilities'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
@@ -47,7 +48,8 @@ const useTokenAllowances = (
       await getTokenAllowances(readProvider, usersAddress, spenderAddress, tokenAddresses),
     {
       enabled,
-      onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
+      onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data),
+      refetchInterval: sToMs(30)
     }
   )
 }
