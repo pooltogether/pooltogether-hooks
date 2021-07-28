@@ -20,6 +20,7 @@ export { default as useOnboard } from './hooks/useOnboard'
 export { default as useIsWalletMetamask } from './hooks/useIsWalletMetamask'
 export { default as useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
 export { default as useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
+export { default as useEnsName } from './hooks/useEnsName'
 export { default as useUsersAddress } from './hooks/useUsersAddress'
 export { default as useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
 
