@@ -4,6 +4,7 @@ export { default as usePodChainIds } from './hooks/usePodChainIds'
 
 // Common chain data
 export { default as useInitInfuraId } from './hooks/useInitInfuraId'
+export { default as useInitQuickNodeId } from './hooks/useInitQuickNodeId'
 export { default as useReadProvider } from './hooks/useReadProvider'
 export { default as useReadProviders } from './hooks/useReadProviders'
 export { default as useRefetchInterval } from './hooks/useRefetchInterval'

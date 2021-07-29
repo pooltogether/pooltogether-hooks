@@ -11,10 +11,11 @@ import { ethers } from 'ethers'
 import { getChain } from '@pooltogether/evm-chains-extended'
 import { NETWORK, ETHEREUM_NETWORKS } from '@pooltogether/utilities'
 
-const POLYGON_INFURA_WEBSOCKETS_URL = `wss://polygon-mainnet.infura.io/ws/v3/${process.env.NEXT_JS_INFURA_ID}`
+const POLYGON_INFURA_WEBSOCKETS_URL = `wss://polygon-mainnet.infura.io/ws/v3`
+const BINANCE_QUICKNODE_WEBSOCKETS_URL = `wss://red-fragrant-fire.bsc.quiknode.pro`
 const providerCache = {}
 
-export const readProvider = async (chainId, infuraId) => {
+export const readProvider = async (chainId, infuraId, quickNodeId) => {
   let provider: ethers.providers.BaseProvider
 
   try {
@@ -27,8 +28,14 @@ export const readProvider = async (chainId, infuraId) => {
         provider = ethers.getDefaultProvider(network.network)
       } else if (network && ETHEREUM_NETWORKS.includes(chainId)) {
         provider = ethers.getDefaultProvider(network.network)
-      } else if (chainId === 137) {
-        provider = new ethers.providers.WebSocketProvider(POLYGON_INFURA_WEBSOCKETS_URL)
+      } else if (chainId === NETWORK.bsc) {
+        provider = new ethers.providers.WebSocketProvider(
+          `${POLYGON_INFURA_WEBSOCKETS_URL}/${infuraId}`
+        )
+      } else if (chainId === NETWORK.polygon) {
+        provider = new ethers.providers.WebSocketProvider(
+          `${BINANCE_QUICKNODE_WEBSOCKETS_URL}/${quickNodeId}`
+        )
       } else if (chainId === 1234 || chainId === 31337) {
         provider = new ethers.providers.JsonRpcProvider()
       } else if (Boolean(jsonRpcProviderUrl)) {
