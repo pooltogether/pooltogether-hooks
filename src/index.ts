@@ -8,6 +8,10 @@ export { default as useReadProviders } from './hooks/useReadProviders'
 export { default as useRefetchInterval } from './hooks/useRefetchInterval'
 export { default as useGovernanceChainId } from './hooks/useGovernanceChainId'
 
+// Time
+export { useTimeCountdown } from './hooks/useTimeCountdown'
+export { usePrizePeriodTimeLeft } from './hooks/usePrizePeriodTimeLeft'
+
 // Token
 export { default as useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
 export { default as useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
