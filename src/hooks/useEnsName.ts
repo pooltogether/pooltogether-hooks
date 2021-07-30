@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
+import { NETWORK } from '@pooltogether/utilities'
 
-export const useEnsName = (provider, address) => {
+import useReadProvider from './useReadProvider'
+
+export const useEnsName = (address) => {
   const [ensName, setEnsName] = useState('')
 
+  const { readProvider, isReadProviderReady } = useReadProvider(NETWORK.mainnet)
+
   useEffect(async () => {
-    if (address && provider) {
+    if (address && readProvider) {
       try {
-        const resolvedEnsName = await provider.lookupAddress(address)
+        const resolvedEnsName = await readProvider.lookupAddress(address)
         if (resolvedEnsName) {
           setEnsName(resolvedEnsName)
         }
@@ -16,7 +21,7 @@ export const useEnsName = (provider, address) => {
     } else {
       setEnsName('')
     }
-  }, [address, provider])
+  }, [address, readProvider, isReadProviderReady])
 
   return ensName
 }
