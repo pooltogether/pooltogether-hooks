@@ -30,11 +30,11 @@ export const readProvider = async (chainId, infuraId, quickNodeId) => {
         provider = ethers.getDefaultProvider(network.network)
       } else if (chainId === NETWORK.bsc) {
         provider = new ethers.providers.WebSocketProvider(
-          `${POLYGON_INFURA_WEBSOCKETS_URL}/${infuraId}`
+          `${BINANCE_QUICKNODE_WEBSOCKETS_URL}/${quickNodeId}/`
         )
       } else if (chainId === NETWORK.polygon) {
         provider = new ethers.providers.WebSocketProvider(
-          `${BINANCE_QUICKNODE_WEBSOCKETS_URL}/${quickNodeId}`
+          `${POLYGON_INFURA_WEBSOCKETS_URL}/${infuraId}`
         )
       } else if (chainId === 1234 || chainId === 31337) {
         provider = new ethers.providers.JsonRpcProvider()

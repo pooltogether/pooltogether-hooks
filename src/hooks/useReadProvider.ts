@@ -19,11 +19,11 @@ const useReadProvider = (chainId) => {
     isFetched,
     isFetching
   } = useQuery<ethers.providers.BaseProvider, Error>(
-    [QUERY_KEYS.readProvider, chainId],
+    [QUERY_KEYS.readProvider, chainId, quickNodeId],
     () => readProvider(chainId, infuraId, quickNodeId),
     {
       ...NO_REFETCH_QUERY_OPTIONS,
-      enabled: Boolean(infuraId) && Boolean(chainId)
+      enabled: Boolean(infuraId) && Boolean(chainId) && Boolean(quickNodeId)
     }
   )
   const isReadProviderReady =

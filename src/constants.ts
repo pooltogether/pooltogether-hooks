@@ -6,6 +6,7 @@ export const QUERY_KEYS = Object.freeze({
   tokenBalances: 'tokenBalances',
   tokenAllowances: 'tokenAllowances',
   readProvider: 'readProvider',
+  readProviders: 'readProviders',
   getCoingeckoTokenData: 'getCoingeckoTokenData'
 })
 

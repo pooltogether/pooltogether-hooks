@@ -14,12 +14,13 @@ import { useQuickNodeId } from './useInitQuickNodeId'
 const useReadProviders = (chainIds) => {
   const infuraId = useInfuraId()
   const quickNodeId = useQuickNodeId()
+
   const {
     data: _readProviders,
     isFetched,
     isFetching
   } = useQuery<{ [chainId: string]: ethers.providers.BaseProvider }, Error>(
-    [QUERY_KEYS.readProvider, chainIds, infuraId, quickNodeId],
+    [QUERY_KEYS.readProviders, chainIds, infuraId, quickNodeId],
     () => getReadProviders(chainIds, infuraId, quickNodeId),
     {
       ...NO_REFETCH_QUERY_OPTIONS,
