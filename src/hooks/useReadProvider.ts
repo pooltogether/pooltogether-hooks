@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import { NO_REFETCH_QUERY_OPTIONS, QUERY_KEYS } from '../constants'
 import { readProvider } from '../services/readProvider'
 import { useInfuraId } from './useInitInfuraId'
+import { useQuickNodeId } from './useInitQuickNodeId'
 
 /**
  *
@@ -12,16 +13,17 @@ import { useInfuraId } from './useInitInfuraId'
  */
 const useReadProvider = (chainId) => {
   const infuraId = useInfuraId()
+  const quickNodeId = useQuickNodeId()
   const {
     data: _readProvider,
     isFetched,
     isFetching
   } = useQuery<ethers.providers.BaseProvider, Error>(
-    [QUERY_KEYS.readProvider, chainId],
-    () => readProvider(chainId, infuraId),
+    [QUERY_KEYS.readProvider, chainId, quickNodeId],
+    () => readProvider(chainId, infuraId, quickNodeId),
     {
       ...NO_REFETCH_QUERY_OPTIONS,
-      enabled: Boolean(infuraId) && Boolean(chainId)
+      enabled: Boolean(infuraId) && Boolean(chainId) && Boolean(quickNodeId)
     }
   )
   const isReadProviderReady =

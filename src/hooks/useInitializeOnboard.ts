@@ -8,7 +8,6 @@ import { getNetworkNameAliasByChainId, getChainIdByAlias } from '@pooltogether/u
 
 import { SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { useCookieOptions } from './useCookieOptions'
-import { useInfuraId } from './useInitInfuraId'
 
 export const onboardAtom = atom<API>(undefined as API)
 export const addressAtom = atom<string>(undefined as string)
