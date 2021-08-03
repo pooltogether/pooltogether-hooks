@@ -13,7 +13,7 @@ import {
 import { SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { useCookieOptions } from './useCookieOptions'
 
-const useOnboard = () => {
+export const useOnboard = () => {
   const [onboard] = useAtom(onboardAtom)
   const [address] = useAtom(addressAtom)
   const [network] = useAtom(networkAtom)
@@ -77,5 +77,3 @@ const useOnboard = () => {
     disconnectWallet
   }
 }
-
-export default useOnboard

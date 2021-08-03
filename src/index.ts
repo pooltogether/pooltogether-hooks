@@ -22,7 +22,7 @@ export { default as useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImag
 
 // Users Wallet
 export { default as useInitializeOnboard } from './hooks/useInitializeOnboard'
-export { default as useOnboard } from './hooks/useOnboard'
+export { useOnboard } from './hooks/useOnboard'
 export { default as useIsWalletMetamask } from './hooks/useIsWalletMetamask'
 export { default as useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
 export { default as useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'

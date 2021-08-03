@@ -1,4 +1,4 @@
-import useOnboard from './useOnboard'
+import { useOnboard } from './useOnboard'
 
 const useIsWalletOnSupportedNetwork = (supportedNetworks) => {
   const { network } = useOnboard()

@@ -23,7 +23,10 @@ const useTokenBalances = (chainId: number, address: string, tokenAddresses: stri
   const enabled =
     isReadProviderReady &&
     Boolean(address) &&
-    tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
+    tokenAddresses.reduce(
+      (aggregate, current) => aggregate && Boolean(current),
+      true
+    ) &&
     Array.isArray(tokenAddresses) &&
     tokenAddresses.length > 0 &&
     Boolean(chainId)
