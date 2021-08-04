@@ -20,6 +20,9 @@ export { default as useTokenAllowances, useTokenAllowance } from './hooks/useTok
 export { default as useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
 export { default as useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 
+// Transactions
+export * from './hooks/useSendTransaction'
+
 // Users Wallet
 export { default as useInitializeOnboard } from './hooks/useInitializeOnboard'
 export { useOnboard } from './hooks/useOnboard'
