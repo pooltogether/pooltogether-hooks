@@ -20,6 +20,12 @@ const DEFAULT_TX_DETAILS = {
   callbacks: {}
 }
 
+export const useTransaction = (txId) => {
+  const [transactions] = useAtom(transactionsAtom)
+  if (!txId) return null
+  return transactions?.find((tx) => tx.id === txId)
+}
+
 export const useSendTransaction = function (t) {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
   const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
@@ -353,12 +359,6 @@ export function chainIdToNetworkName(chainId) {
   }
 
   return getNetworkNameAliasByChainId(chainId)
-}
-
-export const useTransaction = (txId) => {
-  const [transactions] = useAtom(transactionsAtom)
-  if (!txId) return null
-  return transactions?.find((tx) => tx.id === txId)
 }
 
 export const createTransaction = (newTx, transactions, setTransactions, usersAddress, chainId) => {
