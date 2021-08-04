@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai'
 import { ethers } from 'ethers'
-import { getNetworkNameAliasByChainId, poolToast } from '@pooltogether/utilities'
+import { getNetworkNameAliasByChainId } from '@pooltogether/utilities'
 
 import { useOnboard } from './useOnboard'
 
@@ -26,7 +26,7 @@ export const useTransaction = (txId) => {
   return transactions?.find((tx) => tx.id === txId)
 }
 
-export const useSendTransaction = function (t) {
+export const useSendTransaction = function (t, poolToast) {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
   const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
 
@@ -54,6 +54,7 @@ export const useSendTransaction = function (t) {
 
     callTransaction(
       t,
+      poolToast,
       updatedTransactions,
       setTransactions,
       newTx,
@@ -75,6 +76,7 @@ export const useSendTransaction = function (t) {
 
 export const callTransaction = async (
   t,
+  poolToast,
   transactions,
   setTransactions,
   tx,
@@ -129,7 +131,7 @@ export const callTransaction = async (
       chainId
     )
 
-    poolToast.success(`${tx.name} - ${t?.('transactionSentConfirming') || 'Transaction sent! Confirming...'}`)
+    poolToast.success(`"${tx.name}" ${t?.('transactionSentConfirming') || 'Transaction sent! Confirming...'}`)
     await ethersTx.wait()
 
     updatedTransactions = updateTransaction(
@@ -144,7 +146,7 @@ export const callTransaction = async (
       chainId
     )
 
-    poolToast.rainbow(`${tx.name} - ${t('transactionSuccessful') || 'Transaction successful!'}`)
+    poolToast.rainbow(`"${tx.name}" ${t('transactionSuccessful') || 'Transaction successful!'}`)
   } catch (e) {
     console.error(e.message)
 
@@ -201,7 +203,7 @@ export const callTransaction = async (
         chainId
       )
 
-      poolToast.error(`${tx.name} - ${t?.('txFailedToCompleteWithReason') || 'Transaction did not complete:'} ${errorMsg}`)
+      poolToast.error(`"${tx.name}" ${t?.('txFailedToCompleteWithReason') || 'Transaction did not complete:'} ${errorMsg}`)
     }
   }
 }
