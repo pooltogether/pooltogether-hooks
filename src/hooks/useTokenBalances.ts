@@ -61,7 +61,7 @@ const getTokenBalances = async (readProvider, address, tokenAddresses) => {
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol())
+    batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol().totalSupply())
   })
   const response = await batch(readProvider, ...batchCalls)
   const result = {}
@@ -70,13 +70,18 @@ const getTokenBalances = async (readProvider, address, tokenAddresses) => {
     const decimals = response[tokenAddress].decimals[0]
     const name = response[tokenAddress].name[0]
     const symbol = response[tokenAddress].symbol[0]
+    const totalSupplyUnformatted = response[tokenAddress].totalSupply[0]
+    const totalSupply = formatUnits(totalSupplyUnformatted, decimals)
+
     result[tokenAddress] = {
       hasBalance: !amountUnformatted.isZero(),
       amount: formatUnits(amountUnformatted, decimals),
       amountUnformatted,
       decimals,
       name,
-      symbol
+      symbol,
+      totalSupplyUnformatted,
+      totalSupply
     }
   })
   return result
