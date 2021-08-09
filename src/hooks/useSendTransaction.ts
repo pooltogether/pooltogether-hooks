@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai'
 import { ethers } from 'ethers'
-import { getNetworkNameAliasByChainId } from '@pooltogether/utilities'
+import { getNetworkNiceNameByChainId, getNetworkNameAliasByChainId } from '@pooltogether/utilities'
 
 import { useOnboard } from './useOnboard'
 
@@ -20,12 +20,23 @@ const DEFAULT_TX_DETAILS = {
   callbacks: {}
 }
 
+/**
+ * Finds a transaction in the jotai mem-store based on the provided txId
+ * @param txId
+ * @returns object (Transaction)
+ */
 export const useTransaction = (txId) => {
   const [transactions] = useAtom(transactionsAtom)
   if (!txId) return null
   return transactions?.find((tx) => tx.id === txId)
 }
 
+/**
+ * A hook for firing off transactions to the blockchain
+ * @param t translation object from useTranslation hook
+ * @param poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
+ * @returns async function 'sendTx'
+ */
 export const useSendTransaction = function (t, poolToast) {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
   const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
@@ -74,7 +85,23 @@ export const useSendTransaction = function (t, poolToast) {
   return sendTx
 }
 
-export const callTransaction = async (
+/**
+ * Internal async method used by useSendTransaction hook for sending transactions using Ethers.js lib
+ * @param {object} t translation object from useTranslation hook
+ * @param {object} poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
+ * @param {array} transactions most recent array of transactions including the newly created tx from useSendTransaction() hook
+ * @param {function} setTransactions the jotai atom setter function to update the list of transactions in the mem-store
+ * @param {object} tx our local transaction instance used to store data before the ethersTx is created
+ * @param {object} provider the provider/wallet object to use when sending
+ * @param {string} usersAddress the sender's address
+ * @param {number} chainId The network to call the tx on
+ * @param {array} contractAbi The definition of all methods, events, etc. in the deployed smart contract
+ * @param {string} contractAddress the address of the smart contract on the blockchain
+ * @param {string} method the Solidity smart contract function to call
+ * @param {array} params optional array of Solidity contract parameters to be sent using ethers.js
+ * @param {number} value The value of ETH to have the sender send along with the transaction
+ */
+const callTransaction = async (
   t,
   poolToast,
   transactions,
@@ -169,7 +196,7 @@ export const callTransaction = async (
 
       try {
         if (ethersTx?.hash) {
-          const networkName = chainIdToNetworkName(ethersTx.chainId)
+          const networkName = getNetworkNiceNameByChainId(ethersTx.chainId)
           if (networkName === 'mainnet') {
             reason = await getRevertReason(ethersTx.hash, networkName)
           }
@@ -354,14 +381,6 @@ export const clearPreviousTransactions = (transactions, setTransactions, usersAd
   updateStorageWith(ongoingTransactions, usersAddress, chainId)
 }
 
-
-export function chainIdToNetworkName(chainId) {
-  if (chainId === 137) {
-    return 'polygon'
-  }
-
-  return getNetworkNameAliasByChainId(chainId)
-}
 
 export const createTransaction = (newTx, transactions, setTransactions, usersAddress, chainId) => {
   const newTransactions = [...transactions, newTx]
