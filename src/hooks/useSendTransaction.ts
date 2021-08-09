@@ -21,7 +21,7 @@ const DEFAULT_TX_DETAILS = {
 }
 
 /**
- * Finds a transaction in the jotai mem-store based on the provided txId
+ * Finds a transaction in the mem-store based on the provided txId
  * @param txId
  * @returns object (Transaction)
  */
@@ -90,7 +90,7 @@ export const useSendTransaction = function (t, poolToast) {
  * @param {object} t translation object from useTranslation hook
  * @param {object} poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
  * @param {array} transactions most recent array of transactions including the newly created tx from useSendTransaction() hook
- * @param {function} setTransactions the jotai atom setter function to update the list of transactions in the mem-store
+ * @param {function} setTransactions the mem-store setter function to update the list of transactions in the mem-store
  * @param {object} tx our local transaction instance used to store data before the ethersTx is created
  * @param {object} provider the provider/wallet object to use when sending
  * @param {string} usersAddress the sender's address
@@ -235,8 +235,15 @@ const callTransaction = async (
   }
 }
 
-// bring in new list of tx's from localStorage and check
-// if any are ongoing & what their status is
+/**
+ * Read latest list of tx's from localStorage and kick off job to check if any are ongoing or what their status is
+ * @param {array} transactions (deprecated) array of in mem-store transactions
+ * @param {function} setTransactions the mem-store setter function to update the list of transactions in the mem-store
+ * @param {number} chainId the network to check for existing transactions on
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key to only find tx's by this sender
+ * @param {object} provider the provider/wallet object to use when checking
+ * @param {transactionsKey} string customizable key for the localStorage key/val store, defaults to 'tx'
+ */
 export const readTransactions = (
   transactions,
   setTransactions,
@@ -266,12 +273,29 @@ export const readTransactions = (
   }
 }
 
+/**
+ * Filters list of transactions to only in-flight ones before checking their status on the chain then kicks off job for each
+ * @param {array} localStorageTransactions all tx's pulled for a user on a network from the browser's localStorage cache
+ * @param {object} provider the provider/wallet object to use when checking
+ * @param {function} setTransactions the mem-store setter function to update the list of transactions
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key to only find tx's by this sender
+ * @param {number} chainId the network to check for existing transactions on
+ */
 export const checkTransactionStatuses = (localStorageTransactions, provider, setTransactions, usersAddress, chainId) => {
-  localStorageTransactions = localStorageTransactions
+  localStorageTransactions
     .filter((tx) => tx.sent && !tx.completed)
     .map((tx) => runAsyncCheckTx(tx, provider, localStorageTransactions, setTransactions, usersAddress, chainId))
 }
 
+/**
+ * The job runner to check the status of an in-flight tx on-chain
+ * @param {object} tx our local data representation of a single transaction
+ * @param {object} provider the provider/wallet object to use when checking
+ * @param {array} transactions the filtered list of localStorage transactions
+ * @param {function} setTransactions the mem-store setter function to update the list of transactions
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key to only find tx's by this sender
+ * @param {number} chainId the network to check for existing transactions on
+ */
 const runAsyncCheckTx = async (tx, provider, transactions, setTransactions, usersAddress, chainId) => {
   let ethersTx
   try {
@@ -332,6 +356,16 @@ const runAsyncCheckTx = async (tx, provider, transactions, setTransactions, user
   }
 }
 
+/**
+ * Helper function to set new values in an existing transaction object
+ * @param {number} id the transaction id (txId) of the transaction object to update
+ * @param {object} newValues new values for keys to update in the object
+ * @param {array} transactions the list of transactions from the mem-store
+ * @param {function} setTransactions the mem-store setter function to update the list of transactions
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
+ * @returns {array} the updates list of transactions
+ */
 export const updateTransaction = (id, newValues, transactions, setTransactions, usersAddress, chainId) => {
   let editedTransactions = transactions.map((transaction) => {
     return transaction.id === id
@@ -352,6 +386,13 @@ export const updateTransaction = (id, newValues, transactions, setTransactions, 
   return updatedTransactions
 }
 
+/**
+ * Stores the latest list of in mem-store transactions into the browser's localStorage
+ * @param {array} transactions the list of transactions from the mem-store
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
+ * @param {transactionsKey} string customizable key for the localStorage key/val store, defaults to 'tx'
+ */
 export const updateStorageWith = (transactions, usersAddress, chainId, transactionsKey = DEFAULT_TRANSACTIONS_KEY) => {
   const sentTransactions = transactions.filter((tx) => {
     return tx.sent && !tx.cancelled
@@ -373,6 +414,13 @@ export const updateStorageWith = (transactions, usersAddress, chainId, transacti
   }
 }
 
+/**
+ * Removes all completed transactions from the browser's localStorage cache and local mem-store
+ * @param {array} transactions the list of transactions from the mem-store
+ * @param {function} setTransactions the mem-store function to update the list of transactions in the mem-store
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
+ */
 export const clearPreviousTransactions = (transactions, setTransactions, usersAddress, chainId) => {
   const ongoingTransactions = transactions.filter((tx) => !tx.completed)
 
@@ -381,7 +429,14 @@ export const clearPreviousTransactions = (transactions, setTransactions, usersAd
   updateStorageWith(ongoingTransactions, usersAddress, chainId)
 }
 
-
+/**
+ * Creates a new transaction in both the mem-store and the browser's localStorage cache
+ * @param {object} newTx new transaction data to add
+ * @param {array} transactions the list of transactions from the mem-store
+ * @param {function} setTransactions the mem-store function to update the list of transactions in the mem-store
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
+ */
 export const createTransaction = (newTx, transactions, setTransactions, usersAddress, chainId) => {
   const newTransactions = [...transactions, newTx]
   setTransactions(newTransactions)
