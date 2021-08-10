@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import useOnboard from './useOnboard'
+import { useOnboard } from './useOnboard'
 
 const METAMASK_KEY = 'MetaMask'
 

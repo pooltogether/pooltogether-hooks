@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
-import useOnboard from './useOnboard'
+import { useOnboard } from './useOnboard'
 
 const useSigner = () => {
   const { provider, onboard } = useOnboard()

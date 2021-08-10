@@ -1,4 +1,4 @@
-import useOnboard from './useOnboard'
+import { useOnboard } from './useOnboard'
 
 const useUsersAddress = () => {
   const { address } = useOnboard()
