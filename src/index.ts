@@ -21,7 +21,7 @@ export { default as useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
 export { default as useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 
 // Transactions
-export * from './hooks/useSendTransaction'
+export * from './hooks/transactions'
 
 // Users Wallet
 export { default as useInitializeOnboard } from './hooks/useInitializeOnboard'
