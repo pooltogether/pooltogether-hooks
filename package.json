@@ -14,7 +14,7 @@
     "start": "rm -rf dist && tsc-watch --onSuccess \"yalc push\"",
     "build": "rm -rf dist && tsc",
     "watch": "yarn start",
-    "reinstall": "rm -rf node_modules/ && yarn install",
+    "reinstall": "rm -rf node_modules/ && rm -rf dist/ && yarn install",
     "prepublish": "yarn build",
     "test": "jest",
     "test:watch": "yarn run test --watch",
@@ -22,37 +22,45 @@
     "link-local": "yarn link react && yarn link react-query && yarn link react-dom && yarn link jotai",
     "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink jotai && yarn install --force"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.16.0",
     "@pooltogether/bnc-onboard": "^1.25.0-c",
     "@pooltogether/etherplex": "^1.1.1",
     "@pooltogether/evm-chains-extended": "^0.4.4",
     "@pooltogether/utilities": "^0.0.34",
     "beautiful-react-hooks": "^0.35.0",
+    "jotai": "^0.16.10",
     "date-fns": "^2.23.0",
     "ethers": "^5.3.0",
     "framer-motion": "^4.1.17",
-    "js-cookie": "^2.2.1"
-  },
-  "devDependencies": {
+    "js-cookie": "^2.2.1",
     "@types/jest": "^26.0.23",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",
     "eth-revert-reason": "^1.0.3",
     "glob": "^7.1.7",
     "jest": "^26.6.3",
-    "jotai": "^0.16.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-query": "^3.16.0",
     "ts-jest": "^26.5.6",
     "tsc-watch": "^4.2.9",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
-    "jotai": "^0.16.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.16.0"
+    "react-query": "^3.16.0",
+    "@pooltogether/bnc-onboard": "^1.25.0-c",
+    "@pooltogether/etherplex": "^1.1.1",
+    "@pooltogether/evm-chains-extended": "^0.4.4",
+    "@pooltogether/utilities": "^0.0.34",
+    "beautiful-react-hooks": "^0.35.0",
+    "jotai": "^0.16.10",
+    "date-fns": "^2.23.0",
+    "ethers": "^5.3.0",
+    "framer-motion": "^4.1.17",
+    "js-cookie": "^2.2.1"
   },
   "jest": {
     "collectCoverageFrom": [

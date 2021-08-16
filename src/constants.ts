@@ -3,6 +3,7 @@ import { CookieAttributes } from 'js-cookie'
 export const SELECTED_WALLET_COOKIE_KEY = 'selectedWallet'
 
 export const QUERY_KEYS = Object.freeze({
+  prizePeriod: 'prizePeriod',
   tokenBalances: 'tokenBalances',
   tokenAllowances: 'tokenAllowances',
   readProvider: 'readProvider',

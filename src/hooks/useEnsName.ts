@@ -8,8 +8,8 @@ export const useEnsName = (address) => {
 
   const { readProvider, isReadProviderReady } = useReadProvider(NETWORK.mainnet)
 
-  useEffect(async () => {
-    if (address && readProvider) {
+  useEffect(() => {
+    const getAndSetEnsName = async () => {
       try {
         const resolvedEnsName = await readProvider.lookupAddress(address)
         if (resolvedEnsName) {
@@ -18,6 +18,10 @@ export const useEnsName = (address) => {
       } catch (e) {
         console.log(e)
       }
+    }
+
+    if (address && readProvider) {
+      getAndSetEnsName()
     } else {
       setEnsName('')
     }
