@@ -44,7 +44,7 @@ const TOKEN_IMAGES_BY_ADDRESS = {
 }
 
 const useCoingeckoTokenImage = (chainId, address) => {
-  const formattedAddress = address.toLowerCase()
+  const formattedAddress = address?.toLowerCase()
   const { data, isFetched, isFetching } = useCoingeckoTokenData(chainId, formattedAddress)
 
   const hardcodedImageUrl = TOKEN_IMAGES_BY_ADDRESS[formattedAddress]

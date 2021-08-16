@@ -37,7 +37,7 @@ export const useTransaction = (txId) => {
  * @param poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
  * @returns async function 'sendTx'
  */
-export const useSendTransaction = function (t, poolToast) {
+export const useSendTransaction = (t, poolToast) => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
   const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
 
@@ -61,7 +61,13 @@ export const useSendTransaction = function (t, poolToast) {
       ...callbacks
     }
 
-    let updatedTransactions = createTransaction(newTx, transactions, setTransactions, usersAddress, chainId)
+    let updatedTransactions = createTransaction(
+      newTx,
+      transactions,
+      setTransactions,
+      usersAddress,
+      chainId
+    )
 
     callTransaction(
       t,
@@ -158,7 +164,9 @@ const callTransaction = async (
       chainId
     )
 
-    poolToast.success(`"${tx.name}" ${t?.('transactionSentConfirming') || 'Transaction sent! Confirming...'}`)
+    poolToast.success(
+      `"${tx.name}" ${t?.('transactionSentConfirming') || 'Transaction sent! Confirming...'}`
+    )
     await ethersTx.wait()
 
     updatedTransactions = updateTransaction(
@@ -207,7 +215,8 @@ const callTransaction = async (
       }
 
       if (reason?.match('rng-in-flight') || e.message.match('rng-in-flight')) {
-        reason = t?.('prizeBeingAwardedPleaseTryAgainSoon') || 'Prize being awarded! Please try again soon'
+        reason =
+          t?.('prizeBeingAwardedPleaseTryAgainSoon') || 'Prize being awarded! Please try again soon'
       }
 
       errorMsg = reason ? reason : e.data?.message ? e.data.message : e.message
@@ -230,7 +239,10 @@ const callTransaction = async (
         chainId
       )
 
-      poolToast.error(`"${tx.name}" ${t?.('txFailedToCompleteWithReason') || 'Transaction did not complete:'} ${errorMsg}`)
+      poolToast.error(
+        `"${tx.name}" ${t?.('txFailedToCompleteWithReason') ||
+          'Transaction did not complete:'} ${errorMsg}`
+      )
     }
   }
 }
@@ -281,10 +293,25 @@ export const readTransactions = (
  * @param {string} usersAddress the current wallet address used in the localStorage lookup key to only find tx's by this sender
  * @param {number} chainId the network to check for existing transactions on
  */
-export const checkTransactionStatuses = (localStorageTransactions, provider, setTransactions, usersAddress, chainId) => {
+export const checkTransactionStatuses = (
+  localStorageTransactions,
+  provider,
+  setTransactions,
+  usersAddress,
+  chainId
+) => {
   localStorageTransactions
     .filter((tx) => tx.sent && !tx.completed)
-    .map((tx) => runAsyncCheckTx(tx, provider, localStorageTransactions, setTransactions, usersAddress, chainId))
+    .map((tx) =>
+      runAsyncCheckTx(
+        tx,
+        provider,
+        localStorageTransactions,
+        setTransactions,
+        usersAddress,
+        chainId
+      )
+    )
 }
 
 /**
@@ -296,7 +323,14 @@ export const checkTransactionStatuses = (localStorageTransactions, provider, set
  * @param {string} usersAddress the current wallet address used in the localStorage lookup key to only find tx's by this sender
  * @param {number} chainId the network to check for existing transactions on
  */
-const runAsyncCheckTx = async (tx, provider, transactions, setTransactions, usersAddress, chainId) => {
+const runAsyncCheckTx = async (
+  tx,
+  provider,
+  transactions,
+  setTransactions,
+  usersAddress,
+  chainId
+) => {
   let ethersTx
   try {
     ethersTx = await provider.getTransaction(tx.hash)
@@ -362,11 +396,18 @@ const runAsyncCheckTx = async (tx, provider, transactions, setTransactions, user
  * @param {object} newValues new values for keys to update in the object
  * @param {array} transactions the list of transactions from the mem-store
  * @param {function} setTransactions the mem-store setter function to update the list of transactions
- * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage
  * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
  * @returns {array} the updates list of transactions
  */
-export const updateTransaction = (id, newValues, transactions, setTransactions, usersAddress, chainId) => {
+export const updateTransaction = (
+  id,
+  newValues,
+  transactions,
+  setTransactions,
+  usersAddress,
+  chainId
+) => {
   let editedTransactions = transactions.map((transaction) => {
     return transaction.id === id
       ? {
@@ -389,11 +430,16 @@ export const updateTransaction = (id, newValues, transactions, setTransactions, 
 /**
  * Stores the latest list of in mem-store transactions into the browser's localStorage
  * @param {array} transactions the list of transactions from the mem-store
- * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage
  * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
  * @param {transactionsKey} string customizable key for the localStorage key/val store, defaults to 'tx'
  */
-export const updateStorageWith = (transactions, usersAddress, chainId, transactionsKey = DEFAULT_TRANSACTIONS_KEY) => {
+export const updateStorageWith = (
+  transactions,
+  usersAddress,
+  chainId,
+  transactionsKey = DEFAULT_TRANSACTIONS_KEY
+) => {
   const sentTransactions = transactions.filter((tx) => {
     return tx.sent && !tx.cancelled
   })
@@ -418,7 +464,7 @@ export const updateStorageWith = (transactions, usersAddress, chainId, transacti
  * Removes all completed transactions from the browser's localStorage cache and local mem-store
  * @param {array} transactions the list of transactions from the mem-store
  * @param {function} setTransactions the mem-store function to update the list of transactions in the mem-store
- * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage
  * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
  */
 export const clearPreviousTransactions = (transactions, setTransactions, usersAddress, chainId) => {
@@ -434,7 +480,7 @@ export const clearPreviousTransactions = (transactions, setTransactions, usersAd
  * @param {object} newTx new transaction data to add
  * @param {array} transactions the list of transactions from the mem-store
  * @param {function} setTransactions the mem-store function to update the list of transactions in the mem-store
- * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage 
+ * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage
  * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
  */
 export const createTransaction = (newTx, transactions, setTransactions, usersAddress, chainId) => {

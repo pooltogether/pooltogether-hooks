@@ -2,59 +2,29 @@
 
 A collection of various useful hooks used across the PoolTogether applications.
 
+## NOTE
+
+Make sure you keep `peerDependencies` and `devDependencies` versions in sync!
+
 ## How to use
 
 1. `yarn add @pooltogether/utilities`
-2. `import * as Utils from '@pooltogether/hooks'` OR `import { hookYouWantToUse } from '@pooltogether/hooks'`
-3. Ensure you have all of the required environment variables imported into your project
+2. `import * as Hooks from '@pooltogether/hooks'` OR `import { hookYouWantToUse } from '@pooltogether/hooks'`
+3. Ensure you call any required init functions early
 
-## Requirements
+## Local development
 
-Hooks that require other hooks also require their required hooks & environment variables.
+Local development works best with yalc
+`yarn global add yalc`
 
-### useInitializeOnboard
+In pooltogether-hooks:
+`yarn start`
 
-- `NEXT_JS_DOMAIN_NAME` ex. `'pooltogether.com'` or `''`
-- `NEXT_JS_INFURA_ID`
-- `NEXT_JS_FORTMATIC_API_KEY`
-- `NEXT_JS_PORTIS_API_KEY`
-- `NEXT_JS_DEFAULT_ETHEREUM_NETWORK_NAME` ex. `'homestead'`
+In the app you're importing pooltogether-hooks:
+`yalc link @pooltogether/hooks`
 
-### useOnboard
-
-- useInitializeOnboard
-
-### useIsWalletMetamask
-
-- useOnboard
-
-### useIsWalletOnNetwork
-
-- useOnboard
-
-### useUsersAddress
-
-- useOnboard
+When you save changes inside the hooks `src` folder, the package will rebuild and be pushed to all other projects that have run `yalc link @pooltogether/hooks`.
 
 ## TODO:
 
 - jest tests
-
-## Local development
-
-TODO: Make this better...
-
-In pooltogether-hooks:
-`yarn link`
-
-In the app you're importing pooltogether-hooks:
-`yarn link-hooks`
-
-In pooltogether-hooks:
-`yarn link-local`
-`yarn start`
-
-In the app you're importing pooltogether-hooks:
-`yarn dev`
-
-And your app will hot reload when changes are detected in the hooks folder!
