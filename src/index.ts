@@ -13,6 +13,7 @@ export { default as useGovernanceChainId } from './hooks/useGovernanceChainId'
 // Time
 export { useTimeCountdown } from './hooks/useTimeCountdown'
 export { usePrizePeriodTimeLeft } from './hooks/usePrizePeriodTimeLeft'
+export { usePrizePeriod } from './hooks/usePrizePeriod'
 
 // Token
 export { default as useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'

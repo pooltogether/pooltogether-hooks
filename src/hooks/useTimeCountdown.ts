@@ -1,12 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useInterval } from 'beautiful-react-hooks'
-import { addSeconds } from 'date-fns'
-import { msToSeconds, subtractDates } from '@pooltogether/utilities'
+import { getTimeBreakdown, msToSeconds } from '@pooltogether/utilities'
 
 /**
  * Compares the range of time now with the time provided and provides a nice data representation to build UIs with
  * @param {number} initialSecondsLeft how many seconds remain in the period
- * @param {number} countBy Optional param for how often this function should run (default to every second) 
+ * @param {number} countBy Optional param for how often this function should run (default to every second)
  * @returns {object} time representation broken down into days, hours, minutes, seconds and secondsLeft (remaining)
  */
 export const useTimeCountdown = (initialSecondsLeft, countBy = 1000) => {
@@ -20,8 +19,13 @@ export const useTimeCountdown = (initialSecondsLeft, countBy = 1000) => {
     }
   }, countBy)
 
-  const currentDate = new Date(Date.now())
-  const futureDate = addSeconds(currentDate, secondsLeft)
-  const { days, hours, minutes, seconds } = subtractDates(futureDate, currentDate)
+  useEffect(() => {
+    const newInitialSecondsLeft = initialSecondsLeft < 0 ? 0 : initialSecondsLeft
+    if (newInitialSecondsLeft !== secondsLeft) {
+      setSecondsLeft(newInitialSecondsLeft)
+    }
+  }, [initialSecondsLeft])
+
+  const { days, hours, minutes, seconds } = getTimeBreakdown(secondsLeft)
   return { days, hours, minutes, seconds, secondsLeft }
 }
