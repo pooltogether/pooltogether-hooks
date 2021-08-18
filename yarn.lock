@@ -1981,11 +1981,6 @@
     walletlink "^2.1.6"
     web3-provider-engine "^16.0.1"
 
-"@pooltogether/current-pool-data@^3.4.3":
-  version "3.5.18"
-  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.5.18.tgz#60bcf85da83894278ce46ea0cee424ef06e1edce"
-  integrity sha512-IXWguQBwtuSkbwOp6DDpgiF4NI9/dVPWXON3S0v/6At6uGEtzaHHiv+wj4+RPJttWOQi5qU/kcwQu3FK7ChHgw==
-
 "@pooltogether/etherplex@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@pooltogether/etherplex/-/etherplex-1.1.1.tgz#330f326ce8fbfd4f4aae70d5fd02d5baa3e9195e"
@@ -2003,15 +1998,10 @@
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@^0.0.34":
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.34.tgz#de297bb7a03a5665491ee6870e63181953cf9ff8"
-  integrity sha512-yiTpsRCy4j3wXOAhRoqwMrm8irbRNKfgdSbVbjqI6XmI6VbNq9UNaTVVjOYlYppam3NIT27qZrFajOHRE+lqdQ==
-  dependencies:
-    "@pooltogether/current-pool-data" "^3.4.3"
-    ethers "^5.3.0"
-    lodash.clonedeep "^4.5.0"
-    query-string "^7.0.0"
+"@pooltogether/utilities@^0.0.37":
+  version "0.0.37"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.37.tgz#ada3d644c042f520d06e7aaf618461c420db7e7b"
+  integrity sha512-sKCDd7Dyb/CpDsSnXskkp9quDtdhrTG3AOgeFPY4emeNe+SEiqH2mJc53AL6llll8TZH9YECvDjgAXv7GJ2h2w==
 
 "@portis/web3@^4.0.0":
   version "4.0.5"
@@ -6013,11 +6003,6 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-filter-obj@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/filter-obj/-/filter-obj-1.1.0.tgz#9b311112bc6c6127a16e016c6c5d7f19e0805c5b"
-  integrity sha1-mzERErxsYSehbgFsbF1/GeCAXFs=
-
 find-cache-dir@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-3.3.1.tgz#89b33fad4a4670daa94f855f7fbe31d6d84fe880"
@@ -8427,11 +8412,6 @@ lodash.assign@^4.0.3, lodash.assign@^4.0.6:
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
   integrity sha1-DZnzzNem0mHRm9rrkkUAXShYCOc=
 
-lodash.clonedeep@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
-  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
-
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
@@ -9931,16 +9911,6 @@ query-string@^5.0.1:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
-
-query-string@^7.0.0:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.1.tgz#45bd149cf586aaa582dffc7ec7a8ad97dd02f75d"
-  integrity sha512-uIw3iRvHnk9to1blJCG3BTc+Ro56CBowJXKmNNAm3RulvPBzWLRqKSiiDk+IplJhsydwtuNMHi8UGQFcCLVfkA==
-  dependencies:
-    decode-uri-component "^0.2.0"
-    filter-obj "^1.1.0"
-    split-on-first "^1.0.0"
-    strict-uri-encode "^2.0.0"
 
 querystring-es3@^0.2.0:
   version "0.2.1"
