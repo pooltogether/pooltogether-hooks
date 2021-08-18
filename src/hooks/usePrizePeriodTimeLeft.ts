@@ -1,4 +1,6 @@
-import { getSecondsSinceEpoch } from '@pooltogether/utilities'
+import { BigNumber } from '@ethersproject/bignumber'
+import { getSecondsRemainingInPrizePeriod } from '@pooltogether/utilities'
+import { useMemo } from 'react'
 
 import { useTimeCountdown } from './useTimeCountdown'
 
@@ -8,13 +10,13 @@ import { useTimeCountdown } from './useTimeCountdown'
  * @param {number} prizePeriodStartedAt the unix timestamp when the period started
  * @returns {object} time representation broken down into days, hours, minutes, seconds and secondsLeft (remaining)
  */
-export const usePrizePeriodTimeLeft = (prizePeriodSeconds, prizePeriodStartedAt) => {
-  const prizePeriodDurationInSeconds = prizePeriodSeconds.toNumber()
-  const prizePeriodStartedAtInSeconds = prizePeriodStartedAt.toNumber()
-  const currentTimeInSeconds = getSecondsSinceEpoch()
-
-  const secondsSinceStartOfPrizePeriod = currentTimeInSeconds - prizePeriodStartedAtInSeconds
-  const initialSecondsLeft = prizePeriodDurationInSeconds - secondsSinceStartOfPrizePeriod
+export const usePrizePeriodTimeLeft = (
+  prizePeriodSeconds: BigNumber,
+  prizePeriodStartedAt: BigNumber
+) => {
+  const initialSecondsLeft = useMemo(() => {
+    return getSecondsRemainingInPrizePeriod(prizePeriodSeconds, prizePeriodStartedAt)
+  }, [prizePeriodSeconds, prizePeriodStartedAt])
 
   return useTimeCountdown(initialSecondsLeft)
 }
