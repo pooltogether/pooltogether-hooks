@@ -80,17 +80,6 @@ const getPrizePeriod = async (
       .prizePeriodEndAt()
   )
 
-  console.log('getPrizePeriod', Date(), {
-    canCompleteAward: response[prizeStrategyAddress].canCompleteAward[0],
-    canStartAward: response[prizeStrategyAddress].canStartAward[0],
-    currentPrize: response[prizeStrategyAddress].currentPrize[0],
-    isRngCompleted: response[prizeStrategyAddress].isRngCompleted[0],
-    isRngRequested: response[prizeStrategyAddress].isRngRequested[0],
-    prizePeriodSeconds: response[prizeStrategyAddress].prizePeriodSeconds[0],
-    prizePeriodStartedAt: response[prizeStrategyAddress].prizePeriodStartedAt[0],
-    prizePeriodEndAt: response[prizeStrategyAddress].prizePeriodEndAt[0]
-  })
-
   return {
     canCompleteAward: response[prizeStrategyAddress].canCompleteAward[0],
     canStartAward: response[prizeStrategyAddress].canStartAward[0],
