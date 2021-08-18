@@ -3,17 +3,21 @@ import { BaseProvider } from '@ethersproject/providers'
 import { batch, contract } from '@pooltogether/etherplex'
 import { useState } from 'react'
 import { BigNumber } from 'ethers'
-import {
-  getSecondsRemainingInPrizePeriod,
-  getSecondsSinceEpoch,
-  sToMs
-} from '@pooltogether/utilities'
+import { getSecondsRemainingInPrizePeriod, sToMs } from '@pooltogether/utilities'
 
 import { QUERY_KEYS } from '../constants'
 import useReadProvider from './useReadProvider'
 import useRefetchInterval from './useRefetchInterval'
 import PrizeStrategyAbi_3_4_4 from '../abis/PrizeStrategy_3_4_4'
 
+/**
+ * A hook that fetches returns metadata about a prize period.
+ * Dynamically changes the refresh rate depending on how much time is left in the prize period.
+ * Refreshes faster once the prize period is over so that we fetch the next prize periods data faster.
+ * @param chainId
+ * @param prizeStrategyAddress
+ * @returns
+ */
 export const usePrizePeriod = (chainId: number, prizeStrategyAddress: string) => {
   const standardRefetchIntervalInMs = useRefetchInterval()
   const { readProvider, isReadProviderReady } = useReadProvider(chainId)
@@ -52,7 +56,7 @@ interface PrizePeriodResponse {
 }
 
 /**
- * Fetches the live prize period data
+ * Fetches the live prize period data from the chain
  * @param provider
  * @param prizeStrategyAddress
  * @returns
@@ -92,6 +96,14 @@ const getPrizePeriod = async (
   }
 }
 
+/**
+ * After the data has been fetched, set the refetch interval depending on
+ * how long there is until the next prize period.
+ * @param data
+ * @param setRefetchInterval
+ * @param standardRefetchIntervalInMs
+ * @param refetchInterval
+ */
 const onPrizePeriodFetchSuccess = async (
   data: PrizePeriodResponse,
   setRefetchInterval: React.Dispatch<React.SetStateAction<number | false>>,
@@ -104,7 +116,8 @@ const onPrizePeriodFetchSuccess = async (
   )
 
   if (secondsLeft > 60) {
-    // Refetch right before prize will be awarded
+    // Refetch 1 block - 1 second before prize will be awarded.
+    // The 2nd refetch will be 1 second after the last block in the prize period.
     setRefetchInterval(sToMs(secondsLeft + 1) - standardRefetchIntervalInMs)
   } else if (standardRefetchIntervalInMs !== refetchInterval) {
     // Set to the standard refetch interval for that chain
