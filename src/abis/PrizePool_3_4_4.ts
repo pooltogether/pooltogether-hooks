@@ -1,4 +1,4 @@
-export default [
+export const PrizePoolAbi_3_4_4 = [
   {
     "anonymous": false,
     "inputs": [

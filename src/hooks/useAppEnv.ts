@@ -35,7 +35,7 @@ const appEnvAtom = atom(
  * ex. a user loads /pools/rinkeby but with their wallet connected to BSC.
  * @returns string
  */
-const useAppEnv = () => {
+export const useAppEnv = () => {
   const [appEnv, setAppEnvState] = useAtom(appEnvAtom)
   const cookieOptions = useCookieOptions()
 
@@ -55,4 +55,3 @@ const useAppEnv = () => {
   return { appEnv, setAppEnv }
 }
 
-export default useAppEnv

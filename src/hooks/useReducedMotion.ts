@@ -4,7 +4,7 @@ import { atom, useAtom } from 'jotai'
 
 const reducedMotionAtom = atom<boolean>(false)
 
-const useReducedMotion = () => {
+export const useReducedMotion = () => {
   const [reducedMotionOverride] = useAtom(reducedMotionAtom)
   return reducedMotionOverride || framerUseReducedMotion()
 }
@@ -15,5 +15,3 @@ export const useInitReducedMotion = (reducedMotionOverride: boolean) => {
     setReducedMotionOverride(reducedMotionOverride)
   }, [reducedMotionOverride])
 }
-
-export default useReducedMotion

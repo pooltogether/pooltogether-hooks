@@ -1,8 +1,6 @@
 import { useOnboard } from './useOnboard'
 
-const useUsersAddress = () => {
+export const useUsersAddress = () => {
   const { address } = useOnboard()
   return address
 }
-
-export default useUsersAddress

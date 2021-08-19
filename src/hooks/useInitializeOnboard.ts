@@ -19,7 +19,7 @@ export const providerAtom = atom<ethers.providers.Web3Provider>(
 export const balanceAtom = atom<string>(undefined as string)
 export const walletAtom = atom<Wallet>(undefined as Wallet)
 
-const useInitializeOnboard = (
+export const useInitializeOnboard = (
   config: {
     infuraId?: string
     fortmaticKey?: string
@@ -102,8 +102,6 @@ const useInitializeOnboard = (
     }
   }, [onboard])
 }
-
-export default useInitializeOnboard
 
 const initOnboard = (subscriptions, walletConfig) => {
   const onboard = Onboard

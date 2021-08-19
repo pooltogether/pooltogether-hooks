@@ -11,7 +11,7 @@ import { useQuickNodeId } from './useInitQuickNodeId'
  * @param {*} chainId a chainId to get a provider for
  * @returns Providers for the provided chain id
  */
-const useReadProviders = (chainIds) => {
+export const useReadProviders = (chainIds) => {
   const infuraId = useInfuraId()
   const quickNodeId = useQuickNodeId()
 
@@ -46,5 +46,3 @@ const getReadProviders = async (chainIds, infuraId, quickNodeId) => {
   }
   return readProviders
 }
-
-export default useReadProviders

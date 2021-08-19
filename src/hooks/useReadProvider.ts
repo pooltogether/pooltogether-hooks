@@ -11,7 +11,7 @@ import { useQuickNodeId } from './useInitQuickNodeId'
  * @param {*} chainId a chainId to get a provider for
  * @returns Providers for the provided chain id
  */
-const useReadProvider = (chainId) => {
+export const useReadProvider = (chainId) => {
   const infuraId = useInfuraId()
   const quickNodeId = useQuickNodeId()
   const {
@@ -30,5 +30,3 @@ const useReadProvider = (chainId) => {
     isFetched && Boolean(chainId) && _readProvider?.network?.chainId === chainId && !isFetching
   return { readProvider: _readProvider, isReadProviderReady }
 }
-
-export default useReadProvider
