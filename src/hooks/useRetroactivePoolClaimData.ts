@@ -2,9 +2,11 @@ import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
 import { ethers } from 'ethers'
 import { isValidAddress } from '@pooltogether/utilities'
-import { useGovernanceChainId, useOnboard, useReadProvider } from '@pooltogether/hooks'
 
 import { GOVERNANCE_CONTRACT_ADDRESSES, QUERY_KEYS } from '../constants'
+import { useGovernanceChainId } from './useGovernanceChainId'
+import { useOnboard } from './useOnboard'
+import { useReadProvider } from './useReadProvider'
 import { MerkleDistributorAbi } from '../abis/MerkleDistributor'
 
 export const useRetroactivePoolClaimData = (address) => {
@@ -45,13 +47,10 @@ const useFetchRetroactivePoolClaimData = (address) => {
 
 const getRetroactivePoolClaimData = async (provider, chainId, usersAddress) => {
   const checksummedAddress = ethers.utils.getAddress(usersAddress)
-  let merkleDistributionData = {}
+  let merkleDistributionData: any = {}
 
   try {
-    const response = await getMerkleDistributionData(checksummedAddress, chainId)
-  console.log({response})
-
-    merkleDistributionData = response.data
+    merkleDistributionData = await getMerkleDistributionData(checksummedAddress, chainId)
   } catch (e) {
     return {
       isMissing: true,
@@ -63,7 +62,6 @@ const getRetroactivePoolClaimData = async (provider, chainId, usersAddress) => {
   const formattedAmount = Number(
     ethers.utils.formatUnits(ethers.BigNumber.from(merkleDistributionData.amount).toString(), 18)
   )
-
   const isClaimed = await getIsClaimed(provider, chainId, merkleDistributionData.index)
 
   return {
@@ -79,8 +77,13 @@ const getMerkleDistributionData = async (usersAddress, chainId) => {
       chainId === 4 ? '&chainId=4&testVersion=v4' : ''
     }`
   )
-  console.log(response)
-  return await response.json()
+
+
+  if (response.status === 200) {
+    return await response.json()
+  } else {
+    throw new Error('User does not exist in Merkle tree or 500 error')
+  }
 }
 
 const getIsClaimed = async (provider, chainId, index) => {

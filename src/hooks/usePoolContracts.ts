@@ -15,13 +15,13 @@ export function useGovernancePoolContracts() {
 }
 
 export function usePoolContractByAddress(poolAddress) {
-  const poolContracts = useAllPoolContracts()
+  const poolContracts: any = useAllPoolContracts()
   if (!poolAddress) return null
   return poolContracts.find((contract) => contract.prizePool.address === poolAddress)
 }
 
 export function usePoolContractBySymbol(symbol) {
-  const poolContracts = useAllPoolContracts()
+  const poolContracts: any = useAllPoolContracts()
   if (!symbol) return null
   return poolContracts.find((contract) => contract.symbol === symbol)
 }

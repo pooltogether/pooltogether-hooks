@@ -16,8 +16,7 @@ export const useReadProvider = (chainId) => {
   const quickNodeId = useQuickNodeId()
   const {
     data: _readProvider,
-    isFetched,
-    isFetching
+    isFetched
   } = useQuery<ethers.providers.BaseProvider, Error>(
     [QUERY_KEYS.readProvider, chainId, quickNodeId],
     () => readProvider(chainId, infuraId, quickNodeId),
@@ -27,6 +26,6 @@ export const useReadProvider = (chainId) => {
     }
   )
   const isReadProviderReady =
-    isFetched && Boolean(chainId) && _readProvider?.network?.chainId === chainId && !isFetching
+    isFetched && Boolean(chainId) && _readProvider?.network?.chainId === chainId
   return { readProvider: _readProvider, isReadProviderReady }
 }

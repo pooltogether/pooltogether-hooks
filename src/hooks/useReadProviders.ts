@@ -16,9 +16,8 @@ export const useReadProviders = (chainIds) => {
   const quickNodeId = useQuickNodeId()
 
   const {
-    data: _readProviders,
-    isFetched,
-    isFetching
+    data: readProviders,
+    isFetched
   } = useQuery<{ [chainId: string]: ethers.providers.BaseProvider }, Error>(
     [QUERY_KEYS.readProviders, chainIds, infuraId, quickNodeId],
     () => getReadProviders(chainIds, infuraId, quickNodeId),
@@ -30,13 +29,13 @@ export const useReadProviders = (chainIds) => {
 
   const areProvidersForAllChainIdsRequestedReady = chainIds
     ? chainIds.reduce((allReady, chainId) => {
-        return _readProviders?.[chainId]?.network?.chainId === chainId && allReady
+        return readProviders?.[chainId]?.network?.chainId === chainId && allReady
       }, true)
     : false
 
-  const isReadProvidersReady = isFetched && areProvidersForAllChainIdsRequestedReady && !isFetching
+  const isReadProvidersReady = isFetched && areProvidersForAllChainIdsRequestedReady
 
-  return { readProviders: _readProviders, isReadProvidersReady }
+  return { readProviders, isReadProvidersReady }
 }
 
 const getReadProviders = async (chainIds, infuraId, quickNodeId) => {

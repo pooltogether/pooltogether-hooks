@@ -8,7 +8,7 @@ import { QUERY_KEYS } from '../constants'
 import { useAllPools } from './usePools'
 import { useEnvReadProviders } from './useEnvReadProviders'
 
-import { TokenFaucetABI } from '../abis/pooltogether-contracts_3_3/TokenFaucet'
+import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
 
 export const useClaimableTokenFromTokenFaucet = (chainId, tokenFaucetAddress, usersAddress) => {
@@ -77,7 +77,7 @@ const calculateClaimable = async (provider, tokenFaucets, usersAddress) => {
     const tokenFaucetAddress = tokenFaucet?.address
     const dripToken = tokenFaucet?.dripToken
 
-    const tokenFaucetContract = contract('tokenFaucetValues', TokenFaucetABI, tokenFaucetAddress)
+    const tokenFaucetContract = contract('tokenFaucetValues', TokenFaucetAbi, tokenFaucetAddress)
     const { tokenFaucetValues } = await batch(provider, tokenFaucetContract.claim(usersAddress))
     const claimableAmountUnformatted = tokenFaucetValues.claim[0]
     const claimableAmount = ethers.utils.formatUnits(claimableAmountUnformatted, dripToken.decimals)

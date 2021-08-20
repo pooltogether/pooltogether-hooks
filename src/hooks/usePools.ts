@@ -2,12 +2,10 @@ import { useQuery, useQueryClient } from 'react-query'
 import { NETWORK } from '@pooltogether/utilities'
 
 import { APP_ENVIRONMENT, useAppEnv } from './useAppEnv'
-import { QUERY_KEYS } from '../constants'
+import { QUERY_KEYS, REFETCH_INTERVAL } from '../constants'
 import { useGovernancePoolContracts, usePoolContractBySymbol } from './usePoolContracts'
 import { useRouterChainId } from './useRouterChainId'
 import { getPool, getPoolsByChainId } from '../fetchers/getPools'
-
-const REFETCH_INTERVAL = process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000
 
 /**
  * Fetches pool graph data, chain data, token prices, lootbox data & merges it all.
@@ -16,7 +14,7 @@ const REFETCH_INTERVAL = process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000
  */
 export const useAllPools = () => {
   const { data: poolsByChainId, ...useAllPoolsResponse } = useAllPoolsKeyedByChainId()
-  let pools = poolsByChainId ? Object.values(poolsByChainId).flat() : null
+  let pools: any = poolsByChainId ? Object.values(poolsByChainId).flat() : null
   pools = pools?.filter(Boolean)
   return { ...useAllPoolsResponse, data: pools }
 }
@@ -150,6 +148,10 @@ export const useCurrentPool = (router) => {
 export const usePoolByAddress = (chainId, poolAddress) => {
   return usePoolByChainId(chainId, poolAddress)
 }
+
+// function getMainImageUrl(images: Images): string {
+//   return images.main;
+// }
 
 /**
  *

@@ -1,4 +1,4 @@
-export const TokenFaucetABI = [
+export const TokenFaucetAbi = [
   {
     "anonymous": false,
     "inputs": [
