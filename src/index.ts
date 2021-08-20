@@ -1,5 +1,3 @@
-import { useUserTickets } from './hooks/useUserTicketsFormattedByPool'
-
 // Multi Chain Utilities
 export { useAppEnv, APP_ENVIRONMENT } from './hooks/useAppEnv'
 export { usePodChainIds } from './hooks/usePodChainIds'
@@ -13,6 +11,7 @@ export { useRefetchInterval } from './hooks/useRefetchInterval'
 export { useGovernanceChainId } from './hooks/useGovernanceChainId'
 
 // Time
+export { useBlockOnProviderLoad } from './hooks/useBlockOnProviderLoad'
 export { useTimeCountdown } from './hooks/useTimeCountdown'
 export { usePrizePeriodTimeLeft } from './hooks/usePrizePeriodTimeLeft'
 export { usePrizePeriod } from './hooks/usePrizePeriod'
@@ -46,6 +45,7 @@ export { useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowance
 export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
 export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 export { usePoolTokenData } from './hooks/usePoolTokenData'
+export { useTokenHolder } from './hooks/useTokenHolder'
 export { useTotalClaimablePool } from './hooks/useTotalClaimablePool'
 
 // TokenFaucets

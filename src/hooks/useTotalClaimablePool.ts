@@ -44,6 +44,6 @@ export const useTotalClaimablePool = (address) => {
 
   return {
     isFetched,
-    total
+    total,
   }
 }

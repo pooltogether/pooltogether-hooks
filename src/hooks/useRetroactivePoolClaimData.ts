@@ -55,17 +55,18 @@ const getRetroactivePoolClaimData = async (provider, chainId, usersAddress) => {
     return {
       isMissing: true,
       isClaimed: false,
+      amount: ethers.BigNumber.from(0),
       formattedAmount: 0
     }
   }
 
-  const formattedAmount = Number(
-    ethers.utils.formatUnits(ethers.BigNumber.from(merkleDistributionData.amount).toString(), 18)
-  )
+  const amount = ethers.BigNumber.from(merkleDistributionData.amount).toString()
+  const formattedAmount = Number(ethers.utils.formatUnits(amount, 18))
   const isClaimed = await getIsClaimed(provider, chainId, merkleDistributionData.index)
 
   return {
     ...merkleDistributionData,
+    amount,
     formattedAmount,
     isClaimed
   }
