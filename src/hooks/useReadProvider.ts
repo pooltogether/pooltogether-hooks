@@ -11,13 +11,12 @@ import { useQuickNodeId } from './useInitQuickNodeId'
  * @param {*} chainId a chainId to get a provider for
  * @returns Providers for the provided chain id
  */
-const useReadProvider = (chainId) => {
+export const useReadProvider = (chainId) => {
   const infuraId = useInfuraId()
   const quickNodeId = useQuickNodeId()
   const {
     data: _readProvider,
-    isFetched,
-    isFetching
+    isFetched
   } = useQuery<ethers.providers.BaseProvider, Error>(
     [QUERY_KEYS.readProvider, chainId, quickNodeId],
     () => readProvider(chainId, infuraId, quickNodeId),
@@ -27,8 +26,6 @@ const useReadProvider = (chainId) => {
     }
   )
   const isReadProviderReady =
-    isFetched && Boolean(chainId) && _readProvider?.network?.chainId === chainId && !isFetching
+    isFetched && Boolean(chainId) && _readProvider?.network?.chainId === chainId
   return { readProvider: _readProvider, isReadProviderReady }
 }
-
-export default useReadProvider

@@ -8,7 +8,7 @@ import {
   onboardAtom,
   providerAtom,
   networkNameAtom,
-  walletAtom
+  walletAtom,
 } from './useInitializeOnboard'
 import { SELECTED_WALLET_COOKIE_KEY } from '../constants'
 import { useCookieOptions } from './useCookieOptions'
@@ -42,7 +42,8 @@ export const useOnboard = () => {
 
         postSignInCallback?.()
       } catch (e) {
-        console.warn("Onboard isn't ready!")
+        console.error(e)
+        console.warn("Onboard error")
       }
     },
     [onboard]
@@ -53,7 +54,8 @@ export const useOnboard = () => {
       onboard.walletReset()
       Cookies.remove(SELECTED_WALLET_COOKIE_KEY, cookieOptions)
     } catch (e) {
-      console.warn("Onboard isn't ready!")
+      console.error(e)
+      console.warn("Onboard error")
     }
   }, [onboard, cookieOptions])
 

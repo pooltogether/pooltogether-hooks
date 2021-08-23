@@ -19,7 +19,7 @@ export const providerAtom = atom<ethers.providers.Web3Provider>(
 export const balanceAtom = atom<string>(undefined as string)
 export const walletAtom = atom<Wallet>(undefined as Wallet)
 
-const useInitializeOnboard = (
+export const useInitializeOnboard = (
   config: {
     infuraId?: string
     fortmaticKey?: string
@@ -61,8 +61,8 @@ const useInitializeOnboard = (
   }
 
   const handleLoadOnboard = async () => {
-    const onboard = await await getOnboard()
-    setOnboard(onboard)
+    const _onboard = await getOnboard()
+    setOnboard(_onboard)
   }
 
   useEffect(() => {
@@ -74,8 +74,10 @@ const useInitializeOnboard = (
   const setSelectedWallet = useCallback(
     (selectedWallet) => {
       try {
+        console.log(onboard)
         onboard.walletSelect(selectedWallet)
       } catch (e) {
+        console.error(e)
         console.warn("Onboard isn't ready!")
       }
     },
@@ -87,6 +89,7 @@ const useInitializeOnboard = (
       onboard.walletReset()
       Cookies.remove(SELECTED_WALLET_COOKIE_KEY, cookieOptions)
     } catch (e) {
+      console.error(e)
       console.warn("Onboard isn't ready!")
     }
   }, [onboard, cookieOptions])
@@ -102,8 +105,6 @@ const useInitializeOnboard = (
     }
   }, [onboard])
 }
-
-export default useInitializeOnboard
 
 const initOnboard = (subscriptions, walletConfig) => {
   const onboard = Onboard

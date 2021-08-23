@@ -11,7 +11,7 @@ const COINGECKO_ASSET_PLATFORMS = Object.freeze({
   [NETWORK.polygon]: 'polygon-pos'
 })
 
-const useCoingeckoTokenData = (chainId, contractAddress) => {
+export const useCoingeckoTokenData = (chainId, contractAddress) => {
   const validNetworks = Object.keys(COINGECKO_ASSET_PLATFORMS)
 
   const isValidNetwork = validNetworks.includes(chainId.toString())
@@ -35,8 +35,6 @@ const useCoingeckoTokenData = (chainId, contractAddress) => {
     }
   )
 }
-
-export default useCoingeckoTokenData
 
 const getCoingeckoTokenData = async (assetPlatform, contractAddress) => {
   try {

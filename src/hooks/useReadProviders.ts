@@ -11,14 +11,13 @@ import { useQuickNodeId } from './useInitQuickNodeId'
  * @param {*} chainId a chainId to get a provider for
  * @returns Providers for the provided chain id
  */
-const useReadProviders = (chainIds) => {
+export const useReadProviders = (chainIds) => {
   const infuraId = useInfuraId()
   const quickNodeId = useQuickNodeId()
 
   const {
-    data: _readProviders,
-    isFetched,
-    isFetching
+    data: readProviders,
+    isFetched
   } = useQuery<{ [chainId: string]: ethers.providers.BaseProvider }, Error>(
     [QUERY_KEYS.readProviders, chainIds, infuraId, quickNodeId],
     () => getReadProviders(chainIds, infuraId, quickNodeId),
@@ -30,13 +29,13 @@ const useReadProviders = (chainIds) => {
 
   const areProvidersForAllChainIdsRequestedReady = chainIds
     ? chainIds.reduce((allReady, chainId) => {
-        return _readProviders?.[chainId]?.network?.chainId === chainId && allReady
+        return readProviders?.[chainId]?.network?.chainId === chainId && allReady
       }, true)
     : false
 
-  const isReadProvidersReady = isFetched && areProvidersForAllChainIdsRequestedReady && !isFetching
+  const isReadProvidersReady = isFetched && areProvidersForAllChainIdsRequestedReady
 
-  return { readProviders: _readProviders, isReadProvidersReady }
+  return { readProviders, isReadProvidersReady }
 }
 
 const getReadProviders = async (chainIds, infuraId, quickNodeId) => {
@@ -46,5 +45,3 @@ const getReadProviders = async (chainIds, infuraId, quickNodeId) => {
   }
   return readProviders
 }
-
-export default useReadProviders

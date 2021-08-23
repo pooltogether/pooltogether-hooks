@@ -8,11 +8,9 @@ export const useInfuraId = () => {
   return infuraId
 }
 
-const useInitInfuraId = (infuraId) => {
+export const useInitInfuraId = (infuraId) => {
   const [, setInfuraId] = useAtom(infuraAtom)
   useEffect(() => {
     setInfuraId(infuraId)
   }, [infuraId])
 }
-
-export default useInitInfuraId

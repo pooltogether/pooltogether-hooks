@@ -6,7 +6,7 @@ export const ScreenSize = Object.freeze({
   lg: 1481
 })
 
-const useScreenSize = () => {
+export const useScreenSize = () => {
   const { width } = useWindowSize()
   if (!width || width <= ScreenSize.xs) {
     return ScreenSize.xs
@@ -16,8 +16,6 @@ const useScreenSize = () => {
     return ScreenSize.lg
   }
 }
-
-export default useScreenSize
 
 // Hook
 function useWindowSize() {

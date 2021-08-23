@@ -1,6 +1,6 @@
 import { getChain, formatNetworkForAddEthereumChain } from '@pooltogether/evm-chains-extended'
 
-const useAddNetworkToMetamask = (chainId) => {
+export const useAddNetworkToMetamask = (chainId) => {
   return async () => {
     try {
       const ethereum = (window as any).ethereum
@@ -17,5 +17,3 @@ const useAddNetworkToMetamask = (chainId) => {
     }
   }
 }
-
-export default useAddNetworkToMetamask
