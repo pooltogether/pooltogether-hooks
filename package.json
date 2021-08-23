@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.1.21",
+  "version": "0.2.0",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,6 +16,7 @@
     "watch": "yarn start",
     "reinstall": "rm -rf node_modules/ && rm -rf dist/ && yarn install",
     "prepublish": "yarn build",
+    "postpublish": "git push",
     "test": "jest",
     "test:watch": "yarn run test --watch",
     "test:cov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
