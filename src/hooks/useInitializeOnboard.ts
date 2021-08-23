@@ -61,8 +61,8 @@ export const useInitializeOnboard = (
   }
 
   const handleLoadOnboard = async () => {
-    const onboard = await await getOnboard()
-    setOnboard(onboard)
+    const _onboard = await getOnboard()
+    setOnboard(_onboard)
   }
 
   useEffect(() => {
@@ -74,8 +74,10 @@ export const useInitializeOnboard = (
   const setSelectedWallet = useCallback(
     (selectedWallet) => {
       try {
+        console.log(onboard)
         onboard.walletSelect(selectedWallet)
       } catch (e) {
+        console.error(e)
         console.warn("Onboard isn't ready!")
       }
     },
@@ -87,6 +89,7 @@ export const useInitializeOnboard = (
       onboard.walletReset()
       Cookies.remove(SELECTED_WALLET_COOKIE_KEY, cookieOptions)
     } catch (e) {
+      console.error(e)
       console.warn("Onboard isn't ready!")
     }
   }, [onboard, cookieOptions])
