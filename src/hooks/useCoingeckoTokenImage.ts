@@ -1,4 +1,4 @@
-import useCoingeckoTokenData from './useCoingeckoTokenData'
+import { useCoingeckoTokenData } from './useCoingeckoTokenData'
 
 const TOKEN_IMAGES_BY_ADDRESS = {
   '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48':
@@ -43,7 +43,7 @@ const TOKEN_IMAGES_BY_ADDRESS = {
     'https://assets.coingecko.com/coins/images/12900/small/rgt_logo.png?1603340632'
 }
 
-const useCoingeckoTokenImage = (chainId, address) => {
+export const useCoingeckoTokenImage = (chainId, address) => {
   const formattedAddress = address?.toLowerCase()
   const { data, isFetched, isFetching } = useCoingeckoTokenData(chainId, formattedAddress)
 
@@ -70,5 +70,3 @@ const useCoingeckoTokenImage = (chainId, address) => {
     isFetching
   }
 }
-
-export default useCoingeckoTokenImage

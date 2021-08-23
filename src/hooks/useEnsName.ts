@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NETWORK } from '@pooltogether/utilities'
 
-import useReadProvider from './useReadProvider'
+import { useReadProvider } from './useReadProvider'
 
 export const useEnsName = (address) => {
   const [ensName, setEnsName] = useState('')
@@ -29,5 +29,3 @@ export const useEnsName = (address) => {
 
   return ensName
 }
-
-export default useEnsName

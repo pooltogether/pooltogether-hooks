@@ -8,11 +8,9 @@ export const useQuickNodeId = () => {
   return quickNodeId
 }
 
-const useInitQuickNodeId = (quickNodeId) => {
+export const useInitQuickNodeId = (quickNodeId) => {
   const [, setQuickNodeId] = useAtom(quickNodeAtom)
   useEffect(() => {
     setQuickNodeId(quickNodeId)
   }, [quickNodeId])
 }
-
-export default useInitQuickNodeId

@@ -10,7 +10,7 @@ import { QueryClient } from 'react-query'
  * @param data
  * @returns
  */
-const populatePerIdCache = (
+export const populatePerIdCache = (
   queryClient: QueryClient,
   getCacheKey: (id: (string | number)[]) => (string | number | (string | number)[])[],
   data: object
@@ -23,5 +23,3 @@ const populatePerIdCache = (
     queryClient.setQueryData(getCacheKey([id]), { [id]: datum })
   })
 }
-
-export default populatePerIdCache

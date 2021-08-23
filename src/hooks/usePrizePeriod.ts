@@ -6,9 +6,9 @@ import { BigNumber } from 'ethers'
 import { getSecondsRemainingInPrizePeriod, sToMs } from '@pooltogether/utilities'
 
 import { QUERY_KEYS } from '../constants'
-import useReadProvider from './useReadProvider'
-import useRefetchInterval from './useRefetchInterval'
-import PrizeStrategyAbi_3_4_4 from '../abis/PrizeStrategy_3_4_4'
+import { useReadProvider } from './useReadProvider'
+import { useRefetchInterval } from './useRefetchInterval'
+import { PrizeStrategyAbi_3_4_4 } from '../abis/PrizeStrategy_3_4_4'
 
 /**
  * A hook that fetches returns metadata about a prize period.

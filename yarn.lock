@@ -1981,6 +1981,11 @@
     walletlink "^2.1.6"
     web3-provider-engine "^16.0.1"
 
+"@pooltogether/current-pool-data@^3.5.18":
+  version "3.5.18"
+  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.5.18.tgz#60bcf85da83894278ce46ea0cee424ef06e1edce"
+  integrity sha512-IXWguQBwtuSkbwOp6DDpgiF4NI9/dVPWXON3S0v/6At6uGEtzaHHiv+wj4+RPJttWOQi5qU/kcwQu3FK7ChHgw==
+
 "@pooltogether/etherplex@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@pooltogether/etherplex/-/etherplex-1.1.1.tgz#330f326ce8fbfd4f4aae70d5fd02d5baa3e9195e"
@@ -1998,10 +2003,10 @@
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@^0.0.37":
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.37.tgz#ada3d644c042f520d06e7aaf618461c420db7e7b"
-  integrity sha512-sKCDd7Dyb/CpDsSnXskkp9quDtdhrTG3AOgeFPY4emeNe+SEiqH2mJc53AL6llll8TZH9YECvDjgAXv7GJ2h2w==
+"@pooltogether/utilities@^0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.39.tgz#420bcfa7f127b2cfd50ba21ce0abca4b0c8a604b"
+  integrity sha512-Wc1yYFjTaWK8DWLcD6g4u/9bOpCpE+yYicvWqaj0+0qAg78WqUD+mlek91pH5jgJXqRglGtpJWz5Z8/J0wgmGw==
 
 "@portis/web3@^4.0.0":
   version "4.0.5"
@@ -4304,6 +4309,13 @@ cross-fetch@^2.1.0:
     node-fetch "2.6.1"
     whatwg-fetch "2.0.4"
 
+cross-fetch@^3.0.6:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
+  integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
+  dependencies:
+    node-fetch "2.6.1"
+
 cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -5911,6 +5923,11 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+extract-files@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-9.0.0.tgz#8a7744f2437f81f5ed3250ed9f1550de902fe54a"
+  integrity sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==
+
 extsprintf@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
@@ -6355,6 +6372,22 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9,
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
   integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
+
+graphql-request@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-3.5.0.tgz#7e69574e15875fb3f660a4b4be3996ecd0bbc8b7"
+  integrity sha512-Io89QpfU4rqiMbqM/KwMBzKaDLOppi8FU8sEccCE4JqCgz95W9Q8bvxQ4NfPALLSMvg9nafgg8AkYRmgKSlukA==
+  dependencies:
+    cross-fetch "^3.0.6"
+    extract-files "^9.0.0"
+    form-data "^3.0.0"
+
+graphql-tag@^2.12.5:
+  version "2.12.5"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.5.tgz#5cff974a67b417747d05c8d9f5f3cb4495d0db8f"
+  integrity sha512-5xNhP4063d16Pz3HBtKprutsPrmHZi5IdUGOWRxA2B6VF7BIRGOHZ5WQvDmJXZuPcBg7rYwaFxvQYjqkSdR3TQ==
+  dependencies:
+    tslib "^2.1.0"
 
 gridplus-sdk@^0.7.16:
   version "0.7.27"

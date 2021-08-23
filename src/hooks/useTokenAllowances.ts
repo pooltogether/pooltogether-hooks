@@ -1,11 +1,12 @@
 import { batch, contract } from '@pooltogether/etherplex'
-import { default as ERC20Abi } from '../abis/ERC20Abi'
 import { formatUnits } from '@ethersproject/units'
-import useReadProvider from './useReadProvider'
 import { useQuery, useQueryClient } from 'react-query'
-import { QUERY_KEYS } from '../constants'
-import populatePerIdCache from '../utils/populatePerIdCache'
 import { sToMs } from '@pooltogether/utilities'
+
+import { ERC20Abi } from '../abis/ERC20Abi'
+import { QUERY_KEYS } from '../constants'
+import { useReadProvider } from './useReadProvider'
+import { populatePerIdCache } from '../utils/populatePerIdCache'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
@@ -16,7 +17,7 @@ import { sToMs } from '@pooltogether/utilities'
  * @param tokenAddresses
  * @returns
  */
-const useTokenAllowances = (
+export const useTokenAllowances = (
   chainId: number,
   usersAddress: string,
   spenderAddress: string,
@@ -97,5 +98,3 @@ const getTokenAllowances = async (readProvider, usersAddress, spenderAddress, to
   })
   return result
 }
-
-export default useTokenAllowances

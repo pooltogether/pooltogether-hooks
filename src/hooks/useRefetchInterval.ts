@@ -1,6 +1,6 @@
 import { NETWORK, sToMs } from '@pooltogether/utilities'
 
-const useRefetchInterval = (chainId?: number) => {
+export const useRefetchInterval = (chainId?: number) => {
   switch (chainId) {
     case NETWORK.mainnet:
       return sToMs(16)
@@ -11,5 +11,3 @@ const useRefetchInterval = (chainId?: number) => {
       return sToMs(16)
   }
 }
-
-export default useRefetchInterval
