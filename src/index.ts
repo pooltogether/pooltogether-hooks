@@ -5,6 +5,7 @@ export { usePodChainIds } from './hooks/usePodChainIds'
 // Common chain data
 export { useInitInfuraId } from './hooks/useInitInfuraId'
 export { useInitQuickNodeId } from './hooks/useInitQuickNodeId'
+export { useInitTheGraphApiKey } from './hooks/useInitTheGraphApiKey'
 export { useReadProvider } from './hooks/useReadProvider'
 export { useReadProviders } from './hooks/useReadProviders'
 export { useRefetchInterval } from './hooks/useRefetchInterval'

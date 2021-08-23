@@ -3,9 +3,10 @@ import gql from 'graphql-tag'
 import { request } from 'graphql-request'
 import { isValidAddress } from '@pooltogether/utilities'
 
-import { POOLTOGETHER_GOVERNANCE_GRAPH_URIS, QUERY_KEYS } from '../constants'
+import { QUERY_KEYS } from '../constants'
 import { useBlockOnProviderLoad } from './useBlockOnProviderLoad'
 import { useGovernanceChainId } from './useGovernanceChainId'
+import { useGovernanceGraphUri } from './useGovernanceGraphUri'
 
 const EMPTY_TOKEN_HOLDER = Object.freeze({
   delegatedVotes: null,
@@ -46,12 +47,12 @@ export function useTokenHolder(address, blockNumber) {
 
 function useFetchTokenHolder(address, blockNumber) {
   const chainId = useGovernanceChainId()
-
+  const governanceGraphUri = useGovernanceGraphUri(chainId)
 
   return useQuery(
     [QUERY_KEYS.tokenHolderQuery, chainId, address, blockNumber],
     async () => {
-      return getTokenHolder(address, chainId, blockNumber)
+      return getTokenHolder(address, chainId, blockNumber, governanceGraphUri)
     },
     {
       enabled: Boolean(chainId && address) && isValidAddress(address)
@@ -59,12 +60,12 @@ function useFetchTokenHolder(address, blockNumber) {
   )
 }
 
-async function getTokenHolder(address, chainId, blockNumber) {
+async function getTokenHolder(address, chainId, blockNumber, governanceGraphUri) {
   try {
     const query = tokenHolderQuery(blockNumber)
     const variables = { id: address.toLowerCase() }
     const subgraphData = await request(
-      POOLTOGETHER_GOVERNANCE_GRAPH_URIS[chainId],
+      governanceGraphUri,
       query,
       variables
     )

@@ -51,8 +51,3 @@ export const GOVERNANCE_CONTRACT_ADDRESSES = {
 
 export const CONTRACT_ADDRESSES = Object.freeze(contractAddresses)
 export const PRIZE_POOL_CONTRACTS = prizePoolContracts
-
-export const POOLTOGETHER_GOVERNANCE_GRAPH_URIS = {
-  1: 'https://gateway.thegraph.com/api/21d3ba98f6136741319574fadc046b4b/subgraphs/id/0xa57d294c3a11fb542d524062ae4c5100e0e373ec-0',
-  4: 'https://api.thegraph.com/subgraphs/name/pooltogether/pooltogether-rinkeby-governance'
-}
