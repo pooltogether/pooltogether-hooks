@@ -24,7 +24,8 @@ export {
   useCurrentPool,
   usePoolByAddress,
   usePoolBySymbol,
-  useGovernancePools
+  useGovernancePools,
+  useRouterChainId
 } from './hooks/usePools'
 export { 
   useUserTickets,

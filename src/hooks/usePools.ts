@@ -1,10 +1,9 @@
 import { useQuery, useQueryClient } from 'react-query'
-import { NETWORK } from '@pooltogether/utilities'
+import { NETWORK, getChainIdByAlias } from '@pooltogether/utilities'
 
 import { APP_ENVIRONMENT, useAppEnv } from './useAppEnv'
 import { QUERY_KEYS, REFETCH_INTERVAL } from '../constants'
 import { useGovernancePoolContracts, usePoolContractBySymbol } from './usePoolContracts'
-import { useRouterChainId } from './useRouterChainId'
 import { getPool, getPoolsByChainId } from '../fetchers/getPools'
 
 /**
@@ -180,6 +179,12 @@ export const useGovernancePools = () => {
     data: pools
   }
 }
+
+export const useRouterChainId = (router) => {
+  const networkName = router?.query?.networkName
+  return getChainIdByAlias(networkName)
+}
+
 
 // Utils
 
