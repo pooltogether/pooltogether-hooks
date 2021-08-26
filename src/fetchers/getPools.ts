@@ -18,7 +18,11 @@ const flagshipFilteredPoolAddresses = {
   ],
   4: ['0x4706856fa8bb747d50b4ef8547fe51ab5edc4ac2', '0xab068f220e10eed899b54f1113de7e354c9a8eb7'],
   56: ['0x06d75eb5ca4da7f7c7a043714172cf109d07a5f8', '0x2f4fc07e4bd097c68774e5bdaba98d948219f827'],
-  137: ['0x887e17d791dcb44bfdda3023d26f7a04ca9c7ef4', '0xee06abe9e2af61cabcb13170e01266af2defa946']
+  137: ['0x887e17d791dcb44bfdda3023d26f7a04ca9c7ef4', '0xee06abe9e2af61cabcb13170e01266af2defa946'],
+  42220: [
+    '0x6f634f531ed0043b94527f68ec7861b4b1ab110d',
+    '0xbe55435BdA8f0A2A20D2Ce98cC21B0AF5bfB7c83'
+  ]
 }
 
 /**
@@ -48,9 +52,12 @@ export const getPoolsByChainIds = async (chainIds) =>
 export const getPoolsByChainId = async (chainId) =>
   await fetchData(`${API_URI}/pools/${chainId}.json`).then((pools) =>
     pools
-      ?.filter((pool) =>
-        flagshipFilteredPoolAddresses[chainId].includes(pool.prizePool.address.toLowerCase())
-      )
+      ?.filter((pool) => {
+        const poolAddress = pool.prizePool.address.toLowerCase()
+        const chainFilterAddresses = flagshipFilteredPoolAddresses[chainId]
+        const filterAddresses = chainFilterAddresses.map((address) => address.toLowerCase())
+        return filterAddresses.includes(poolAddress)
+      })
       .map((pool) => formatPool(pool, chainId))
   )
 

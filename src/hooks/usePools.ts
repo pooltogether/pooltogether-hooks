@@ -30,6 +30,7 @@ export const useAllPoolsKeyedByChainId = () => {
   const ethereumChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.mainnet : NETWORK.rinkeby
   const polygonChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.matic : NETWORK.mumbai
   const bscChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.bsc : null
+  const celoChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.celo : null
 
   const { data: ethereumPools, ...ethereumUseQuery } = useQuery(
     getUsePoolsQueryKey(ethereumChainId),
@@ -59,13 +60,26 @@ export const useAllPoolsKeyedByChainId = () => {
     }
   )
 
-  const error = ethereumUseQuery.error || polygonUseQuery.error || bscUseQuery.error
+  const { data: celoPools, ...celoUseQuery } = useQuery(
+    getUsePoolsQueryKey(celoChainId),
+    async () => await getPoolsByChainId(celoChainId),
+    {
+      onSuccess: (data) => populatePerPoolCache(celoChainId, queryClient, data),
+      refetchInterval: REFETCH_INTERVAL,
+      enabled: Boolean(celoChainId)
+    }
+  )
+
+  const error =
+    ethereumUseQuery.error || polygonUseQuery.error || bscUseQuery.error || celoUseQuery.error
 
   const refetch = () => {
     ethereumUseQuery.refetch()
     polygonUseQuery.refetch()
     bscUseQuery.refetch()
+    celoUseQuery.refetch()
   }
+
   const isFetched = ethereumUseQuery.isFetched && polygonUseQuery.isFetched
   let data = null
   if (ethereumUseQuery.isFetched) {
@@ -90,6 +104,14 @@ export const useAllPoolsKeyedByChainId = () => {
     }
     if (bscPools) {
       data[bscChainId] = bscPools
+    }
+  }
+  if (celoUseQuery.isFetched && celoChainId) {
+    if (!data) {
+      data = {}
+    }
+    if (celoPools) {
+      data[celoChainId] = celoPools
     }
   }
 
@@ -185,11 +207,9 @@ export const useRouterChainId = (router) => {
   return getChainIdByAlias(networkName)
 }
 
-
 // Utils
 
 const filterPoolData = (data, contractsByChainId) => {
-  // console.log(data, contractsByChainId)
   return Object.keys(data).reduce((filteredPoolsByChainId, chainId) => {
     const pools = data[chainId]
     const contracts = contractsByChainId[chainId] || []

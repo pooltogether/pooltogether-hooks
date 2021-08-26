@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,10 +25,10 @@
   },
   "devDependencies": {
     "@pooltogether/bnc-onboard": "^1.25.0-c",
-    "@pooltogether/current-pool-data": "^3.5.18",
-    "@pooltogether/etherplex": "^1.1.1",
-    "@pooltogether/evm-chains-extended": "^0.4.4",
-    "@pooltogether/utilities": "^0.0.39",
+    "@pooltogether/current-pool-data": "^3.6.0",
+    "@pooltogether/etherplex": "^1.1.2",
+    "@pooltogether/evm-chains-extended": "^0.5.3",
+    "@pooltogether/utilities": "^0.0.42",
     "@types/jest": "^26.0.23",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",

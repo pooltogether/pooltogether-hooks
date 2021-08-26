@@ -1204,32 +1204,32 @@
     walletlink "^2.1.6"
     web3-provider-engine "^16.0.1"
 
-"@pooltogether/current-pool-data@^3.5.18":
-  version "3.5.19"
-  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.5.19.tgz#1c66585d455c1cfc97c3d86faee01749b0cb02dd"
-  integrity sha512-K+OFDFP2LPtDTi6dJboVxP/J2zovslufvi8SQwUjnJLmI/GAJjt2o+xOBjul09loDEnbCh9T2eotravsb2r5CQ==
+"@pooltogether/current-pool-data@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.6.0.tgz#5814f91342c81ca595e18dbed85aa4a37b7b4c76"
+  integrity sha512-soPqbmTNk3VER6fbkTupck70sDAgnQ/2ZxnAybArr4Rp9xPu0T9DdnU197yFmUqN8i1eEg1F6q9zWlXQm4T3zw==
 
-"@pooltogether/etherplex@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@pooltogether/etherplex/-/etherplex-1.1.1.tgz#330f326ce8fbfd4f4aae70d5fd02d5baa3e9195e"
-  integrity sha512-fKk3/YnAhwjdA83hP7+mXIjRQm40o/+uwdbSWdz0mIgccEwQFkHKXJRGhpM25aclwa5Yiu/p6+sxTHUTpTTM9Q==
+"@pooltogether/etherplex@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@pooltogether/etherplex/-/etherplex-1.1.2.tgz#fb8144f98c3543fe231871660c6a25b3add42219"
+  integrity sha512-ZJh7iGnm3X+cnA4FIogZ6RrYfehzpNexE3gTzG2+gPKD6XE0T920MBKWeGYD2MYULMcsRLravVNWnBgJgPhcfw==
   dependencies:
     debug "^4.1.1"
     lodash "^4.17.15"
     lodash.merge "^4.6.2"
     zen-observable-ts "^0.8.20"
 
-"@pooltogether/evm-chains-extended@^0.4.4":
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.4.5.tgz#2d020672259723327c06be5b4858ca66335e08c5"
-  integrity sha512-R+8HdyC36R8h9bEGx0/K+dgT3MvrqjSyHkx2jX/KiZNneIjPTs0WnDy0pYuZr0nvm4I/FigEofaNI39zi02bKA==
+"@pooltogether/evm-chains-extended@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.5.3.tgz#678a94fcde4aa5602cb57d793da0865736f0a850"
+  integrity sha512-2P/MzeFeKhbtCb2WSmb7G5zMcI0nztgCdzTYwc5DjN5q9iLbUymr/PE/nKJBoStuuMtzXBzDjdLDpI5GyQdPXg==
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@^0.0.39":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.39.tgz#420bcfa7f127b2cfd50ba21ce0abca4b0c8a604b"
-  integrity sha512-Wc1yYFjTaWK8DWLcD6g4u/9bOpCpE+yYicvWqaj0+0qAg78WqUD+mlek91pH5jgJXqRglGtpJWz5Z8/J0wgmGw==
+"@pooltogether/utilities@^0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.42.tgz#243dc5abcdb5ded06b94932d92d62fe563d5c7dc"
+  integrity sha512-huxJRKcvxnK/lYzRROwjznxtLN4jWDHwp2I+iFcatKu926Inbin8hXTLSBI3PmF2jINVOrrg6Quwu70L8AutAA==
 
 "@portis/web3@^4.0.0":
   version "4.0.5"
