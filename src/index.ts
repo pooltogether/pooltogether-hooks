@@ -28,7 +28,7 @@ export {
   useGovernancePools,
   useRouterChainId
 } from './hooks/usePools'
-export { 
+export {
   useUserTickets,
   useUserTicketsByChainIds,
   useUserTicketsByChainIdsRpc,
@@ -38,7 +38,7 @@ export {
   useUserTicketsByPool,
   getUserDataRpc,
   getUserDataSubgraph,
-  formatTicketsByPool,
+  formatTicketsByPool
 } from './hooks/useUserTicketsFormattedByPool'
 
 // Tokens
@@ -51,13 +51,26 @@ export { useTokenHolder } from './hooks/useTokenHolder'
 export { useTotalClaimablePool } from './hooks/useTotalClaimablePool'
 
 // TokenFaucets
-export { useClaimableTokenFromTokenFaucet, useClaimableTokenFromTokenFaucets } from './hooks/useClaimableTokenFromTokenFaucets'
+export {
+  useClaimableTokenFromTokenFaucet,
+  useClaimableTokenFromTokenFaucets
+} from './hooks/useClaimableTokenFromTokenFaucets'
 
 // Retro Claim
 export { useRetroactivePoolClaimData } from './hooks/useRetroactivePoolClaimData'
 
 // Transactions
-export * from './hooks/transactions'
+export {
+  transactionsAtom,
+  useTransaction,
+  useSendTransaction,
+  readTransactions,
+  checkTransactionStatuses,
+  updateTransaction,
+  updateStorageWith,
+  clearPreviousTransactions,
+  createTransaction
+} from './hooks/transactions'
 
 // Users Wallet
 export { useInitializeOnboard } from './hooks/useInitializeOnboard'

@@ -8,6 +8,7 @@ import { useEnvChainIds } from './useEnvChainIds'
  */
 export const useSubgraphVersions = () => {
   const chainIds = useEnvChainIds()
+  console.log(chainIds, POOLTOGETHER_SUBGRAPH_URIS)
   return chainIds.reduce((subgraphVersions, chainId) => {
     subgraphVersions[chainId] = Object.keys(POOLTOGETHER_SUBGRAPH_URIS[chainId])
     return subgraphVersions
