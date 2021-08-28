@@ -1,20 +1,12 @@
 import { useQuery } from 'react-query'
 
 import { isValidAddress, NETWORK } from '@pooltogether/utilities'
-import { QUERY_KEYS } from '../constants'
-
-const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
-
-const COINGECKO_ASSET_PLATFORMS = Object.freeze({
-  [NETWORK.mainnet]: 'ethereum',
-  [NETWORK.bsc]: 'binance-smart-chain',
-  [NETWORK.polygon]: 'polygon-pos'
-})
+import { COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
 
 export const useCoingeckoTokenData = (chainId, contractAddress) => {
   const validNetworks = Object.keys(COINGECKO_ASSET_PLATFORMS)
 
-  const isValidNetwork = validNetworks.includes(chainId.toString())
+  const isValidNetwork = validNetworks.includes(chainId.toString()) && chainId !== NETWORK.rinkeby
   const _isValidAddress = isValidAddress(contractAddress)
 
   const assetPlatform = COINGECKO_ASSET_PLATFORMS[chainId]

@@ -1,7 +1,6 @@
 import { batch, contract } from '@pooltogether/etherplex'
 import { formatUnits } from '@ethersproject/units'
 import { useQuery, useQueryClient } from 'react-query'
-import { ethers } from 'ethers'
 import { numberWithCommas } from '@pooltogether/utilities'
 
 import { QUERY_KEYS } from '../constants'
@@ -9,6 +8,7 @@ import { ERC20Abi } from '../abis/ERC20Abi'
 import { useReadProvider } from './useReadProvider'
 import { populatePerIdCache } from '../utils/populatePerIdCache'
 import { useRefetchInterval } from './useRefetchInterval'
+import { TokenBalances } from '../types/token'
 
 /**
  * Returns a dictionary keyed by the token addresses filled with
@@ -57,36 +57,11 @@ export const useTokenBalance = (chainId: number, address: string, tokenAddress: 
   return { ...queryData, data: tokenBalances ? tokenBalances[tokenAddress] : null }
 }
 
-const getTokenBalances = async (
-  readProvider,
-  address,
-  tokenAddresses
-): Promise<{
-  [key: string]: {
-    address: string
-    hasBalance: boolean
-    amount: string
-    amountUnformatted: ethers.BigNumber
-    amountPretty: string
-    decimals: string
-    name: string
-    symbol: string
-    totalSupply: string
-    totalSupplyUnformatted: ethers.BigNumber
-    totalSupplyPretty: string
-  }
-}> => {
+const getTokenBalances = async (readProvider, address, tokenAddresses): Promise<TokenBalances> => {
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(
-      tokenContract
-        .balanceOf(address)
-        .decimals()
-        .name()
-        .symbol()
-        .totalSupply()
-    )
+    batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol().totalSupply())
   })
   const response = await batch(readProvider, ...batchCalls)
   const result = {}

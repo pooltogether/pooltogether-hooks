@@ -1,4 +1,5 @@
 import { contractAddresses, prizePoolContracts } from '@pooltogether/current-pool-data'
+import { NETWORK } from '@pooltogether/utilities'
 
 export const SELECTED_WALLET_COOKIE_KEY = 'selectedWallet'
 
@@ -17,7 +18,8 @@ export const QUERY_KEYS = Object.freeze({
   usePools: 'usePools',
   usePoolsByChainId: 'usePoolsByChainId',
   userData: 'userData',
-  userTicketData: 'userTicketData'
+  userTicketData: 'userTicketData',
+  getCoingeckoTokenPrices: 'getCoingeckoTokenPrices'
 })
 
 export const REFETCH_INTERVAL = process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000
@@ -51,3 +53,12 @@ export const GOVERNANCE_CONTRACT_ADDRESSES = {
 
 export const CONTRACT_ADDRESSES = Object.freeze(contractAddresses)
 export const PRIZE_POOL_CONTRACTS = prizePoolContracts
+
+// CoinGecko
+export const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
+export const COINGECKO_ASSET_PLATFORMS = Object.freeze({
+  [NETWORK.mainnet]: 'ethereum',
+  [NETWORK.bsc]: 'binance-smart-chain',
+  [NETWORK.polygon]: 'polygon-pos',
+  [NETWORK.rinkeby]: 'rinkeby'
+})

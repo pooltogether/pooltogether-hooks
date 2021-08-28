@@ -2,6 +2,16 @@
 export { useAppEnv, APP_ENVIRONMENT } from './hooks/useAppEnv'
 export { usePodChainIds } from './hooks/usePodChainIds'
 
+// Types
+export {
+  Token,
+  TokenBalance,
+  TokenBalanceWithUsd,
+  TokenBalances,
+  TokenPrices,
+  TokenPrice
+} from './types/token'
+
 // Common chain data
 export { useInitInfuraId } from './hooks/useInitInfuraId'
 export { useInitQuickNodeId } from './hooks/useInitQuickNodeId'
@@ -44,11 +54,14 @@ export {
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
 export { useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
-export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
-export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 export { usePoolTokenData } from './hooks/usePoolTokenData'
 export { useTokenHolder } from './hooks/useTokenHolder'
 export { useTotalClaimablePool } from './hooks/useTotalClaimablePool'
+
+// CoinGecko
+export { useCoingeckoTokenPrices } from './hooks/useCoingeckoTokenPrices'
+export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
+export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 
 // TokenFaucets
 export {
