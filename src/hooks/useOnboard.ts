@@ -114,7 +114,7 @@ const trackWalletConnectedGoal = (onboard) => {
     const goalCode = WALLET_CONNECTED_GOALS_MAPPING[wallet.name]
 
     if (!goalCode) {
-      console.warn(`${e} - Wallet: '${wallet.name}', wallet needs Fathom Goal set up for it`)
+      console.warn(`Wallet: '${wallet.name}', wallet needs Fathom Goal set up for it`)
       return
     }
 
