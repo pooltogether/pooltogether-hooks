@@ -26,6 +26,6 @@ export const useTimeCountdown = (initialSecondsLeft, countBy = 1000) => {
     }
   }, [initialSecondsLeft])
 
-  const { days, hours, minutes, seconds } = getTimeBreakdown(secondsLeft)
-  return { days, hours, minutes, seconds, secondsLeft }
+  const timeBreakdown = getTimeBreakdown(secondsLeft)
+  return { ...timeBreakdown, secondsLeft }
 }

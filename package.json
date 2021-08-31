@@ -28,7 +28,7 @@
     "@pooltogether/current-pool-data": "^3.6.1",
     "@pooltogether/etherplex": "^1.1.2",
     "@pooltogether/evm-chains-extended": "^0.5.3",
-    "@pooltogether/utilities": "^0.0.42",
+    "@pooltogether/utilities": "^0.0.43",
     "@types/jest": "^26.0.23",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^15.0.2",

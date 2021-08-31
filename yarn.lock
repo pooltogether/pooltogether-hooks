@@ -1226,10 +1226,10 @@
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@^0.0.42":
-  version "0.0.42"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.42.tgz#243dc5abcdb5ded06b94932d92d62fe563d5c7dc"
-  integrity sha512-huxJRKcvxnK/lYzRROwjznxtLN4jWDHwp2I+iFcatKu926Inbin8hXTLSBI3PmF2jINVOrrg6Quwu70L8AutAA==
+"@pooltogether/utilities@^0.0.43":
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.0.43.tgz#ce4eb0533e9f9b6acb63300c9f75c0a10c606dcb"
+  integrity sha512-aYJGisnlTG6hsEU6aF0CW7ZxHcHdvn1EEGlyy4plNE0vtZ/m8z49Z21x3g6KEk9hZ+qI5/r8JlnJGCMAo6IlVQ==
 
 "@portis/web3@^4.0.0":
   version "4.0.5"
