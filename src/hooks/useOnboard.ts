@@ -83,32 +83,41 @@ export const useOnboard = () => {
 }
 
 const WALLET_CONNECTED_GOALS_MAPPING = {
-  MetaMask: '7ES8KJDL'
+  'MetaMask': '7ES8KJDL',
+  'WalletConnect': 'QRMTASRB',
+  'Rainbow': 'FX8BNN3H',
+  'Argent': 'F1RWQBVS',
+  'Trust Wallet': 'X7JOP245',
+  'Gnosis Safe': 'GT9K2R3Z',
+  'Coinbase Wallet': 'PIYGDMAR',
+  'Trezor': 'TU6DAWAZ',
+  'Ledger': 'JHPHUI00',
+  'Fortmatic': 'SYCBUNUA',
+  'Portis': 'GFPDI0OW',
+  'Authereum': 'F5U95ZHJ',
+  'Torus': '0W1QGAYE',
+  'Lattice': '4HZXMHK8',
+  'Opera': 'VFMCHT9R',
+  'Opera Touch': 'DS0XRUCJ',
+  'MYKEY': 'ZGKE5KFX',
+  'Huobi Wallet': 'UX6WJNB3',
+  "D'CENT": 'HDO2XUKB',
+  'imToken': '7IBOGHSP',
+  'Web3 Wallet': '3BVHUJM2'
 }
 
 // If Fathom is available track which wallet was connected as a Goal
 const trackWalletConnectedGoal = (onboard) => {
-  console.log(onboard)
   const wallet = onboard.getState().wallet
 
-  if (wallet) {
-    console.log(wallet?.name)
-  }
-
-  if (window['fathom']) {
-    console.log('fathom is go')
-  }
-
   if (window['fathom'] && wallet?.name) {
-    try {
-      console.log('trying!')
-      console.log(WALLET_CONNECTED_GOALS_MAPPING[wallet.name])
-      console.log(window['fathom'].trackGoal)
-      window['fathom'].trackGoal(WALLET_CONNECTED_GOALS_MAPPING[wallet.name], 1)
-    } catch (e) {
-      console.error(
-        `${e} - Wallet: '${wallet.name}', possibly new wallet that needs a Goal to be set up for it`
-      )
+    const goalCode = WALLET_CONNECTED_GOALS_MAPPING[wallet.name]
+
+    if (!goalCode) {
+      console.warn(`${e} - Wallet: '${wallet.name}', wallet needs Fathom Goal set up for it`)
+      return
     }
+
+    window['fathom'].trackGoal(goalCode, 1)
   }
 }
