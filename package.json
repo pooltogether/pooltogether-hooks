@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "0.2.7",
+  "version": "0.2.9",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,8 @@
     "watch": "yarn start",
     "reinstall": "rm -rf node_modules/ && rm -rf dist/ && yarn install",
     "prepublishOnly": "yarn build",
-    "postpack": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags",
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags && yarn gitwarn",
+    "gitwarn": "echo '*******************' && echo 'Please push your changes to Git' && echo '*******************'",
     "test": "jest",
     "test:watch": "yarn run test --watch",
     "test:cov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
