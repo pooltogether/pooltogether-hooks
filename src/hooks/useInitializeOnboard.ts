@@ -74,7 +74,6 @@ export const useInitializeOnboard = (
   const setSelectedWallet = useCallback(
     (selectedWallet) => {
       try {
-        console.log(onboard)
         onboard.walletSelect(selectedWallet)
       } catch (e) {
         console.error(e)

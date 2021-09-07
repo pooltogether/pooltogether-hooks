@@ -53,6 +53,7 @@ export {
 
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
+export { usePodShareBalance } from './hooks/usePodShareBalance'
 export { useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
 export { usePoolTokenData } from './hooks/usePoolTokenData'
 export { useTokenHolder } from './hooks/useTokenHolder'
