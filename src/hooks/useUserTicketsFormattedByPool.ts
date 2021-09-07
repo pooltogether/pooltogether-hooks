@@ -2,7 +2,11 @@ import { useMemo } from 'react'
 import { useQuery } from 'react-query'
 import { ethers } from 'ethers'
 import { formatUnits } from '@ethersproject/units'
-import { getSubgraphClientFromVersions, accountQuery, calculateTokenValues } from '@pooltogether/utilities'
+import {
+  getSubgraphClientFromVersions,
+  accountQuery,
+  calculateTokenValues
+} from '@pooltogether/utilities'
 
 import { QUERY_KEYS, REFETCH_INTERVAL } from '../constants'
 import { useReadProviders } from './useReadProviders'
@@ -212,7 +216,6 @@ export const getUserDataRpc = async (
     }
 
     const pools = poolsKeyedByChainId[chainId]
-    // console.log(pools)
 
     pools.forEach((pool) => {
       const ticketAddress = pool.tokens.ticket.address
