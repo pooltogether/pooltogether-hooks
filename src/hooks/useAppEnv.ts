@@ -12,20 +12,21 @@ export const APP_ENVIRONMENT = Object.freeze({
   production: 'production'
 })
 
-const storedAppEnv = Cookies.get(APP_ENVIRONMENT_KEY)
+export const storedAppEnv = Cookies.get(APP_ENVIRONMENT_KEY)
+
+export const getStoredAppEnv = () =>
+  storedAppEnv
+    ? storedAppEnv === APP_ENVIRONMENT.production
+      ? APP_ENVIRONMENT.mainnets
+      : storedAppEnv
+    : APP_ENVIRONMENT.mainnets
 
 /**
  * Overwrite 'production' with 'mainnets'
  * If there's something stored, use it
  * Otherwise set the atom to 'mainnets' and update the cache in useAppEnv mount hook
  */
-const appEnvAtom = atom(
-  storedAppEnv
-    ? storedAppEnv === APP_ENVIRONMENT.production
-      ? APP_ENVIRONMENT.mainnets
-      : storedAppEnv
-    : APP_ENVIRONMENT.mainnets
-)
+const appEnvAtom = atom(getStoredAppEnv())
 
 /**
  * Used to manage what pools we want to display to the user.
@@ -54,4 +55,3 @@ export const useAppEnv = () => {
 
   return { appEnv, setAppEnv }
 }
-

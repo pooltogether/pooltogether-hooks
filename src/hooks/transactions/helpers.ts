@@ -2,250 +2,11 @@ import { atom, useAtom } from 'jotai'
 import { ethers } from 'ethers'
 import { getNetworkNiceNameByChainId, getNetworkNameAliasByChainId } from '@pooltogether/utilities'
 
-import { useOnboard } from './useOnboard'
+import { useOnboard } from '../useOnboard'
+import { DEFAULT_TRANSACTIONS_KEY, DEFAULT_TX_DETAILS, transactionsAtom } from './constants'
+import { Transaction, TransactionOptionalValues } from '../../types/transaction'
 
 const getRevertReason = require('eth-revert-reason')
-
-export const transactionsAtom = atom([])
-
-const DEFAULT_TRANSACTIONS_KEY = 'txs'
-
-const DEFAULT_TX_DETAILS = {
-  name: '',
-  contractAbi: [],
-  contractAddress: '',
-  method: '',
-  value: 0,
-  params: [],
-  callbacks: {}
-}
-
-/**
- * Finds a transaction in the mem-store based on the provided txId
- * @param txId
- * @returns object (Transaction)
- */
-export const useTransaction = (txId) => {
-  const [transactions] = useAtom(transactionsAtom)
-  if (!txId) return null
-  return transactions?.find((tx) => tx.id === txId)
-}
-
-/**
- * A hook for firing off transactions to the blockchain
- * @param t translation object from useTranslation hook
- * @param poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
- * @returns async function 'sendTx'
- */
-export const useSendTransaction = (t, poolToast) => {
-  const [transactions, setTransactions] = useAtom(transactionsAtom)
-  const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
-
-  const sendTx = async (txDetails) => {
-    const { name, contractAbi, contractAddress, method, value, params, callbacks } = Object.assign(
-      DEFAULT_TX_DETAILS,
-      txDetails
-    )
-
-    await onboard.walletCheck()
-
-    const txId = transactions.length + 1
-
-    let newTx = {
-      __typename: 'Transaction',
-      id: txId,
-      name,
-      inWallet: true,
-      method,
-      hash: '',
-      ...callbacks
-    }
-
-    let updatedTransactions = createTransaction(
-      newTx,
-      transactions,
-      setTransactions,
-      usersAddress,
-      chainId
-    )
-
-    callTransaction(
-      t,
-      poolToast,
-      updatedTransactions,
-      setTransactions,
-      newTx,
-      provider,
-      usersAddress,
-      chainId,
-      contractAbi,
-      contractAddress,
-      method,
-      params,
-      value
-    )
-
-    return txId
-  }
-
-  return sendTx
-}
-
-/**
- * Internal async method used by useSendTransaction hook for sending transactions using Ethers.js lib
- * @param {object} t translation object from useTranslation hook
- * @param {object} poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
- * @param {array} transactions most recent array of transactions including the newly created tx from useSendTransaction() hook
- * @param {function} setTransactions the mem-store setter function to update the list of transactions in the mem-store
- * @param {object} tx our local transaction instance used to store data before the ethersTx is created
- * @param {object} provider the provider/wallet object to use when sending
- * @param {string} usersAddress the sender's address
- * @param {number} chainId The network to call the tx on
- * @param {array} contractAbi The definition of all methods, events, etc. in the deployed smart contract
- * @param {string} contractAddress the address of the smart contract on the blockchain
- * @param {string} method the Solidity smart contract function to call
- * @param {array} params optional array of Solidity contract parameters to be sent using ethers.js
- * @param {number} value The value of ETH to have the sender send along with the transaction
- */
-const callTransaction = async (
-  t,
-  poolToast,
-  transactions,
-  setTransactions,
-  tx,
-  provider,
-  usersAddress,
-  chainId,
-  contractAbi,
-  contractAddress,
-  method,
-  params = [],
-  value = 0
-) => {
-  let ethersTx
-
-  let updatedTransactions = transactions
-
-  const signer = provider.getSigner()
-
-  const contract = new ethers.Contract(contractAddress, contractAbi, signer)
-
-  let gasEstimate
-  try {
-    gasEstimate = await contract.estimateGas[method](...params)
-  } catch (e) {
-    console.warn(`error while estimating gas: `, e)
-  }
-
-  try {
-    poolToast.info(t?.('pleaseConfirmInYourWallet') || 'Please confirm transaction in your wallet')
-
-    // Increase the gas limit by 1.15x as many tx's fail when gas estimate is left at 1x
-    const gasLimit = gasEstimate ? gasEstimate.mul(115).div(100) : undefined
-    const ethersTx = await contract[method](...params, { gasLimit })
-
-    // Dismisses the "pleaseConfirmInYourWallet" msg which was added because if you are not
-    // signed in to MetaMask and run a tx absolutely nothing happens,
-    // as well on mobile it can be handy to have a msg pop up when you take an action
-    // and the phone hasn't responded yet
-    poolToast.dismiss()
-
-    updatedTransactions = updateTransaction(
-      tx.id,
-      {
-        ethersTx,
-        sent: true,
-        inWallet: false,
-        hash: ethersTx.hash
-      },
-      updatedTransactions,
-      setTransactions,
-      usersAddress,
-      chainId
-    )
-
-    poolToast.success(
-      `"${tx.name}" ${t?.('transactionSentConfirming') || 'Transaction sent! Confirming...'}`
-    )
-    await ethersTx.wait()
-
-    updatedTransactions = updateTransaction(
-      tx.id,
-      {
-        ethersTx,
-        completed: true
-      },
-      updatedTransactions,
-      setTransactions,
-      usersAddress,
-      chainId
-    )
-
-    poolToast.rainbow(`"${tx.name}" ${t('transactionSuccessful') || 'Transaction successful!'}`)
-  } catch (e) {
-    console.error(e.message)
-
-    if (e?.message?.match('User denied transaction signature')) {
-      updatedTransactions = updateTransaction(
-        tx.id,
-        {
-          cancelled: true,
-          completed: true
-        },
-        updatedTransactions,
-        setTransactions,
-        usersAddress,
-        chainId
-      )
-
-      poolToast.warn(t?.('youCancelledTheTransaction') || 'You cancelled the transaction')
-    } else {
-      let reason, errorMsg
-
-      try {
-        if (ethersTx?.hash) {
-          const networkName = getNetworkNiceNameByChainId(ethersTx.chainId)
-          if (networkName === 'mainnet') {
-            reason = await getRevertReason(ethersTx.hash, networkName)
-          }
-        }
-      } catch (error2) {
-        console.error('Error getting revert reason')
-        console.error(error2)
-      }
-
-      if (reason?.match('rng-in-flight') || e.message.match('rng-in-flight')) {
-        reason =
-          t?.('prizeBeingAwardedPleaseTryAgainSoon') || 'Prize being awarded! Please try again soon'
-      }
-
-      errorMsg = reason ? reason : e.data?.message ? e.data.message : e.message
-
-      if (!reason && e?.message?.match('transaction failed')) {
-        errorMsg = t?.('transactionFailedUnknownError') || 'Transaction failed: unknown error'
-      }
-
-      updatedTransactions = updateTransaction(
-        tx.id,
-        {
-          error: true,
-          completed: true,
-          reason: errorMsg,
-          hash: ethersTx?.hash
-        },
-        updatedTransactions,
-        setTransactions,
-        usersAddress,
-        chainId
-      )
-
-      poolToast.error(
-        `"${tx.name}" ${t?.('txFailedToCompleteWithReason') ||
-          'Transaction did not complete:'} ${errorMsg}`
-      )
-    }
-  }
-}
 
 /**
  * Read latest list of tx's from localStorage and kick off job to check if any are ongoing or what their status is
@@ -401,12 +162,12 @@ const runAsyncCheckTx = async (
  * @returns {array} the updates list of transactions
  */
 export const updateTransaction = (
-  id,
-  newValues,
-  transactions,
-  setTransactions,
-  usersAddress,
-  chainId
+  id: number,
+  newValues: TransactionOptionalValues,
+  transactions: Transaction[],
+  setTransactions: (transactions: Transaction[]) => void,
+  usersAddress: string,
+  chainId: number
 ) => {
   let editedTransactions = transactions.map((transaction) => {
     return transaction.id === id
@@ -435,10 +196,10 @@ export const updateTransaction = (
  * @param {transactionsKey} string customizable key for the localStorage key/val store, defaults to 'tx'
  */
 export const updateStorageWith = (
-  transactions,
-  usersAddress,
-  chainId,
-  transactionsKey = DEFAULT_TRANSACTIONS_KEY
+  transactions: Transaction[],
+  usersAddress: string,
+  chainId: number,
+  transactionsKey: string = DEFAULT_TRANSACTIONS_KEY
 ) => {
   const sentTransactions = transactions.filter((tx) => {
     return tx.sent && !tx.cancelled
@@ -483,7 +244,13 @@ export const clearPreviousTransactions = (transactions, setTransactions, usersAd
  * @param {string} usersAddress the current wallet address used in the localStorage lookup key for setting a tx into localStorage
  * @param {number} chainId the network to check use in the localStorage lookup key for setting a tx into localStorage
  */
-export const createTransaction = (newTx, transactions, setTransactions, usersAddress, chainId) => {
+export const createTransaction = (
+  newTx: Transaction,
+  transactions: Transaction[],
+  setTransactions: (transactions: Transaction[]) => void,
+  usersAddress: string,
+  chainId: number
+) => {
   const newTransactions = [...transactions, newTx]
   setTransactions(newTransactions)
 

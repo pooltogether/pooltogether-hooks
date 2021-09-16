@@ -36,6 +36,11 @@ export const readProvider = async (chainId, infuraId, quickNodeId) => {
         provider = new ethers.providers.WebSocketProvider(
           `${POLYGON_INFURA_WEBSOCKETS_URL}/${infuraId}`
         )
+      } else if (chainId === NETWORK.mumbai) {
+        provider = new ethers.providers.JsonRpcProvider(
+          'https://matic-mumbai.chainstacklabs.com',
+          NETWORK.mumbai
+        )
       } else if (chainId === 1234 || chainId === 31337) {
         provider = new ethers.providers.JsonRpcProvider()
       } else if (Boolean(jsonRpcProviderUrl)) {
