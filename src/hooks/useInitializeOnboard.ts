@@ -125,6 +125,11 @@ const initOnboard = (subscriptions, walletConfig) => {
   const walletConnectOptions = {
     infuraKey: INFURA_ID,
     preferred: true,
+    rpc: {
+      42220: 'https://forno.celo.org',
+      44787: 'https://alfajores-forno.celo-testnet.org',
+      62320: 'https://baklava-forno.celo-testnet.org'
+    },
     bridge: 'https://pooltogether.bridge.walletconnect.org/'
   }
 
