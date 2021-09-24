@@ -36,13 +36,11 @@ export interface PreTransactionDetails {
 }
 
 export interface TransactionCallbacks {
-  refetch?: () => void
-  onSuccess?: () => void
-  onSent?: () => void
-  onInWallet?: () => void
-  onConfirming?: () => void
-  onCancelled?: () => void
-  onError?: () => void
+  refetch?: (tx?: Transaction) => void
+  onSuccess?: (tx?: Transaction) => void
+  onSent?: (tx?: Transaction) => void
+  onCancelled?: (tx?: Transaction) => void
+  onError?: (tx?: Transaction) => void
 }
 
 export interface Transaction extends TransactionOptionalValues, TransactionCallbacks {
@@ -59,6 +57,7 @@ export interface TransactionOptionalValues {
   ethersTx?: TransactionResponse
   ethersTxReceipt?: TransactionReceipt
   // Tx status
+  inFlight?: boolean
   inWallet?: boolean
   sent?: boolean
   completed?: boolean

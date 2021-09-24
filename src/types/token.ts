@@ -7,11 +7,14 @@ export interface Token {
   decimals: string
 }
 
-export interface TokenBalance {
-  hasBalance: boolean
+export interface Amount {
   amount: string
   amountUnformatted: ethers.BigNumber
   amountPretty: string
+}
+
+export interface TokenBalance extends Amount {
+  hasBalance: boolean
 }
 
 export interface TokenWithBalances extends Token, TokenBalance {
@@ -19,8 +22,6 @@ export interface TokenWithBalances extends Token, TokenBalance {
   totalSupplyUnformatted: ethers.BigNumber
   totalSupplyPretty: string
 }
-
-export interface TokenBalanceWithUsd extends TokenWithBalances, TokenPrice {}
 
 export interface TokenBalances {
   [address: string]: TokenWithBalances

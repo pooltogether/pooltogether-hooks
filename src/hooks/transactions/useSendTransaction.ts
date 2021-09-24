@@ -38,8 +38,8 @@ export const useSendTransaction = (t: (key: string) => string, poolToast: PoolTo
       method,
       inWallet: true,
       hash: '',
-      response: undefined,
-      receipt: undefined,
+      ethersTx: undefined,
+      ethersTxReceipt: undefined,
       ...callbacks
     } as Transaction
 
@@ -124,9 +124,7 @@ const watchTransactionLifecycle = async (
   try {
     poolToast.info(t?.('pleaseConfirmInYourWallet') || 'Please confirm transaction in your wallet')
 
-    console.log('pre callTransaction', callTransaction)
     const ethersTx = await callTransaction()
-    console.log('post callTransaction', ethersTx)
 
     // Dismisses the "pleaseConfirmInYourWallet" msg which was added because if you are not
     // signed in to MetaMask and run a tx absolutely nothing happens,
@@ -140,7 +138,8 @@ const watchTransactionLifecycle = async (
         ethersTx,
         sent: true,
         inWallet: false,
-        hash: ethersTx.hash
+        hash: ethersTx.hash,
+        inFlight: true
       },
       updatedTransactions,
       setTransactions,
@@ -158,7 +157,8 @@ const watchTransactionLifecycle = async (
       {
         ethersTx,
         ethersTxReceipt,
-        completed: true
+        completed: true,
+        inFlight: false
       },
       updatedTransactions,
       setTransactions,
@@ -175,7 +175,8 @@ const watchTransactionLifecycle = async (
         tx.id,
         {
           cancelled: true,
-          completed: true
+          completed: true,
+          inFlight: false
         },
         updatedTransactions,
         setTransactions,
@@ -215,6 +216,7 @@ const watchTransactionLifecycle = async (
         {
           error: true,
           completed: true,
+          inFlight: false,
           reason: errorMsg,
           hash: ethersTx?.hash
         },
