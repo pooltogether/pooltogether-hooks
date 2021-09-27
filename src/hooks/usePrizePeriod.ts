@@ -1,7 +1,7 @@
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import { BaseProvider } from '@ethersproject/providers'
 import { batch, contract } from '@pooltogether/etherplex'
-import { useState } from 'react'
 import { BigNumber } from 'ethers'
 import { getSecondsRemainingInPrizePeriod, sToMs } from '@pooltogether/utilities'
 

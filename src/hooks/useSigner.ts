@@ -1,9 +1,7 @@
 import { ethers } from 'ethers'
 import { useState, useEffect } from 'react'
-import { useOnboard } from './useOnboard'
 
-export const useSigner = () => {
-  const { provider, onboard } = useOnboard()
+export const useSigner = (provider) => {
   const [signer, setSigner] = useState<ethers.providers.JsonRpcSigner>()
 
   useEffect(() => {
@@ -12,5 +10,5 @@ export const useSigner = () => {
     }
   }, [provider])
 
-  return { provider, signer, walletCheck: onboard.walletCheck as () => Promise<boolean> }
+  return signer
 }

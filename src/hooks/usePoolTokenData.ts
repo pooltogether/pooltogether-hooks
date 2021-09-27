@@ -4,12 +4,10 @@ import { batch, contract } from '@pooltogether/etherplex'
 
 import { GOVERNANCE_CONTRACT_ADDRESSES, QUERY_KEYS } from '../constants'
 import { useGovernanceChainId } from './useGovernanceChainId'
-import { useOnboard } from './useOnboard'
 import { useReadProvider } from './useReadProvider'
 import { DelegateableERC20Abi } from '../abis/DelegateableERC20Abi'
 
-export const usePoolTokenData = (addressOverride) => {
-  const { address: usersAddress } = useOnboard()
+export const usePoolTokenData = (usersAddress, addressOverride) => {
   const chainId = useGovernanceChainId()
   const { readProvider, isReadProviderReady } = useReadProvider(chainId)
 

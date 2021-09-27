@@ -2,8 +2,6 @@ import { atom, useAtom } from 'jotai'
 import { ethers } from 'ethers'
 import { getNetworkNiceNameByChainId, getNetworkNameAliasByChainId } from '@pooltogether/utilities'
 
-import { useOnboard } from './useOnboard'
-
 const getRevertReason = require('eth-revert-reason')
 
 export const transactionsAtom = atom([])
@@ -35,19 +33,19 @@ export const useTransaction = (txId) => {
  * A hook for firing off transactions to the blockchain
  * @param t translation object from useTranslation hook
  * @param poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
+ * @param usersAddress evm-compat address of current wallet
+ * @param provider ethers provider
+ * @param chainId int of network to use
  * @returns async function 'sendTx'
  */
-export const useSendTransaction = (t, poolToast) => {
+export const useSendTransaction = (t, poolToast, usersAddress, provider, chainId) => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
-  const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
 
   const sendTx = async (txDetails) => {
     const { name, contractAbi, contractAddress, method, value, params, callbacks } = Object.assign(
       DEFAULT_TX_DETAILS,
       txDetails
     )
-
-    await onboard.walletCheck()
 
     const txId = transactions.length + 1
 
@@ -240,8 +238,9 @@ const callTransaction = async (
       )
 
       poolToast.error(
-        `"${tx.name}" ${t?.('txFailedToCompleteWithReason') ||
-          'Transaction did not complete:'} ${errorMsg}`
+        `"${tx.name}" ${
+          t?.('txFailedToCompleteWithReason') || 'Transaction did not complete:'
+        } ${errorMsg}`
       )
     }
   }

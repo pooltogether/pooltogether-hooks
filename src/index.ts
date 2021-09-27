@@ -87,13 +87,10 @@ export {
 } from './hooks/transactions'
 
 // Users Wallet
-export { useInitializeOnboard } from './hooks/useInitializeOnboard'
-export { useOnboard } from './hooks/useOnboard'
 export { useIsWalletMetamask } from './hooks/useIsWalletMetamask'
 export { useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
 export { useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
 export { useEnsName } from './hooks/useEnsName'
-export { useUsersAddress } from './hooks/useUsersAddress'
 export { useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
 
 // UI

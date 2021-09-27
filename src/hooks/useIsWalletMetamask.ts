@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useOnboard } from './useOnboard'
 
 const METAMASK_KEY = 'MetaMask'
 
-export const useIsWalletMetamask = (): Boolean => {
-  const { wallet } = useOnboard()
+// wallet is the wallet object from useOnboard:
+// ie. used to be:
+//   const { wallet } = useOnboard()
+export const useIsWalletMetamask = (wallet): Boolean => {
   const [isWalletMetamask, setIsWalletMetamask] = useState<boolean>()
 
   useEffect(() => {

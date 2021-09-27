@@ -1,6 +1,6 @@
-import { useOnboard } from './useOnboard'
-
-export const useUsersAddress = () => {
-  const { address } = useOnboard()
-  return address
-}
+// address is the address var from useOnboard:
+// ie. used to be:
+//   const { address } = useOnboard()
+// export const useUsersAddress = (address) => {
+//   return address
+// }

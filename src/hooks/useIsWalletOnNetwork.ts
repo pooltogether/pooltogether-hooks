@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useOnboard } from './useOnboard'
 
-export const useIsWalletOnNetwork = (chainId: number) => {
-  const { network } = useOnboard()
+// network is the network var from useOnboard:
+// ie. used to be:
+//   const { network } = useOnboard()
+export const useIsWalletOnNetwork = (network, chainId: number) => {
   const [isWalletOnNetwork, setIsWalletOnNetwork] = useState<boolean>()
 
   useEffect(() => {
