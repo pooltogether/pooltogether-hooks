@@ -1,4 +1,4 @@
 export const useIsWalletOnSupportedNetwork = (network, supportedNetworks) => {
-  if (!network) return false
+  if (!network || !supportedNetworks) return false
   return supportedNetworks.includes(network)
 }

@@ -124,6 +124,9 @@ const callTransaction = async (
 
   let updatedTransactions = transactions
 
+  if (!provider) {
+    console.warn('provider not passed/ready')
+  }
   const signer = provider.getSigner()
 
   const contract = new ethers.Contract(contractAddress, contractAbi, signer)
