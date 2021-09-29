@@ -1,7 +1,4 @@
-import { useOnboard } from './useOnboard'
-
-export const useIsWalletOnSupportedNetwork = (supportedNetworks) => {
-  const { network } = useOnboard()
-  if (!network) return false
+export const useIsWalletOnSupportedNetwork = (network, supportedNetworks) => {
+  if (!network || !supportedNetworks) return false
   return supportedNetworks.includes(network)
 }

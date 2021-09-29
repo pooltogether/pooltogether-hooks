@@ -5,7 +5,6 @@ import { isValidAddress } from '@pooltogether/utilities'
 
 import { GOVERNANCE_CONTRACT_ADDRESSES, QUERY_KEYS } from '../constants'
 import { useGovernanceChainId } from './useGovernanceChainId'
-import { useOnboard } from './useOnboard'
 import { useReadProvider } from './useReadProvider'
 import { MerkleDistributorAbi } from '../abis/MerkleDistributor'
 
@@ -22,22 +21,17 @@ export const useRetroactivePoolClaimData = (address) => {
   }
 }
 
-const useFetchRetroactivePoolClaimData = (address) => {
-  const { address: usersAddress } = useOnboard()
+const useFetchRetroactivePoolClaimData = (usersAddress) => {
   const chainId = useGovernanceChainId()
   const { readProvider, isReadProviderReady } = useReadProvider(chainId)
 
-  if (!address) {
-    address = usersAddress
-  }
-
   return useQuery(
-    [QUERY_KEYS.retroactivePoolClaimDataQuery, address, chainId],
+    [QUERY_KEYS.retroactivePoolClaimDataQuery, usersAddress, chainId],
     async () => {
-      return getRetroactivePoolClaimData(readProvider, chainId, address)
+      return getRetroactivePoolClaimData(readProvider, chainId, usersAddress)
     },
     {
-      enabled: Boolean(address && isReadProviderReady) && isValidAddress(usersAddress),
+      enabled: Boolean(usersAddress && isReadProviderReady) && isValidAddress(usersAddress),
       refetchInterval: false,
       refetchOnWindowFocus: false,
       refetchOnMount: false
@@ -78,7 +72,6 @@ const getMerkleDistributionData = async (usersAddress, chainId) => {
       chainId === 4 ? '&chainId=4&testVersion=v4' : ''
     }`
   )
-
 
   if (response.status === 200) {
     return await response.json()

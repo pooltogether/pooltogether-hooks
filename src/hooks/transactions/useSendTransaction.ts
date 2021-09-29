@@ -1,13 +1,12 @@
 import { getNetworkNiceNameByChainId } from '@pooltogether/utilities'
 import { ethers } from 'ethers'
 import { useAtom } from 'jotai'
-import { useOnboard } from '../useOnboard'
 import { DEFAULT_TX_DETAILS, transactionsAtom } from './constants'
 import { createTransaction, updateTransaction } from './helpers'
 import { getRevertReason } from 'eth-revert-reason'
 import { PoolToast, PreTransactionDetails, Transaction } from '../../types/transaction'
 import { JsonRpcProvider } from '@ethersproject/providers'
-import { TransactionResponse } from '@ethersproject/abstract-provider'
+import { TransactionResponse, Provider } from '@ethersproject/abstract-provider'
 
 /**
  * A hook for firing off transactions to the blockchain
@@ -15,19 +14,20 @@ import { TransactionResponse } from '@ethersproject/abstract-provider'
  * @param poolToast poolToast object from @pooltogether/react-components library for displaying toast messages
  * @returns async function 'sendTx'
  */
-export const useSendTransaction = (t: (key: string) => string, poolToast: PoolToast) => {
+export const useSendTransaction = (
+  t: (key: string) => string,
+  poolToast: PoolToast,
+  usersAddress: string,
+  provider: Provider,
+  chainId: number
+) => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
-  const { onboard, address: usersAddress, provider, network: chainId } = useOnboard()
 
   const sendTx = async (txDetails: PreTransactionDetails) => {
     const { name, contractAbi, contractAddress, method, params, callbacks } = Object.assign(
       DEFAULT_TX_DETAILS,
       txDetails
     )
-
-    await onboard.walletCheck()
-
-    console.log('transactions', transactions)
 
     const txId = transactions.length + 1
 
@@ -55,7 +55,8 @@ export const useSendTransaction = (t: (key: string) => string, poolToast: PoolTo
 
     const callTx = Boolean(txDetails.callTransaction)
       ? txDetails.callTransaction
-      : async () => callTransaction(provider, contractAddress, contractAbi, method, params)
+      : async () =>
+          callTransaction(provider as JsonRpcProvider, contractAddress, contractAbi, method, params)
 
     console.log('callTx', callTx)
 

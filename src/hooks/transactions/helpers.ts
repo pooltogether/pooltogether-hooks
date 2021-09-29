@@ -1,9 +1,6 @@
-import { atom, useAtom } from 'jotai'
-import { ethers } from 'ethers'
-import { getNetworkNiceNameByChainId, getNetworkNameAliasByChainId } from '@pooltogether/utilities'
+import { getNetworkNameAliasByChainId } from '@pooltogether/utilities'
 
-import { useOnboard } from '../useOnboard'
-import { DEFAULT_TRANSACTIONS_KEY, DEFAULT_TX_DETAILS, transactionsAtom } from './constants'
+import { DEFAULT_TRANSACTIONS_KEY } from './constants'
 import { Transaction, TransactionOptionalValues } from '../../types/transaction'
 
 const getRevertReason = require('eth-revert-reason')
