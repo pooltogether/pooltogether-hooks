@@ -38,7 +38,7 @@ export const readProvider = async (chainId, infuraId, quickNodeId) => {
         )
       } else if (chainId === NETWORK.mumbai) {
         provider = new ethers.providers.JsonRpcProvider(
-          'https://matic-mumbai.chainstacklabs.com',
+          'https://rpc-mumbai.maticvigil.com/',
           NETWORK.mumbai
         )
       } else if (chainId === 1234 || chainId === 31337) {

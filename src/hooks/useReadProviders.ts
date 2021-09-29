@@ -15,10 +15,10 @@ export const useReadProviders = (chainIds) => {
   const infuraId = useInfuraId()
   const quickNodeId = useQuickNodeId()
 
-  const {
-    data: readProviders,
-    isFetched
-  } = useQuery<{ [chainId: string]: ethers.providers.BaseProvider }, Error>(
+  const { data: readProviders, isFetched } = useQuery<
+    { [chainId: string]: ethers.providers.BaseProvider },
+    Error
+  >(
     [QUERY_KEYS.readProviders, chainIds, infuraId, quickNodeId],
     () => getReadProviders(chainIds, infuraId, quickNodeId),
     {
