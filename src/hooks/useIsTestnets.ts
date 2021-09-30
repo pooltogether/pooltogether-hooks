@@ -30,6 +30,7 @@ export const useIsTestnets = () => {
 
   const enableTestnets = () => {
     const cookieValue = 'true'
+    console.log({ cookieOptions })
     Cookies.set(APP_ENVIRONMENT_KEY, cookieValue, cookieOptions)
     setIsTestnetsState(true)
   }
