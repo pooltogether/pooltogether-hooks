@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
-import { useAppEnv } from './useAppEnv'
+import { useIsTestnets } from './useIsTestnets'
 import { isValidAddress } from '@pooltogether/utilities'
 
 import { QUERY_KEYS } from '../constants'
@@ -26,7 +26,7 @@ export const useClaimableTokenFromTokenFaucet = (chainId, tokenFaucetAddress, us
 
 export const useClaimableTokenFromTokenFaucets = (chainId, usersAddress) => {
   const { data: pools, isFetched: poolsIsFetched } = useAllPools()
-  const { appEnv } = useAppEnv()
+  const { isTestnets } = useIsTestnets()
   const { readProviders, isReadProvidersReady: readProvidersIsFetched } = useEnvReadProviders()
 
   const provider = readProviders?.[chainId]
@@ -48,7 +48,7 @@ export const useClaimableTokenFromTokenFaucets = (chainId, usersAddress) => {
   )
 
   return useQuery(
-    [QUERY_KEYS.claimablePoolFromTokenFaucets, chainId, usersAddress, appEnv],
+    [QUERY_KEYS.claimablePoolFromTokenFaucets, chainId, usersAddress, isTestnets],
     async () => {
       return getClaimableTokensFromTokenFaucets(provider, tokenFaucets, usersAddress)
     },

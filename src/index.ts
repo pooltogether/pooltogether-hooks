@@ -1,5 +1,5 @@
 // Multi Chain Utilities
-export { useAppEnv, APP_ENVIRONMENT, getStoredAppEnv } from './hooks/useAppEnv'
+export { APP_ENVIRONMENTS, useIsTestnets, getStoredIsTestnetsCookie } from './hooks/useIsTestnets'
 export { usePodChainIds } from './hooks/usePodChainIds'
 
 // Types

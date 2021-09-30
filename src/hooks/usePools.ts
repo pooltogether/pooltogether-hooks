@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from 'react-query'
 import { NETWORK, getChainIdByAlias } from '@pooltogether/utilities'
 
-import { APP_ENVIRONMENT, useAppEnv } from './useAppEnv'
+import { useIsTestnets } from './useIsTestnets'
 import { QUERY_KEYS, REFETCH_INTERVAL } from '../constants'
 import { useGovernancePoolContracts, usePoolContractBySymbol } from './usePoolContracts'
 import { getPool, getPoolsByChainId } from '../fetchers/getPools'
@@ -25,12 +25,12 @@ export const useAllPools = () => {
 export const useAllPoolsKeyedByChainId = () => {
   const queryClient = useQueryClient()
 
-  const { appEnv } = useAppEnv()
+  const { isTestnets } = useIsTestnets()
 
-  const ethereumChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.mainnet : NETWORK.rinkeby
-  const polygonChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.matic : NETWORK.mumbai
-  const bscChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.bsc : null
-  const celoChainId = appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.celo : null
+  const ethereumChainId = !isTestnets ? NETWORK.mainnet : NETWORK.rinkeby
+  const polygonChainId = !isTestnets ? NETWORK.matic : NETWORK.mumbai
+  const bscChainId = !isTestnets ? NETWORK.bsc : null
+  const celoChainId = !isTestnets ? NETWORK.celo : null
 
   const { data: ethereumPools, ...ethereumUseQuery } = useQuery(
     getUsePoolsQueryKey(ethereumChainId),

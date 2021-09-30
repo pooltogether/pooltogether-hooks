@@ -1,10 +1,10 @@
 import { NETWORK } from '@pooltogether/utilities'
 
-import { useAppEnv } from './useAppEnv'
+import { useIsTestnets, APP_ENVIRONMENTS } from './useIsTestnets'
 
 export const CHAIN_IDS_BY_APP_ENV = Object.freeze({
-  mainnets: [NETWORK.mainnet, NETWORK.polygon, NETWORK.bsc, NETWORK.celo],
-  testnets: [NETWORK.rinkeby]
+  [APP_ENVIRONMENTS.mainnets]: [NETWORK.mainnet, NETWORK.polygon, NETWORK.bsc, NETWORK.celo],
+  [APP_ENVIRONMENTS.testnets]: [NETWORK.rinkeby]
 })
 
 /**
@@ -12,6 +12,7 @@ export const CHAIN_IDS_BY_APP_ENV = Object.freeze({
  * @returns
  */
 export const useEnvChainIds = () => {
-  const { appEnv } = useAppEnv()
-  return CHAIN_IDS_BY_APP_ENV[appEnv] || CHAIN_IDS_BY_APP_ENV['mainnets']
+  const { isTestnets } = useIsTestnets()
+  const appEnv = isTestnets ? APP_ENVIRONMENTS.testnets : APP_ENVIRONMENTS.mainnets
+  return CHAIN_IDS_BY_APP_ENV[appEnv]
 }

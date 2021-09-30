@@ -1,7 +1,7 @@
 import { NETWORK } from '@pooltogether/utilities'
-import { useAppEnv, APP_ENVIRONMENT } from './useAppEnv'
+import { useIsTestnets } from './useIsTestnets'
 
 export const useGovernanceChainId = () => {
-  const { appEnv } = useAppEnv()
-  return appEnv === APP_ENVIRONMENT.mainnets ? NETWORK.mainnet : NETWORK.rinkeby
+  const { isTestnets } = useIsTestnets()
+  return isTestnets ? NETWORK.rinkeby : NETWORK.mainnet
 }
