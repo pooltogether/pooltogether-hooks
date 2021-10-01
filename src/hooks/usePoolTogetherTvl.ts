@@ -2,13 +2,13 @@ import { ethers } from 'ethers'
 
 import { useAllPools } from './usePools'
 
-export const usePooltogetherTotalPrizes = () => {
+export const usePooltogetherTotalPrizesV3 = () => {
   const { isFetched, data } = useAllPools()
   if (!isFetched || !data) return null
   return calculateTotalPrizes(data)
 }
 
-export const usePooltogetherTvl = () => {
+export const usePooltogetherTvlV3 = () => {
   const { isFetched, data } = useAllPools()
   if (!isFetched || !data) return null
   return calculateTotalValueLocked(data)
