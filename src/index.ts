@@ -60,6 +60,7 @@ export {
   getUserDataSubgraph,
   formatTicketsByPool
 } from './hooks/useUserTicketsFormattedByPool'
+export { usePooltogetherTotalPrizes, usePooltogetherTvl } from './hooks/usePoolTogetherTvl'
 
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
