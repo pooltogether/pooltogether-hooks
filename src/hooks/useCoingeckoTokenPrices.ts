@@ -58,3 +58,33 @@ const getCoingeckoTokenPrices = async (assetPlatform: string, contractAddresses:
     return undefined
   }
 }
+
+export const useCoingeckoSimplePrices = () => {
+  return useQuery(
+    [QUERY_KEYS.getCoingeckoTokenPrices],
+    async () => await getCoingeckoSimplePrices(),
+    {
+      staleTime: Infinity,
+      enabled: true,
+      refetchInterval: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false
+    }
+  )
+}
+
+const getCoingeckoSimplePrices = async () => {
+  try {
+    const url = new URL(`${COINGECKO_API_URL}/simple/price`)
+    url.searchParams.set('ids', ['ethereum', 'matic-network'].join(','))
+    url.searchParams.set('vs_currencies', 'usd')
+    const response = await fetch(url.toString())
+    const tokenPrices = await response.json()
+    return tokenPrices
+  } catch (e) {
+    console.error(e.message)
+    return undefined
+  }
+}

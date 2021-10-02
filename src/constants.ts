@@ -20,6 +20,7 @@ export const QUERY_KEYS = Object.freeze({
   userData: 'userData',
   userTicketData: 'userTicketData',
   getCoingeckoTokenPrices: 'getCoingeckoTokenPrices',
+  getCoingeckoSimplePrices: 'getCoingeckoSimplePrices',
   usersPodBalance: 'usersPodBalance'
 })
 
