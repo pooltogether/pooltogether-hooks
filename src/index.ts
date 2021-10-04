@@ -71,7 +71,8 @@ export { useTokenHolder } from './hooks/useTokenHolder'
 export { useTotalClaimablePool } from './hooks/useTotalClaimablePool'
 
 // CoinGecko
-export { useCoingeckoTokenPrices, useCoingeckoSimplePrices } from './hooks/useCoingeckoTokenPrices'
+export { useCoingeckoTokenPrices } from './hooks/useCoingeckoTokenPrices'
+export { useCoingeckoSimplePrices } from './hooks/useCoingeckoSimplePrices'
 export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
 export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 
