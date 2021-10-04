@@ -14,6 +14,7 @@ const flagshipFilteredPoolAddresses = {
     '0xbc82221e131c082336cf698f0ca3ebd18afd4ce7',
     '0xc32a0f9dfe2d93e8a60ba0200e033a59aec91559',
     '0x65c8827229fbd63f9de9fdfd400c9d264066a336',
+    '0xeab695a8f5a44f583003a8bc97d677880d528248',
     '0xc2a7dfb76e93d12a1bb1fa151b9900158090395d'
   ],
   4: ['0x4706856fa8bb747d50b4ef8547fe51ab5edc4ac2', '0xab068f220e10eed899b54f1113de7e354c9a8eb7'],
