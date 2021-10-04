@@ -76,6 +76,10 @@ export { useCoingeckoSimplePrices } from './hooks/useCoingeckoSimplePrices'
 export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
 export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 
+// Gas
+export { useGasCostEstimate } from './hooks/useGasCostEstimate'
+export { useGasCosts } from './hooks/useGasCosts'
+
 // TokenFaucets
 export {
   useClaimableTokenFromTokenFaucet,
