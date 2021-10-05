@@ -36,10 +36,12 @@ const calculateTotalGasUsd = (prices, chainId, totalGasWei) => {
 }
 
 const calculateTotalGasWei = (gasCosts, gasAmount) => {
-  const standardGasCostGwei = gasCosts.ProposeGasPrice
+  const standardGasCostGwei = Number(gasCosts.ProposeGasPrice)
 
   // Convert gwei to wei
-  const standardGasCostWei = BigNumber.from(standardGasCostGwei).mul(parseUnits('1', 9))
+  const standardGasCostWei = BigNumber.from(standardGasCostGwei * 1000)
+    .mul(parseUnits('1', 9))
+    .div(1000)
 
   return gasAmount.mul(standardGasCostWei)
 }
