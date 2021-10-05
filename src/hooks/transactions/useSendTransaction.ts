@@ -118,7 +118,7 @@ const watchTransactionLifecycle = async (
   chainId: number,
   callTransaction: () => Promise<TransactionResponse>
 ) => {
-  let ethersTx
+  let ethersTx: TransactionResponse
 
   let updatedTransactions = transactions
 
@@ -126,6 +126,12 @@ const watchTransactionLifecycle = async (
     poolToast.info(t?.('pleaseConfirmInYourWallet') || 'Please confirm transaction in your wallet')
 
     const ethersTx = await callTransaction()
+
+    // Chain id may be set to 0 if EIP-155 is disabled and legacy signing is used
+    // See https://docs.ethers.io/v5/api/utils/transactions/#Transaction
+    if (ethersTx.chainId === 0) {
+      ethersTx.chainId = chainId
+    }
 
     // Dismisses the "pleaseConfirmInYourWallet" msg which was added because if you are not
     // signed in to MetaMask and run a tx absolutely nothing happens,
@@ -191,7 +197,7 @@ const watchTransactionLifecycle = async (
 
       try {
         if (ethersTx?.hash) {
-          const networkName = getNetworkNiceNameByChainId(ethersTx.chainId)
+          const networkName = getNetworkNiceNameByChainId(ethersTx?.chainId || chainId)
           if (networkName === 'mainnet') {
             reason = await getRevertReason(ethersTx.hash, networkName)
           }
