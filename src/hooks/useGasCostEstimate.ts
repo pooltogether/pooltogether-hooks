@@ -14,20 +14,29 @@ const GAS_COST_CHAIN_ID_MAP = {
 // Makes use of Coingecko for USD prices (of ether, matic, etc) and PoolTogether's gas API result
 // to calculate how much gas will probably cost in both USD and the native currency
 export const useGasCostEstimate = (gasAmount, chainId) => {
-  const { data: prices, isFetched: pricesIsFetched } = useCoingeckoSimplePrices()
+  const {
+    data: prices,
+    isFetched: pricesIsFetched,
+    error: pricesError
+  } = useCoingeckoSimplePrices()
 
   const mappedChainId = GAS_COST_CHAIN_ID_MAP[chainId]
-  const { data: gasCosts, isFetched: gasCostsIsFetched } = useGasCosts(mappedChainId)
+  const {
+    data: gasCosts,
+    isFetched: gasCostsIsFetched,
+    error: gasCostsError
+  } = useGasCosts(mappedChainId)
 
   const isFetched = pricesIsFetched && gasCostsIsFetched
+  const error = gasCostsError || pricesError
 
   let totalGasUsd, totalGasWei
-  if (isFetched) {
+  if (isFetched && !error) {
     totalGasWei = calculateTotalGasWei(gasCosts, gasAmount)
     totalGasUsd = calculateTotalGasUsd(prices, chainId, totalGasWei)
   }
 
-  return { totalGasWei, totalGasUsd, isFetched }
+  return { totalGasWei, totalGasUsd, isFetched, error }
 }
 
 const calculateTotalGasUsd = (prices, chainId, totalGasWei) => {
