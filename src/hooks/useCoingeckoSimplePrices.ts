@@ -32,6 +32,7 @@ const getCoingeckoSimplePrices = async () => {
     url.searchParams.set('vs_currencies', 'usd')
     const response = await fetch(url.toString())
     const tokenPrices = await response.json()
+
     return tokenPrices
   } catch (e) {
     console.error(e.message)

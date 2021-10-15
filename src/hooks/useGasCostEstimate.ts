@@ -31,7 +31,7 @@ export const useGasCostEstimate = (gasAmount, chainId) => {
   const error = gasCostsError || pricesError
 
   let totalGasUsd, totalGasWei
-  if (isFetched && !error) {
+  if (Boolean(prices) && isFetched && !error) {
     totalGasWei = calculateTotalGasWei(gasCosts, gasAmount)
     totalGasUsd = calculateTotalGasUsd(prices, chainId, totalGasWei)
   }
