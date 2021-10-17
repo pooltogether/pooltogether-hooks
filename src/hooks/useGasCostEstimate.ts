@@ -41,14 +41,14 @@ export const useGasCostEstimate = (gasAmount, chainId) => {
 
 const calculateTotalGasUsd = (prices, chainId, totalGasWei) => {
   const { usd } = prices[SIMPLE_PRICES_CHAIN_ID_MAP[chainId]]
-  return totalGasWei.mul((usd * 100).toString()).div(100)
+  return totalGasWei.mul(Math.round(usd * 100).toString()).div(100)
 }
 
 const calculateTotalGasWei = (gasCosts, gasAmount) => {
   const standardGasCostGwei = Number(gasCosts.ProposeGasPrice)
 
   // Convert gwei to wei
-  const standardGasCostWei = BigNumber.from(standardGasCostGwei * 1000)
+  const standardGasCostWei = BigNumber.from(Math.round(standardGasCostGwei * 1000))
     .mul(parseUnits('1', 9))
     .div(1000)
 
