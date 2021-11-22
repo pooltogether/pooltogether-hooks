@@ -26,8 +26,6 @@ const providerCache: { [networkName: string]: Provider } = {}
 export const readProvider = (chainId: number, rpcApiKeys: RpcApiKeys) => {
   let provider: Provider
 
-  // console.log(getChain)
-
   try {
     if (chainId) {
       let networkData = getChain(chainId)

@@ -21,7 +21,6 @@ export const rpcApiKeysAtom = atom<RpcApiKeys>({ infura: {}, quicknode: {} })
 export const useInitRpcApiKeys = (rpcApiKeys: RpcApiKeys) => {
   const [, setRpcApiKeys] = useAtom(rpcApiKeysAtom)
   useEffect(() => {
-    console.log('AHH')
     setRpcApiKeys(rpcApiKeys)
   }, [])
 }
