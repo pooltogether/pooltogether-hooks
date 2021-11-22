@@ -10,36 +10,65 @@
 import { ethers } from 'ethers'
 import { getChain } from '@pooltogether/evm-chains-extended'
 import { NETWORK, ETHEREUM_NETWORKS } from '@pooltogether/utilities'
+import { Provider } from '@ethersproject/abstract-provider'
+import { RpcApiKeys } from '../hooks/useInitRpcApiKeys'
 
 const POLYGON_INFURA_WEBSOCKETS_URL = `wss://polygon-mainnet.infura.io/ws/v3`
 const BINANCE_QUICKNODE_WEBSOCKETS_URL = `wss://red-fragrant-fire.bsc.quiknode.pro`
-const providerCache = {}
 
-export const readProvider = async (chainId, infuraId, quickNodeId) => {
-  let provider: ethers.providers.BaseProvider
+const RPC_URLS = Object.freeze({
+  [NETWORK.polygon]: 'https://polygon-rpc.com/',
+  [NETWORK.bsc]: 'https://bsc-dataseed.binance.org/'
+})
+
+const providerCache: { [networkName: string]: Provider } = {}
+
+export const readProvider = (chainId: number, rpcApiKeys: RpcApiKeys) => {
+  let provider: Provider
+
+  // console.log(getChain)
 
   try {
     if (chainId) {
-      let network = getChain(chainId)
-      const jsonRpcProviderUrl = network?.rpc?.[0]
+      let networkData = getChain(chainId)
+      const jsonRpcProviderUrl = networkData?.rpc?.[0]
 
-      if (!network) {
-        network = getChain(NETWORK.mainnet)
-        provider = ethers.getDefaultProvider(network.network)
-      } else if (network && ETHEREUM_NETWORKS.includes(chainId)) {
-        provider = ethers.getDefaultProvider(network.network)
+      const cachedProvider = providerCache[networkData?.name]
+      if (Boolean(cachedProvider)) {
+        return cachedProvider
+      }
+
+      if (!networkData) {
+        networkData = getChain(NETWORK.mainnet)
+        provider = ethers.getDefaultProvider()
+      } else if (chainId === NETWORK.mainnet) {
+        if (rpcApiKeys.infura.mainnet) {
+          provider = new ethers.providers.InfuraProvider(NETWORK.mainnet, rpcApiKeys.infura.mainnet)
+        } else {
+          provider = ethers.getDefaultProvider(networkData.network)
+        }
       } else if (chainId === NETWORK.bsc) {
-        provider = new ethers.providers.WebSocketProvider(
-          `${BINANCE_QUICKNODE_WEBSOCKETS_URL}/${quickNodeId}/`
-        )
+        if (rpcApiKeys.quicknode.bsc) {
+          provider = new ethers.providers.WebSocketProvider(
+            `${BINANCE_QUICKNODE_WEBSOCKETS_URL}/${rpcApiKeys.quicknode.bsc}/`
+          )
+        } else {
+          provider = new ethers.providers.JsonRpcProvider(RPC_URLS[NETWORK.bsc], NETWORK.bsc)
+        }
       } else if (chainId === NETWORK.polygon) {
-        provider = new ethers.providers.WebSocketProvider(
-          `${POLYGON_INFURA_WEBSOCKETS_URL}/${infuraId}`
-        )
+        if (rpcApiKeys.infura.polygon) {
+          provider = new ethers.providers.WebSocketProvider(
+            `${POLYGON_INFURA_WEBSOCKETS_URL}/${rpcApiKeys.infura.polygon}`
+          )
+        } else {
+          provider = new ethers.providers.JsonRpcProvider(
+            RPC_URLS[NETWORK.polygon],
+            NETWORK.polygon
+          )
+        }
       } else if (chainId === NETWORK.mumbai) {
         provider = new ethers.providers.JsonRpcProvider(
           'https://rpc-mumbai.maticvigil.com/',
-          // 'https://matic-mumbai.chainstacklabs.com',
           NETWORK.mumbai
         )
       } else if (chainId === 1234 || chainId === 31337) {
@@ -48,20 +77,8 @@ export const readProvider = async (chainId, infuraId, quickNodeId) => {
         provider = new ethers.providers.JsonRpcProvider(jsonRpcProviderUrl)
       }
 
-      const net = await provider.getNetwork()
-
-      // // If we're running against an Ethereum network
-      if (net && net.name !== 'unknown' && ETHEREUM_NETWORKS.includes(chainId)) {
-        if (!providerCache[net.name]) {
-          providerCache[net.name] = ethers.providers.InfuraProvider.getWebSocketProvider(
-            net.name,
-            infuraId
-          )
-        }
-
-        // use a separate Infura-based provider for consistent read api
-        provider = providerCache[net.name]
-      }
+      // Store provider in cache
+      providerCache[networkData.name] = provider
     }
   } catch (e) {
     console.error(e)

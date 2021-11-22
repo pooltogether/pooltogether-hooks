@@ -863,10 +863,10 @@
     lodash.merge "^4.6.2"
     zen-observable-ts "^0.8.20"
 
-"@pooltogether/evm-chains-extended@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.6.0.tgz#ba534137626e89b3a2a6c26fce90c8bd4faa67a3"
-  integrity sha512-OFK6bUYaoBIAegWr8wdevw1hy49yZGpLSgk4cODytiOx9gH319eWpbSZ715caHaALiIi4YMqLLS/MzQTIGIIcQ==
+"@pooltogether/evm-chains-extended@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.6.1.tgz#c21c1ef9d51b6007704f35cae8942559b0b55a8f"
+  integrity sha512-J0Hc6SoDRNfBNmo7xVsDZBzkvH2G0wLiMchpkEYR29HbPE4OEwaxk7a6SQUyCWEDw59q97HBo3A7lkEn3oAdkQ==
   dependencies:
     evm-chains "^0.2.0"
 

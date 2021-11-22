@@ -9,7 +9,7 @@ import { DelegateableERC20Abi } from '../abis/DelegateableERC20Abi'
 
 export const usePoolTokenData = (usersAddress, addressOverride) => {
   const chainId = useGovernanceChainId()
-  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
+  const readProvider = useReadProvider(chainId)
 
   let address = addressOverride || usersAddress
 
@@ -19,7 +19,7 @@ export const usePoolTokenData = (usersAddress, addressOverride) => {
       return getPoolTokenData(readProvider, chainId, address)
     },
     {
-      enabled: Boolean(chainId && isReadProviderReady && address)
+      enabled: Boolean(chainId && address)
     }
   )
 }

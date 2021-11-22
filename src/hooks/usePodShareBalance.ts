@@ -22,10 +22,9 @@ import { getTokenBalances } from './useTokenBalances'
  */
 export const usePodShareBalance = (chainId: number, usersAddress: string, podAddress: string) => {
   const refetchInterval = useRefetchInterval()
-  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
+  const readProvider = useReadProvider(chainId)
 
-  const enabled =
-    isReadProviderReady && Boolean(usersAddress) && Boolean(podAddress) && Boolean(chainId)
+  const enabled = Boolean(usersAddress) && Boolean(podAddress) && Boolean(chainId)
 
   const getCacheKey = (usersAddress, podAddress) => [
     QUERY_KEYS.usersPodBalance,

@@ -1,47 +1,23 @@
-import { ethers } from 'ethers'
-import { useQuery } from 'react-query'
+import { Provider } from '@ethersproject/abstract-provider'
 
-import { NO_REFETCH_QUERY_OPTIONS, QUERY_KEYS } from '../constants'
+import { RpcApiKeys } from '../hooks/useInitRpcApiKeys'
 import { readProvider } from '../services/readProvider'
-import { useInfuraId } from './useInitInfuraId'
-import { useQuickNodeId } from './useInitQuickNodeId'
+import { useRpcApiKeys } from './useInitRpcApiKeys'
 
 /**
  *
- * @param {*} chainId a chainId to get a provider for
- * @returns Providers for the provided chain id
+ * @param {*} chainIds a list of chainIds to get providers for
+ * @returns Providers for the provided chain ids
  */
 export const useReadProviders = (chainIds) => {
-  const infuraId = useInfuraId()
-  const quickNodeId = useQuickNodeId()
-
-  const { data: readProviders, isFetched } = useQuery<
-    { [chainId: string]: ethers.providers.BaseProvider },
-    Error
-  >(
-    [QUERY_KEYS.readProviders, chainIds, infuraId, quickNodeId],
-    () => getReadProviders(chainIds, infuraId, quickNodeId),
-    {
-      ...NO_REFETCH_QUERY_OPTIONS,
-      enabled: Boolean(infuraId) && Boolean(chainIds) && Boolean(quickNodeId)
-    }
-  )
-
-  const areProvidersForAllChainIdsRequestedReady = chainIds
-    ? chainIds.reduce((allReady, chainId) => {
-        return readProviders?.[chainId]?.network?.chainId === chainId && allReady
-      }, true)
-    : false
-
-  const isReadProvidersReady = isFetched && areProvidersForAllChainIdsRequestedReady
-
-  return { readProviders, isReadProvidersReady }
+  const rpcApiKeys = useRpcApiKeys()
+  return getReadProviders(chainIds, rpcApiKeys)
 }
 
-const getReadProviders = async (chainIds, infuraId, quickNodeId) => {
-  const readProviders = {}
+const getReadProviders = (chainIds: number[], rpcApiKeys: RpcApiKeys) => {
+  const readProviders: { [chainId: number]: Provider } = {}
   for (const chainId of chainIds) {
-    readProviders[chainId] = await readProvider(chainId, infuraId, quickNodeId)
+    readProviders[chainId] = readProvider(chainId, rpcApiKeys)
   }
   return readProviders
 }

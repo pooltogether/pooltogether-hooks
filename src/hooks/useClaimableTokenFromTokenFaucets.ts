@@ -10,6 +10,7 @@ import { useEnvReadProviders } from './useEnvReadProviders'
 
 import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
+import { useReadProvider } from '..'
 
 export const useClaimableTokenFromTokenFaucet = (chainId, tokenFaucetAddress, usersAddress) => {
   const { data, ...remainingResult } = useClaimableTokenFromTokenFaucets(chainId, usersAddress)
@@ -27,9 +28,7 @@ export const useClaimableTokenFromTokenFaucet = (chainId, tokenFaucetAddress, us
 export const useClaimableTokenFromTokenFaucets = (chainId, usersAddress) => {
   const { data: pools, isFetched: poolsIsFetched } = useAllPools()
   const { isTestnets } = useIsTestnets()
-  const { readProviders, isReadProvidersReady: readProvidersIsFetched } = useEnvReadProviders()
-
-  const provider = readProviders?.[chainId]
+  const readProvider = useReadProvider(chainId)
 
   const tokenFaucets = []
   pools
@@ -40,17 +39,16 @@ export const useClaimableTokenFromTokenFaucets = (chainId, usersAddress) => {
 
   const enabled = Boolean(
     tokenFaucets.length > 0 &&
-      provider &&
+      readProvider &&
       poolsIsFetched &&
       usersAddress &&
-      isValidAddress(usersAddress) &&
-      readProvidersIsFetched
+      isValidAddress(usersAddress)
   )
 
   return useQuery(
     [QUERY_KEYS.claimablePoolFromTokenFaucets, chainId, usersAddress, isTestnets],
     async () => {
-      return getClaimableTokensFromTokenFaucets(provider, tokenFaucets, usersAddress)
+      return getClaimableTokensFromTokenFaucets(readProvider, tokenFaucets, usersAddress)
     },
     {
       enabled,

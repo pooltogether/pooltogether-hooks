@@ -20,7 +20,7 @@ export const getBlockNumber = async (readProvider, setCurrentBlock) => {
 
 export const useBlockOnProviderLoad = () => {
   const chainId = useGovernanceChainId()
-  const { readProvider } = useReadProvider(chainId)
+  const readProvider = useReadProvider(chainId)
   const [currentBlock, setCurrentBlock] = useAtom(currentBlockAtom)
 
   useEffect(() => {

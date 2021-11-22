@@ -6,7 +6,7 @@ import { useReadProvider } from './useReadProvider'
 export const useEnsName = (address) => {
   const [ensName, setEnsName] = useState('')
 
-  const { readProvider, isReadProviderReady } = useReadProvider(NETWORK.mainnet)
+  const readProvider = useReadProvider(NETWORK.mainnet)
 
   useEffect(() => {
     const getAndSetEnsName = async () => {
@@ -25,7 +25,7 @@ export const useEnsName = (address) => {
     } else {
       setEnsName('')
     }
-  }, [address, readProvider, isReadProviderReady])
+  }, [address, readProvider])
 
   return ensName
 }

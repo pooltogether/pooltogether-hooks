@@ -23,7 +23,7 @@ export const useRetroactivePoolClaimData = (address) => {
 
 const useFetchRetroactivePoolClaimData = (usersAddress) => {
   const chainId = useGovernanceChainId()
-  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
+  const readProvider = useReadProvider(chainId)
 
   return useQuery(
     [QUERY_KEYS.retroactivePoolClaimDataQuery, usersAddress, chainId],
@@ -31,7 +31,7 @@ const useFetchRetroactivePoolClaimData = (usersAddress) => {
       return getRetroactivePoolClaimData(readProvider, chainId, usersAddress)
     },
     {
-      enabled: Boolean(usersAddress && isReadProviderReady) && isValidAddress(usersAddress),
+      enabled: Boolean(usersAddress) && isValidAddress(usersAddress),
       refetchInterval: false,
       refetchOnWindowFocus: false,
       refetchOnMount: false

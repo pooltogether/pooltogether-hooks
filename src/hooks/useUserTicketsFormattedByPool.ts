@@ -83,13 +83,9 @@ export const useUserTicketsByChainIdsRpc = (usersAddress) => {
   const chainIds = useEnvChainIds()
   const { data: poolsKeyedByChainId } = useAllPoolsKeyedByChainId()
 
-  const { readProviders, isReadProvidersReady: readProvidersAreReady } = useReadProviders(chainIds)
+  const readProviders = useReadProviders(chainIds)
 
-  const enabled =
-    Boolean(poolsKeyedByChainId) &&
-    Boolean(chainIds) &&
-    Boolean(usersAddress) &&
-    readProvidersAreReady
+  const enabled = Boolean(poolsKeyedByChainId) && Boolean(chainIds) && Boolean(usersAddress)
 
   return useQuery(
     [QUERY_KEYS.userTicketData, usersAddress, chainIds],

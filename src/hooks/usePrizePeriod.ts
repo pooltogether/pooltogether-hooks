@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import { Provider } from '@ethersproject/abstract-provider'
 import { BaseProvider } from '@ethersproject/providers'
 import { batch, contract } from '@pooltogether/etherplex'
 import { BigNumber } from 'ethers'
@@ -20,10 +21,10 @@ import { PrizeStrategyAbi_3_4_4 } from '../abis/PrizeStrategy_3_4_4'
  */
 export const usePrizePeriod = (chainId: number, prizeStrategyAddress: string) => {
   const standardRefetchIntervalInMs = useRefetchInterval()
-  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
+  const readProvider = useReadProvider(chainId)
   const [refetchInterval, setRefetchInterval] = useState<number | false>(false)
 
-  const enabled = isReadProviderReady && Boolean(prizeStrategyAddress) && Boolean(chainId)
+  const enabled = Boolean(prizeStrategyAddress) && Boolean(chainId)
 
   // Fetch prize period data from chain
   return useQuery(
@@ -62,7 +63,7 @@ interface PrizePeriodResponse {
  * @returns
  */
 const getPrizePeriod = async (
-  provider: BaseProvider,
+  provider: Provider,
   prizeStrategyAddress: string
 ): Promise<PrizePeriodResponse> => {
   const prizeStrategyContract = contract(
@@ -72,7 +73,7 @@ const getPrizePeriod = async (
   )
 
   const response = await batch(
-    provider,
+    provider as BaseProvider,
     prizeStrategyContract
       .canCompleteAward()
       .canStartAward()

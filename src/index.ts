@@ -23,8 +23,7 @@ export {
 } from './types/transaction'
 
 // Common chain data
-export { useInitInfuraId } from './hooks/useInitInfuraId'
-export { useInitQuickNodeId } from './hooks/useInitQuickNodeId'
+export { useInitRpcApiKeys } from './hooks/useInitRpcApiKeys'
 export { useInitTheGraphApiKey } from './hooks/useInitTheGraphApiKey'
 export { useReadProvider } from './hooks/useReadProvider'
 export { useReadProviders } from './hooks/useReadProviders'

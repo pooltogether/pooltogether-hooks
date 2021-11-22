@@ -20,11 +20,10 @@ import { TokenBalances } from '../types/token'
  */
 export const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
   const refetchInterval = useRefetchInterval()
-  const { readProvider, isReadProviderReady } = useReadProvider(chainId)
+  const readProvider = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
   const enabled =
-    isReadProviderReady &&
     Boolean(address) &&
     tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
     Array.isArray(tokenAddresses) &&
