@@ -45,6 +45,12 @@ export const readProvider = (chainId: number, rpcApiKeys: RpcApiKeys) => {
         } else {
           provider = ethers.getDefaultProvider(networkData.network)
         }
+      } else if (ETHEREUM_NETWORKS.includes(chainId)) {
+        if (rpcApiKeys.infura.mainnet) {
+          provider = new ethers.providers.InfuraProvider(chainId, rpcApiKeys.infura.mainnet)
+        } else {
+          provider = ethers.getDefaultProvider(networkData.network)
+        }
       } else if (chainId === NETWORK.bsc) {
         if (rpcApiKeys.quicknode.bsc) {
           provider = new ethers.providers.WebSocketProvider(
