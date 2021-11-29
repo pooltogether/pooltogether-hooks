@@ -14,5 +14,5 @@ export const useReadProviders = (chainIds: number[]): { [chainId: number]: Provi
       providers[chainId] = getReadProvider(chainId)
     })
     return providers
-  }, [chainIds])
+  }, [...chainIds])
 }
