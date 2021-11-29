@@ -871,10 +871,10 @@
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.3.2.tgz#a5ea37295cba18d50b02994494d3d20dfb3ba3d8"
-  integrity sha512-KNFJ7tReqY7ouE4QQIlgv6E9R1F1fP8O6nLcfqgtkXJDMcHPaTKppdE+3GTb9oVOFl8UfTfmKi3dsH4HmMhYPg==
+"@pooltogether/utilities@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.3.3.tgz#209aacca7a55880ac76bb5dfc0eecdb6321eb803"
+  integrity sha512-IYCMcQlRHklroThI/rgr0JDLNS3600tTw2HimOhf/JaB0nIAo9L/P4mPO/7CSTJ8h4b1vjKCU5UIUwcpU+51Iw==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
