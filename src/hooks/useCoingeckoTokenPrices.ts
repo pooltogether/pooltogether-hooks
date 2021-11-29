@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
+import { isAddress } from '@ethersproject/address'
+import { NETWORK } from '@pooltogether/utilities'
 
-import { isValidAddress, NETWORK } from '@pooltogether/utilities'
 import { COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
 import { TokenPrices } from '../types/token'
 
@@ -9,7 +10,7 @@ export const useCoingeckoTokenPrices = (chainId: number, contractAddresses: stri
 
   const isValidNetwork = validNetworks.includes(chainId.toString())
   const isValidAddresses = contractAddresses?.reduce(
-    (isValid, contractAddress) => isValid && isValidAddress(contractAddress),
+    (isValid, contractAddress) => isValid && isAddress(contractAddress),
     true
   )
 

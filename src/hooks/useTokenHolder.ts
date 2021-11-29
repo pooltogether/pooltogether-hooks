@@ -1,12 +1,12 @@
 import { useQuery } from 'react-query'
 import gql from 'graphql-tag'
 import { request } from 'graphql-request'
-import { isValidAddress } from '@pooltogether/utilities'
 
 import { QUERY_KEYS } from '../constants'
 import { useBlockOnProviderLoad } from './useBlockOnProviderLoad'
 import { useGovernanceChainId } from './useGovernanceChainId'
 import { useGovernanceGraphUri } from './useGovernanceGraphUri'
+import { isAddress } from 'ethers/lib/utils'
 
 const EMPTY_TOKEN_HOLDER = Object.freeze({
   delegatedVotes: null,
@@ -55,7 +55,7 @@ function useFetchTokenHolder(address, blockNumber) {
       return getTokenHolder(address, chainId, blockNumber, governanceGraphUri)
     },
     {
-      enabled: Boolean(chainId && address) && isValidAddress(address)
+      enabled: Boolean(chainId && address) && isAddress(address)
     }
   )
 }
@@ -64,11 +64,7 @@ async function getTokenHolder(address, chainId, blockNumber, governanceGraphUri)
   try {
     const query = tokenHolderQuery(blockNumber)
     const variables = { id: address.toLowerCase() }
-    const subgraphData = await request(
-      governanceGraphUri,
-      query,
-      variables
-    )
+    const subgraphData = await request(governanceGraphUri, query, variables)
 
     if (!subgraphData.tokenHolder && !subgraphData.delegate) {
       return EMPTY_TOKEN_HOLDER

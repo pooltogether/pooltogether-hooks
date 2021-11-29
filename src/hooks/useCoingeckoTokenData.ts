@@ -1,17 +1,18 @@
 import { useQuery } from 'react-query'
+import { isAddress } from '@ethersproject/address'
+import { NETWORK } from '@pooltogether/utilities'
 
-import { isValidAddress, NETWORK } from '@pooltogether/utilities'
 import { COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
 
 export const useCoingeckoTokenData = (chainId, contractAddress) => {
   const validNetworks = Object.keys(COINGECKO_ASSET_PLATFORMS)
 
   const isValidNetwork = validNetworks.includes(chainId.toString()) && chainId !== NETWORK.rinkeby
-  const _isValidAddress = isValidAddress(contractAddress)
+  const isValidAddress = isAddress(contractAddress)
 
   const assetPlatform = COINGECKO_ASSET_PLATFORMS[chainId]
 
-  const enabled = Boolean(contractAddress) && _isValidAddress && isValidNetwork && Boolean(chainId)
+  const enabled = Boolean(contractAddress) && isValidAddress && isValidNetwork && Boolean(chainId)
 
   return useQuery(
     [QUERY_KEYS.getCoingeckoTokenData, contractAddress, chainId],

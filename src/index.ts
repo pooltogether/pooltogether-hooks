@@ -23,7 +23,8 @@ export {
 } from './types/transaction'
 
 // Common chain data
-export { useInitRpcApiKeys } from './hooks/useInitRpcApiKeys'
+export { getChain, formatNetworkForAddEthereumChain } from '@pooltogether/evm-chains-extended'
+export { initProviderApiKeys } from '@pooltogether/utilities'
 export { useInitTheGraphApiKey } from './hooks/useInitTheGraphApiKey'
 export { useReadProvider } from './hooks/useReadProvider'
 export { useReadProviders } from './hooks/useReadProviders'

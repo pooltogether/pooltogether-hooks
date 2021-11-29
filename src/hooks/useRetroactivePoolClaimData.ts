@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
 import { ethers } from 'ethers'
-import { isValidAddress } from '@pooltogether/utilities'
+import { isAddress } from '@ethersproject/address'
 
 import { GOVERNANCE_CONTRACT_ADDRESSES, QUERY_KEYS } from '../constants'
 import { useGovernanceChainId } from './useGovernanceChainId'
@@ -31,7 +31,7 @@ const useFetchRetroactivePoolClaimData = (usersAddress) => {
       return getRetroactivePoolClaimData(readProvider, chainId, usersAddress)
     },
     {
-      enabled: Boolean(usersAddress) && isValidAddress(usersAddress),
+      enabled: Boolean(usersAddress) && isAddress(usersAddress),
       refetchInterval: false,
       refetchOnWindowFocus: false,
       refetchOnMount: false
