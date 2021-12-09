@@ -7,7 +7,7 @@ import { PodAbi } from '../abis/PodAbi'
 import { QUERY_KEYS } from '../constants'
 import { useReadProvider } from './useReadProvider'
 import { useRefetchInterval } from './useRefetchInterval'
-import { Amount, TokenWithBalances } from '../types/token'
+import { Amount, TokenWithAllBalances } from '../types/token'
 import { BigNumber } from 'ethers'
 import { getTokenBalances } from './useTokenBalances'
 
@@ -44,11 +44,11 @@ export const usePodShareBalance = (chainId: number, usersAddress: string, podAdd
 }
 
 interface PodShareBalance {
-  shares: TokenWithBalances
+  shares: TokenWithAllBalances
   underlyingAmount: Amount
   pricePerShare: BigNumber
-  podUnderlyingTokenBalance: TokenWithBalances
-  podUnderlyingTicketBalance: TokenWithBalances
+  podUnderlyingTokenBalance: TokenWithAllBalances
+  podUnderlyingTicketBalance: TokenWithAllBalances
 }
 
 const getPodShareBalance = async (

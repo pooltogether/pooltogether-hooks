@@ -17,14 +17,16 @@ export interface TokenBalance extends Amount {
   hasBalance: boolean
 }
 
-export interface TokenWithBalances extends Token, TokenBalance {
+export interface TokenWithBalance extends Token, TokenBalance {}
+
+export interface TokenWithAllBalances extends TokenWithBalance {
   totalSupply: string
   totalSupplyUnformatted: ethers.BigNumber
   totalSupplyPretty: string
 }
 
 export interface TokenBalances {
-  [address: string]: TokenWithBalances
+  [address: string]: TokenWithAllBalances
 }
 
 export interface TokenPrices {

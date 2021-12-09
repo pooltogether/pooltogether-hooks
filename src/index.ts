@@ -7,7 +7,8 @@ export {
   Token,
   Amount,
   TokenBalance,
-  TokenWithBalances,
+  TokenWithBalance,
+  TokenWithAllBalances,
   TokenBalances,
   TokenPrices,
   TokenPrice
