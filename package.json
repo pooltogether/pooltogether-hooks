@@ -1,6 +1,6 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
