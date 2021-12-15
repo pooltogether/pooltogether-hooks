@@ -6,7 +6,13 @@ export const SIMPLE_PRICES_CHAIN_ID_MAP = {
   1: 'ethereum',
   4: 'ethereum',
   137: 'matic-network',
-  80001: 'matic-network'
+  80001: 'matic-network',
+  42220: 'celo',
+  44787: 'celo',
+  56: 'binancecoin',
+  97: 'binancecoin',
+  43113: 'avalanche-2',
+  43114: 'avalanche-2'
 }
 
 export const useCoingeckoSimplePrices = () => {
@@ -28,7 +34,8 @@ export const useCoingeckoSimplePrices = () => {
 const getCoingeckoSimplePrices = async () => {
   try {
     const url = new URL(`${COINGECKO_API_URL}/simple/price`)
-    url.searchParams.set('ids', ['ethereum', 'matic-network'].join(','))
+    const ids = Array.from(new Set(Object.values(SIMPLE_PRICES_CHAIN_ID_MAP)))
+    url.searchParams.set('ids', ids.join(','))
     url.searchParams.set('vs_currencies', 'usd')
     const response = await fetch(url.toString())
     const tokenPrices = await response.json()

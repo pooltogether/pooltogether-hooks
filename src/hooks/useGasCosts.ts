@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { useRefetchInterval } from './useRefetchInterval'
 
-export const useGasCosts = (chainId) => {
+export const useGasCosts = (chainId: number) => {
   const enabled = Boolean(chainId)
   const refetchInterval = useRefetchInterval(chainId)
 
