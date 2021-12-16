@@ -3,9 +3,9 @@ import { ethers } from 'ethers'
 import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
 import { SECONDS_PER_DAY } from '@pooltogether/current-pool-data'
-import { NETWORK } from '@pooltogether/utilities'
-import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
+import { NETWORK, prettyNumber } from '@pooltogether/utilities'
 
+import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
 import { QUERY_KEYS } from '../constants'
 import { useIsTestnets, useReadProvider } from '..'
@@ -267,7 +267,40 @@ const getUserLPChainData = async (
 
   const ownershipPercentage = formatUnits(ownershipPercentageScaled, 6)
 
+  const decimals = ticketDecimals
+  const amountUnformatted = usersTicketBalanceUnformatted
+  const amount = formatUnits(amountUnformatted, decimals)
+  const amountPretty = prettyNumber(amountUnformatted, decimals)
+
+  console.log({ stakingPool })
+  const name = stakingPool.tokens.underlyingToken.pair
+  const symbol = stakingPool.tokens.underlyingToken.symbol
+
+  const balances = {
+    token: {
+      address: stakingPool.tokens.underlyingToken.address,
+      amount,
+      amountPretty,
+      amountUnformatted,
+      decimals,
+      hasBalance: amountUnformatted.gt(0),
+      name,
+      symbol
+    },
+    ticket: {
+      address: stakingPool.tokens.ticket.address,
+      amount,
+      amountPretty,
+      amountUnformatted,
+      decimals,
+      hasBalance: amountUnformatted.gt(0),
+      name,
+      symbol
+    }
+  }
+
   return {
+    balances,
     userData: {
       tokenFaucet: {
         balance: formatUnits(usersResponse.dripToken.balanceOf[0], dripTokenDecimals),

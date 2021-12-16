@@ -62,7 +62,12 @@ export {
   formatTicketsByPool
 } from './hooks/useUserTicketsFormattedByPool'
 export { usePooltogetherTotalPrizesV3, usePooltogetherTvlV3 } from './hooks/usePoolTogetherTvl'
-export { useStakingPools } from './hooks/useStakingPools'
+export {
+  useStakingPools,
+  useUserLPChainData,
+  useStakingPoolChainData,
+  DEXES
+} from './hooks/useStakingPools'
 
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
