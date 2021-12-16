@@ -4,28 +4,20 @@ import { parseUnits } from '@ethersproject/units'
 import { SIMPLE_PRICES_CHAIN_ID_MAP, useCoingeckoSimplePrices } from './useCoingeckoSimplePrices'
 import { useGasCosts } from './useGasCosts'
 
-const GAS_COST_CHAIN_ID_MAP = {
-  1: 1,
-  4: 1,
-  137: 137,
-  80001: 137
-}
-
 // Makes use of Coingecko for USD prices (of ether, matic, etc) and PoolTogether's gas API result
 // to calculate how much gas will probably cost in both USD and the native currency
-export const useGasCostEstimate = (gasAmount, chainId) => {
+export const useGasCostEstimate = (gasAmount: BigNumber, chainId: number) => {
   const {
     data: prices,
     isFetched: pricesIsFetched,
     error: pricesError
   } = useCoingeckoSimplePrices()
 
-  const mappedChainId = GAS_COST_CHAIN_ID_MAP[chainId]
   const {
     data: gasCosts,
     isFetched: gasCostsIsFetched,
     error: gasCostsError
-  } = useGasCosts(mappedChainId)
+  } = useGasCosts(chainId)
 
   const isFetched = pricesIsFetched && gasCostsIsFetched
   const error = gasCostsError || pricesError

@@ -1,31 +1,25 @@
-import { useState, useEffect } from 'react'
 import { NETWORK } from '@pooltogether/utilities'
+import { Provider } from '@ethersproject/abstract-provider'
+import { useQuery } from 'react-query'
 
 import { useReadProvider } from './useReadProvider'
+import { NO_REFETCH_QUERY_OPTIONS } from '../constants'
 
-export const useEnsName = (address) => {
-  const [ensName, setEnsName] = useState('')
-
+export const useEnsName = (address: string) => {
   const readProvider = useReadProvider(NETWORK.mainnet)
 
-  useEffect(() => {
-    const getAndSetEnsName = async () => {
-      try {
-        const resolvedEnsName = await readProvider.lookupAddress(address)
-        if (resolvedEnsName) {
-          setEnsName(resolvedEnsName)
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
+  return useQuery(['useEnsName', address], () => getEnsName(readProvider, address), {
+    enabled: Boolean(address),
+    ...NO_REFETCH_QUERY_OPTIONS
+  })
+}
 
-    if (address && readProvider) {
-      getAndSetEnsName()
-    } else {
-      setEnsName('')
-    }
-  }, [address, readProvider])
-
-  return ensName
+const getEnsName = async (provdier: Provider, address: string) => {
+  try {
+    const resolvedEnsName = await provdier.lookupAddress(address)
+    return resolvedEnsName
+  } catch (e) {
+    console.log(e)
+    return undefined
+  }
 }
