@@ -21,7 +21,8 @@ export const QUERY_KEYS = Object.freeze({
   userTicketData: 'userTicketData',
   getCoingeckoTokenPrices: 'getCoingeckoTokenPrices',
   getCoingeckoSimplePrices: 'getCoingeckoSimplePrices',
-  usersPodBalance: 'usersPodBalance'
+  usersPodBalance: 'usersPodBalance',
+  uniswapLPStakingPool: 'uniswapLPStakingPool'
 })
 
 export const REFETCH_INTERVAL = process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000
