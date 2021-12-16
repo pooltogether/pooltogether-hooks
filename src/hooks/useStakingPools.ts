@@ -267,40 +267,38 @@ const getUserLPChainData = async (
 
   const ownershipPercentage = formatUnits(ownershipPercentageScaled, 6)
 
-  const decimals = ticketDecimals
-  const amountUnformatted = usersTicketBalanceUnformatted
-  const amount = formatUnits(amountUnformatted, decimals)
-  const amountPretty = prettyNumber(amountUnformatted, decimals)
-
-  console.log({ stakingPool })
+  // BALANCES
   const name = stakingPool.tokens.underlyingToken.pair
   const symbol = stakingPool.tokens.underlyingToken.symbol
 
-  const balances = {
-    token: {
-      address: stakingPool.tokens.underlyingToken.address,
-      amount,
-      amountPretty,
-      amountUnformatted,
-      decimals,
-      hasBalance: amountUnformatted.gt(0),
-      name,
-      symbol
-    },
-    ticket: {
-      address: stakingPool.tokens.ticket.address,
-      amount,
-      amountPretty,
-      amountUnformatted,
-      decimals,
-      hasBalance: amountUnformatted.gt(0),
-      name,
-      symbol
-    }
+  // TOKEN
+
+  const tokenBalanceUnformatted = usersResponse.underlyingToken.balanceOf[0]
+  const tokenBalance = {
+    address: stakingPool.tokens.underlyingToken.address,
+    amount: formatUnits(tokenBalanceUnformatted, underlyingDecimals),
+    amountPretty: prettyNumber(tokenBalanceUnformatted, underlyingDecimals),
+    amountUnformatted: tokenBalanceUnformatted,
+    decimals: underlyingDecimals,
+    hasBalance: tokenBalanceUnformatted.gt(0),
+    name,
+    symbol
+  }
+
+  // TICKET
+  const ticketBalance = {
+    address: stakingPool.tokens.ticket.address,
+    amount: formatUnits(usersTicketBalanceUnformatted, ticketDecimals),
+    amountPretty: prettyNumber(usersTicketBalanceUnformatted, ticketDecimals),
+    amountUnformatted: usersTicketBalanceUnformatted,
+    decimals: ticketDecimals,
+    hasBalance: usersTicketBalanceUnformatted.gt(0),
+    name,
+    symbol
   }
 
   return {
-    balances,
+    balances: { token: tokenBalance, ticket: ticketBalance },
     userData: {
       tokenFaucet: {
         balance: formatUnits(usersResponse.dripToken.balanceOf[0], dripTokenDecimals),
