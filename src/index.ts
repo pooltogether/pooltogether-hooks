@@ -116,6 +116,10 @@ export { useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
 export { useEnsName } from './hooks/useEnsName'
 export { useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
 
+// V4 Prize Pool / Tokens
+export { usePrizePoolTokens } from './hooks/usePrizePoolTokens'
+export { useUsersPrizePoolBalances } from './hooks/useUsersPrizePoolBalances'
+
 // UI
 export { useReducedMotion, useInitReducedMotion } from './hooks/useReducedMotion'
 export { useScreenSize, ScreenSize } from './hooks/useScreenSize'
