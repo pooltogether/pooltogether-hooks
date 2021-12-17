@@ -62,6 +62,12 @@ export {
   formatTicketsByPool
 } from './hooks/useUserTicketsFormattedByPool'
 export { usePooltogetherTotalPrizesV3, usePooltogetherTvlV3 } from './hooks/usePoolTogetherTvl'
+export {
+  useStakingPools,
+  useUserLPChainData,
+  useStakingPoolChainData,
+  DEXES
+} from './hooks/useStakingPools'
 
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
@@ -109,6 +115,10 @@ export { useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
 export { useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
 export { useEnsName } from './hooks/useEnsName'
 export { useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
+
+// V4 Prize Pool / Tokens
+export { usePrizePoolTokens } from './hooks/usePrizePoolTokens'
+export { useUsersPrizePoolBalances } from './hooks/useUsersPrizePoolBalances'
 
 // UI
 export { useReducedMotion, useInitReducedMotion } from './hooks/useReducedMotion'

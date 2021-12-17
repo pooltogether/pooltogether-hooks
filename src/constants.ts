@@ -21,21 +21,18 @@ export const QUERY_KEYS = Object.freeze({
   userTicketData: 'userTicketData',
   getCoingeckoTokenPrices: 'getCoingeckoTokenPrices',
   getCoingeckoSimplePrices: 'getCoingeckoSimplePrices',
-  usersPodBalance: 'usersPodBalance'
+  usersPodBalance: 'usersPodBalance',
+  uniswapLPStakingPool: 'uniswapLPStakingPool'
 })
 
 export const REFETCH_INTERVAL = process.env.NEXT_JS_DOMAIN_NAME ? 22 * 1000 : 16 * 1000
 
-export const NO_REFETCH_QUERY_OPTIONS: {
-  refetchInterval: false
-  refetchOnReconnect: false
-  refetchOnWindowFocus: false
-  staleTime: number
-} = Object.freeze({
-  refetchInterval: false,
-  refetchOnReconnect: false,
-  refetchOnWindowFocus: false,
-  staleTime: Infinity
+export const NO_REFETCH = Object.freeze({
+  refetchInterval: false as false,
+  refetchIntervalInBackground: false as false,
+  refetchOnMount: false as false,
+  refetchOnReconnect: false as false,
+  refetchOnWindowFocus: false as false
 })
 
 export const GOVERNANCE_CONTRACT_ADDRESSES = {
