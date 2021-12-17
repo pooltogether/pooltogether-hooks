@@ -2,7 +2,7 @@ import { chainIdToNetworkName, deserializeBigNumbers } from '@pooltogether/utili
 
 import { fetchData } from './fetchData'
 
-const API_URI = process.env.NEXT_JS_API_URI
+const API_URI = 'https://pooltogether-api.com'
 
 // Select only the pools from the API that we want the Flagship to show
 const flagshipFilteredPoolAddresses = {
@@ -79,7 +79,7 @@ const formatPool = (pool, chainId) => ({
  * @param {*} allPools
  * @returns
  */
-const keyPoolsByChainId = (allPools) => {
+const keyPoolsByChainId = (allPools): any => {
   const arrayOfArrayOfPools = Object.values(allPools)
   return arrayOfArrayOfPools.reduce((sortedPools, pools) => {
     const chainId = pools?.[0].chainId

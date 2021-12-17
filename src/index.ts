@@ -62,6 +62,7 @@ export {
   formatTicketsByPool
 } from './hooks/useUserTicketsFormattedByPool'
 export { usePooltogetherTotalPrizesV3, usePooltogetherTvlV3 } from './hooks/usePoolTogetherTvl'
+export { getPoolsByChainIds } from './fetchers/getPools'
 
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
