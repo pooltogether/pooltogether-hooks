@@ -322,7 +322,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
   integrity sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
 
-"@ethersproject/abi@5.5.0", "@ethersproject/abi@^5.5.0":
+"@ethersproject/abi@5.5.0", "@ethersproject/abi@^5.1.0", "@ethersproject/abi@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/abi/-/abi-5.5.0.tgz#fb52820e22e50b854ff15ce1647cc508d6660613"
   integrity sha512-loW7I4AohP5KycATvc0MgujU6JyCHPqHdeoo9z3Nr9xEiNioxa65ccdm1+fsoJhkuhdRtfcL8cfyGamz2AxZ5w==
@@ -849,10 +849,23 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@pooltogether/contract-list-schema@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@pooltogether/contract-list-schema/-/contract-list-schema-0.1.4.tgz#52a4b35e1ef1b263c643e517ca1908180cf1cb6e"
+  integrity sha512-oLAu9TGfU9xf1QFJJZQxUj0hsfcRao/DMCZ1hVvDkmwOnX1PUkuhuvZfvgwLFd4hJ4m2kjdCyTJ+VJ5qvgjyww==
+
 "@pooltogether/current-pool-data@^3.6.3":
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.6.3.tgz#f1dc706376f9b9c3d613a203446d90a9a18cb867"
   integrity sha512-LxkrJQzmDfkTJGvS4/6jGfRqSZEXEGoyKmKk5gZAWBiLjIs5W6ZudssXXI5CxMPkNUJ3Tez99Y/Pi2oJt/HhMQ==
+
+"@pooltogether/draw-calculator-js@^1.0.3-beta.2":
+  version "1.0.3-beta.4"
+  resolved "https://registry.yarnpkg.com/@pooltogether/draw-calculator-js/-/draw-calculator-js-1.0.3-beta.4.tgz#24f46c360ebf6a070e193a95d81c026b7209ce89"
+  integrity sha512-JAh3/gjPdebJm9M8rPP9KRIrVAlBIAe/uZ/5jpDzmQUuEiUBp5FNrUyFFUdK8ATF4x3dVLjxvcwACBQYHPPr8w==
+  dependencies:
+    chalk "^4.1.2"
+    debug "^4.3.2"
 
 "@pooltogether/etherplex@^1.1.2":
   version "1.1.2"
@@ -875,6 +888,17 @@
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.3.3.tgz#209aacca7a55880ac76bb5dfc0eecdb6321eb803"
   integrity sha512-IYCMcQlRHklroThI/rgr0JDLNS3600tTw2HimOhf/JaB0nIAo9L/P4mPO/7CSTJ8h4b1vjKCU5UIUwcpU+51Iw==
+
+"@pooltogether/v4-js-client@^0.9.6":
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/@pooltogether/v4-js-client/-/v4-js-client-0.9.6.tgz#f2ac460e8c9462cea050f0ccf6fa32ccb35175f9"
+  integrity sha512-LXmCtUj/0OjIhS3xAvxUIs1ntFt2fzO0yGtAhC/s7BzLAxsip/3mQT9fE3HiSnt3dQtmhAOV1/BQXBBUxjNoOg==
+  dependencies:
+    "@ethersproject/abi" "^5.1.0"
+    "@pooltogether/contract-list-schema" "^0.1.4"
+    "@pooltogether/draw-calculator-js" "^1.0.3-beta.2"
+    "@pooltogether/etherplex" "^1.1.2"
+    debug "^4.3.3"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -1366,7 +1390,7 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -1555,6 +1579,13 @@ debug@^2.2.0, debug@^2.3.3:
   integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
   dependencies:
     ms "2.0.0"
+
+debug@^4.3.2, debug@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.3.tgz#04266e0b70a98d4462e6e288e38259213332b664"
+  integrity sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==
+  dependencies:
+    ms "2.1.2"
 
 decamelize@^1.2.0:
   version "1.2.0"
