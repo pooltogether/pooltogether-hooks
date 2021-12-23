@@ -1,5 +1,5 @@
 import { formatUnits } from '@ethersproject/units'
-import { ethers } from 'ethers'
+import { ethers, BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
 import { SECONDS_PER_DAY } from '@pooltogether/current-pool-data'
@@ -10,12 +10,40 @@ import { ERC20Abi } from '../abis/ERC20Abi'
 import { QUERY_KEYS } from '../constants'
 import { useIsTestnets, useReadProvider } from '..'
 import { prettyNumber } from './useUsersPrizePoolBalances'
+import { TokenWithBalance } from '../types/token'
 
 const ONE_MINUTE_IN_MILLISECONDS = 60000
 
 export const DEXES = {
   UniSwap: 'UniSwap',
   SushiSwap: 'SushiSwap'
+}
+
+export interface UserLPChainData {
+  balances: {
+    token: TokenWithBalance
+    ticket: TokenWithBalance
+  }
+  userData: {
+    tokenFaucet: {
+      balance: string
+      balanceUnformatted: BigNumber
+    }
+    underlyingToken: {
+      balance: string
+      balanceUnformatted: BigNumber
+      allowance: BigNumber
+    }
+    tickets: {
+      balance: string
+      balanceUnformatted: BigNumber
+      ownershipPercentage: string
+    }
+    claimableBalance: string
+    claimableBalanceUnformatted: BigNumber
+    dripTokensPerDay: string
+    dripTokensPerDayUnformatted: BigNumber
+  }
 }
 
 const STAKING_POOLS = Object.freeze({
@@ -27,11 +55,14 @@ const STAKING_POOLS = Object.freeze({
       },
       tokens: {
         ticket: {
-          address: '0xeb8928ee92efb06c44d072a24c2bcb993b61e543'
+          address: '0xeb8928ee92efb06c44d072a24c2bcb993b61e543',
+          name: 'PT UNI-V2 LP Ticket',
+          symbol: 'PTUNI POOL-ETH'
         },
         underlyingToken: {
           address: '0x85cb0bab616fe88a89a35080516a8928f38b518b',
           dex: DEXES.UniSwap,
+          name: 'Uniswap POOL/ETH LP',
           pair: 'POOL/ETH',
           symbol: 'UNI-V2 LP',
           token1: {
@@ -268,12 +299,7 @@ const getUserLPChainData = async (
 
   const ownershipPercentage = formatUnits(ownershipPercentageScaled, 6)
 
-  // BALANCES
-  const name = stakingPool.tokens.underlyingToken.pair
-  const symbol = stakingPool.tokens.underlyingToken.symbol
-
   // TOKEN
-
   const tokenBalanceUnformatted = usersResponse.underlyingToken.balanceOf[0]
   const tokenBalance = {
     address: stakingPool.tokens.underlyingToken.address,
@@ -282,8 +308,8 @@ const getUserLPChainData = async (
     amountUnformatted: tokenBalanceUnformatted,
     decimals: underlyingDecimals,
     hasBalance: tokenBalanceUnformatted.gt(0),
-    name,
-    symbol
+    name: stakingPool.tokens.underlyingToken.pair,
+    symbol: stakingPool.tokens.underlyingToken.symbol
   }
 
   // TICKET
@@ -294,8 +320,8 @@ const getUserLPChainData = async (
     amountUnformatted: usersTicketBalanceUnformatted,
     decimals: ticketDecimals,
     hasBalance: usersTicketBalanceUnformatted.gt(0),
-    name,
-    symbol
+    name: stakingPool.tokens.ticket.name,
+    symbol: stakingPool.tokens.ticket.symbol
   }
 
   return {

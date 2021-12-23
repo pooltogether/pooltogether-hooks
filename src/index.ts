@@ -64,6 +64,7 @@ export {
 export { usePooltogetherTotalPrizesV3, usePooltogetherTvlV3 } from './hooks/usePoolTogetherTvl'
 export { getPoolsByChainIds } from './fetchers/getPools'
 export {
+  UserLPChainData,
   useStakingPools,
   useUserLPChainData,
   useStakingPoolChainData,
