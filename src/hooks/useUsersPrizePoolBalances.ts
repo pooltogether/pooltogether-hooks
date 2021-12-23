@@ -31,7 +31,7 @@ export const useUsersPrizePoolBalances = (usersAddress: string, prizePool: Prize
   )
 }
 
-const prettyNumber = (amount: BigNumber, decimals: string): string =>
+export const prettyNumber = (amount: BigNumber, decimals: string): string =>
   numberWithCommas(amount, { decimals }) as string
 
 export const getUsersPrizePoolBalances = async (

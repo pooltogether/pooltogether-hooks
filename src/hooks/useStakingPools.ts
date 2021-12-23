@@ -3,12 +3,13 @@ import { ethers } from 'ethers'
 import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
 import { SECONDS_PER_DAY } from '@pooltogether/current-pool-data'
-import { NETWORK, prettyNumber } from '@pooltogether/utilities'
+import { NETWORK } from '@pooltogether/utilities'
 
 import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
 import { QUERY_KEYS } from '../constants'
 import { useIsTestnets, useReadProvider } from '..'
+import { prettyNumber } from './useUsersPrizePoolBalances'
 
 const ONE_MINUTE_IN_MILLISECONDS = 60000
 
