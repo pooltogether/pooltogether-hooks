@@ -1,15 +1,13 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "Useful hooks for PoolTogether applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/ddesrosier/pooltogether-hooks.git",
   "author": "PoolTogether Inc.",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "start": "rm -rf dist && tsc-watch --onSuccess \"yalc push\"",
     "build": "rm -rf dist && tsc",
@@ -69,28 +67,18 @@
     "react-query": "^3.16.0"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{ts,js}"
-    ],
-    "coverageReporters": [
-      "html"
-    ],
+    "collectCoverageFrom": ["src/**/*.{ts,js}"],
+    "coverageReporters": ["html"],
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/src/$1",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     },
     "verbose": true,
-    "testMatch": [
-      "**/__tests__/**/?(*.)+(spec|test).+(ts|tsx)"
-    ],
+    "testMatch": ["**/__tests__/**/?(*.)+(spec|test).+(ts|tsx)"],
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
-    "moduleFileExtensions": [
-      "ts",
-      "js",
-      "json"
-    ]
+    "moduleFileExtensions": ["ts", "js", "json"]
   }
 }
