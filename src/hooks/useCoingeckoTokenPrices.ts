@@ -2,7 +2,8 @@ import { useQuery } from 'react-query'
 import { isAddress } from '@ethersproject/address'
 import { NETWORK } from '@pooltogether/utilities'
 
-import { COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
+import { NO_REFETCH, COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
+
 import { TokenPrices } from '../types/token'
 
 export const useCoingeckoTokenPrices = (chainId: number, contractAddresses: string[]) => {
@@ -29,11 +30,7 @@ export const useCoingeckoTokenPrices = (chainId: number, contractAddresses: stri
     {
       staleTime: Infinity,
       enabled,
-      refetchInterval: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchIntervalInBackground: false,
-      refetchOnWindowFocus: false
+      ...NO_REFETCH
     }
   )
 }

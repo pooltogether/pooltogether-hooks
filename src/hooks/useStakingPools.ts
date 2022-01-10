@@ -5,14 +5,22 @@ import { batch, contract } from '@pooltogether/etherplex'
 import { SECONDS_PER_DAY } from '@pooltogether/current-pool-data'
 import { NETWORK } from '@pooltogether/utilities'
 
+import { NO_REFETCH, QUERY_KEYS } from '../constants'
 import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
-import { QUERY_KEYS } from '../constants'
 import { useIsTestnets, useReadProvider } from '..'
 import { prettyNumber } from './useUsersPrizePoolBalances'
 import { TokenWithBalance } from '../types/token'
 
 const ONE_MINUTE_IN_MILLISECONDS = 60000
+
+const REFETCH_SETTINGS = {
+  refetchInterval: ONE_MINUTE_IN_MILLISECONDS,
+  refetchIntervalInBackground: false,
+  refetchOnMount: false,
+  refetchOnReconnect: false,
+  refetchOnWindowFocus: false
+}
 
 export const DEXES = {
   UniSwap: 'UniSwap',
@@ -164,7 +172,7 @@ export const useStakingPoolChainData = (stakingPool) => {
   return useQuery(
     [QUERY_KEYS.uniswapLPStakingPool, chainId, stakingPool.prizePool.address],
     () => getStakingPoolData(readProvider, stakingPool),
-    { enabled, refetchInterval: ONE_MINUTE_IN_MILLISECONDS }
+    { enabled, ...REFETCH_SETTINGS }
   )
 }
 
@@ -180,7 +188,10 @@ export const useUserLPChainData = (stakingPool, stakingPoolChainData, usersAddre
   return useQuery(
     [QUERY_KEYS.uniswapLPStakingPool, chainId, stakingPool.prizePool.address, usersAddress],
     () => getUserLPChainData(readProvider, usersAddress, stakingPool, stakingPoolChainData),
-    { enabled, refetchInterval: ONE_MINUTE_IN_MILLISECONDS }
+    {
+      enabled,
+      ...REFETCH_SETTINGS
+    }
   )
 }
 

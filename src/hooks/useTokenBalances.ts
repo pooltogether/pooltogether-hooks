@@ -3,11 +3,10 @@ import { formatUnits } from '@ethersproject/units'
 import { useQuery, useQueryClient } from 'react-query'
 import { numberWithCommas } from '@pooltogether/utilities'
 
-import { QUERY_KEYS } from '../constants'
+import { NO_REFETCH, QUERY_KEYS } from '../constants'
 import { ERC20Abi } from '../abis/ERC20Abi'
 import { useReadProvider } from './useReadProvider'
 import { populatePerIdCache } from '../utils/populatePerIdCache'
-import { useRefetchInterval } from './useRefetchInterval'
 import { TokenBalances } from '../types/token'
 
 /**
@@ -19,7 +18,6 @@ import { TokenBalances } from '../types/token'
  * @returns
  */
 export const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
-  const refetchInterval = useRefetchInterval()
   const readProvider = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
@@ -37,7 +35,8 @@ export const useTokenBalances = (chainId: number, address: string, tokenAddresse
     async () => await getTokenBalances(readProvider, address, tokenAddresses),
     {
       enabled,
-      refetchInterval,
+      // refetchInterval,
+      ...NO_REFETCH,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
   )
