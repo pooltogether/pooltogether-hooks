@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@pooltogether/current-pool-data": "^3.6.3",
-    "@pooltogether/etherplex": "^1.1.2",
+    "@pooltogether/etherplex": "^1.1.4",
     "@pooltogether/evm-chains-extended": "^0.6.2",
     "@pooltogether/utilities": "^0.3.3",
     "@pooltogether/v4-js-client": "^0.9.6",
