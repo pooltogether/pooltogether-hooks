@@ -90,6 +90,31 @@ const STAKING_POOLS = Object.freeze({
       tokenFaucet: {
         address: '0x9a29401ef1856b669f55ae5b24505b3b6faeb370'
       }
+    },
+    {
+      prizePool: {
+        chainId: 1,
+        address: '0x396b4489da692788e327e2e4b2b0459a5ef26791'
+      },
+      tokens: {
+        ticket: {
+          address: '0x27d22a7648e955e510a40bdb058333e9190d12d4',
+          name: 'PoolTogether Pool Ticket',
+          symbol: 'PPOOL'
+        },
+        underlyingToken: {
+          address: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e',
+          name: 'PoolTogether',
+          symbol: 'POOL'
+        },
+        tokenFaucetDripToken: {
+          address: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e',
+          symbol: 'POOL'
+        }
+      },
+      tokenFaucet: {
+        address: '0x30430419b86e9512e6d93fc2b0791d98dbeb637b'
+      }
     }
     // Tested with the SUSHI POOL/ETH LP position, but no rewards for that yet
     // {
