@@ -38,7 +38,7 @@ export { useTimeCountdown } from './hooks/useTimeCountdown'
 export { usePrizePeriodTimeLeft } from './hooks/usePrizePeriodTimeLeft'
 export { usePrizePeriod } from './hooks/usePrizePeriod'
 
-// Pool Data
+// V3 Pool Data
 export {
   useAllPools,
   useAllPoolsKeyedByChainId,
@@ -70,6 +70,7 @@ export {
   useStakingPoolChainData,
   DEXES
 } from './hooks/useStakingPools'
+export { useV3ExitFee } from './hooks/useV3ExitFee'
 
 // Tokens
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'

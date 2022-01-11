@@ -1,4 +1,4 @@
-export const PrizePoolAbi_3_4_4 = [
+export default [
   {
     anonymous: false,
     inputs: [
@@ -217,19 +217,6 @@ export const PrizePoolAbi_3_4_4 = [
     inputs: [
       {
         indexed: false,
-        internalType: 'bytes',
-        name: 'error',
-        type: 'bytes'
-      }
-    ],
-    name: 'ErrorAwardingExternalERC721',
-    type: 'event'
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
         internalType: 'address',
         name: 'reserveRegistry',
         type: 'address'
@@ -238,6 +225,12 @@ export const PrizePoolAbi_3_4_4 = [
         indexed: false,
         internalType: 'uint256',
         name: 'maxExitFeeMantissa',
+        type: 'uint256'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'maxTimelockDuration',
         type: 'uint256'
       }
     ],
@@ -370,6 +363,105 @@ export const PrizePoolAbi_3_4_4 = [
       {
         indexed: true,
         internalType: 'address',
+        name: 'operator',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'to',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'token',
+        type: 'address'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      }
+    ],
+    name: 'TimelockDeposited',
+    type: 'event'
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'operator',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'from',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'token',
+        type: 'address'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'unlockTimestamp',
+        type: 'uint256'
+      }
+    ],
+    name: 'TimelockedWithdrawal',
+    type: 'event'
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'operator',
+        type: 'address'
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'from',
+        type: 'address'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'redeemed',
+        type: 'uint256'
+      }
+    ],
+    name: 'TimelockedWithdrawalSwept',
+    type: 'event'
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
         name: 'to',
         type: 'address'
       },
@@ -388,19 +480,6 @@ export const PrizePoolAbi_3_4_4 = [
     ],
     name: 'TransferredExternalERC20',
     type: 'event'
-  },
-  {
-    inputs: [],
-    name: 'VERSION',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
   },
   {
     inputs: [],
@@ -614,6 +693,40 @@ export const PrizePoolAbi_3_4_4 = [
     inputs: [
       {
         internalType: 'address',
+        name: 'from',
+        type: 'address'
+      },
+      {
+        internalType: 'address',
+        name: 'controlledToken',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      }
+    ],
+    name: 'calculateTimelockDuration',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'durationSeconds',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: 'burnedCredit',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
         name: '_externalToken',
         type: 'address'
       }
@@ -757,30 +870,16 @@ export const PrizePoolAbi_3_4_4 = [
         internalType: 'uint256',
         name: '_maxExitFeeMantissa',
         type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_maxTimelockDuration',
+        type: 'uint256'
       }
     ],
     name: 'initialize',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    inputs: [
-      {
-        internalType: 'contract ControlledTokenInterface',
-        name: 'controlledToken',
-        type: 'address'
-      }
-    ],
-    name: 'isControlled',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool'
-      }
-    ],
-    stateMutability: 'view',
     type: 'function'
   },
   {
@@ -810,37 +909,16 @@ export const PrizePoolAbi_3_4_4 = [
     type: 'function'
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'operator',
-        type: 'address'
-      },
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address'
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256'
-      },
-      {
-        internalType: 'bytes',
-        name: 'data',
-        type: 'bytes'
-      }
-    ],
-    name: 'onERC721Received',
+    inputs: [],
+    name: 'maxTimelockDuration',
     outputs: [
       {
-        internalType: 'bytes4',
+        internalType: 'uint256',
         name: '',
-        type: 'bytes4'
+        type: 'uint256'
       }
     ],
-    stateMutability: 'nonpayable',
+    stateMutability: 'view',
     type: 'function'
   },
   {
@@ -952,6 +1030,99 @@ export const PrizePoolAbi_3_4_4 = [
     type: 'function'
   },
   {
+    inputs: [
+      {
+        internalType: 'address[]',
+        name: 'users',
+        type: 'address[]'
+      }
+    ],
+    name: 'sweepTimelockBalances',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'user',
+        type: 'address'
+      }
+    ],
+    name: 'timelockBalanceAvailableAt',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'user',
+        type: 'address'
+      }
+    ],
+    name: 'timelockBalanceOf',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      },
+      {
+        internalType: 'address',
+        name: 'controlledToken',
+        type: 'address'
+      }
+    ],
+    name: 'timelockDepositTo',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'timelockTotalSupply',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
     inputs: [],
     name: 'token',
     outputs: [
@@ -969,7 +1140,7 @@ export const PrizePoolAbi_3_4_4 = [
     name: 'tokens',
     outputs: [
       {
-        internalType: 'contract ControlledTokenInterface[]',
+        internalType: 'address[]',
         name: '',
         type: 'address[]'
       }
@@ -1056,6 +1227,35 @@ export const PrizePoolAbi_3_4_4 = [
       }
     ],
     name: 'withdrawReserve',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256'
+      },
+      {
+        internalType: 'address',
+        name: 'controlledToken',
+        type: 'address'
+      }
+    ],
+    name: 'withdrawWithTimelockFrom',
     outputs: [
       {
         internalType: 'uint256',

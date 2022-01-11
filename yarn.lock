@@ -877,6 +877,16 @@
     lodash.merge "^4.6.2"
     zen-observable-ts "^0.8.20"
 
+"@pooltogether/etherplex@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@pooltogether/etherplex/-/etherplex-1.1.4.tgz#d7584d43f82bc22630a9068f6c69e9a049740621"
+  integrity sha512-SFEv9Ck8ycFkDUkdU8KzQblVyQeFRmOIbdLedNNfgQZM/dNnIX6oAiNxUQrlnicl+03sWtLrenKqu/Hnl0VBjg==
+  dependencies:
+    debug "^4.1.1"
+    lodash "^4.17.15"
+    lodash.merge "^4.6.2"
+    zen-observable-ts "^0.8.20"
+
 "@pooltogether/evm-chains-extended@^0.6.2":
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.6.2.tgz#46993d6fe7b5c0a11107acdc397b5886471d8b93"
