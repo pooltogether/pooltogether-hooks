@@ -116,40 +116,8 @@ const STAKING_POOLS = Object.freeze({
         address: '0x30430419b86e9512e6d93fc2b0791d98dbeb637b'
       }
     }
-    // Tested with the SUSHI POOL/ETH LP position, but no rewards for that yet
-    // {
-    //     prizePool: {
-    //       chainId: 1,
-    //       address: '0x3af7072d29adde20fc7e173a7cb9e45307d2fb0a'
-    //     },
-    //     tokens: {
-    //       ticket: {
-    //         address: '0xeb8928ee92efb06c44d072a24c2bcb993b61e543'
-    //       },
-    //       underlyingToken: {
-    //         address: '0x577959c519c24ee6add28ad96d3531bc6878ba34',
-    //         dex: DEXES.SushiSwap,
-    //         pair: 'POOL/ETH',
-    //         symbol: 'UNI-V2 LP',
-    //         token1: {
-    //           symbol: 'POOL',
-    //           address: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e'
-    //         },
-    //         token2: {
-    //           symbol: 'ETH',
-    //           address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' // WETH
-    //         }
-    //       },
-    //       tokenFaucetDripToken: {
-    //         address: '0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e',
-    //         symbol: 'POOL'
-    //       }
-    //     },
-    //     tokenFaucet: {
-    //       address: '0x9a29401ef1856b669f55ae5b24505b3b6faeb370'
-    //     }
-    // }
   ],
+
   4: [
     {
       prizePool: {
@@ -162,6 +130,8 @@ const STAKING_POOLS = Object.freeze({
         },
         underlyingToken: {
           address: '0x91A590A2D78c71775318524c198a0f2000112108',
+          dex: DEXES.UniSwap,
+          name: 'Uniswap POOL/ETH LP Rinkeby',
           pair: 'POOL/ETH',
           symbol: 'UNI-V2 LP',
           token1: {
@@ -172,6 +142,31 @@ const STAKING_POOLS = Object.freeze({
             symbol: 'ETH',
             address: '0xc778417e063141139fce010982780140aa0cd5ab'
           }
+        },
+        tokenFaucetDripToken: {
+          address: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A',
+          symbol: 'POOL'
+        }
+      },
+      tokenFaucet: {
+        address: '0x97B99693613aaA74A3fa0B2f05378b8F6A74a893' // BAT POOL TOKEN FAUCET
+      }
+    },
+    {
+      prizePool: {
+        chainId: 4,
+        address: '0x4706856FA8Bb747D50b4EF8547FE51Ab5Edc4Ac2'
+      },
+      tokens: {
+        ticket: {
+          address: '0x4fb19557fbd8d73ac884efbe291626fd5641c778',
+          name: 'PoolTogether DAI Ticket',
+          symbol: 'PTDAI'
+        },
+        underlyingToken: {
+          address: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658',
+          name: 'DAI',
+          symbol: 'DAI'
         },
         tokenFaucetDripToken: {
           address: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A',
