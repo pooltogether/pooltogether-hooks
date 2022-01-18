@@ -7,8 +7,9 @@ import { useGovernanceChainId } from './useGovernanceChainId'
 import { useReadProvider } from './useReadProvider'
 import { DelegateableERC20Abi } from '../abis/DelegateableERC20Abi'
 
-export const usePoolTokenData = (usersAddress, addressOverride) => {
-  const chainId = useGovernanceChainId()
+export const usePoolTokenData = (usersAddress, addressOverride, chainId = null) => {
+  chainId = chainId || useGovernanceChainId()
+
   const readProvider = useReadProvider(chainId)
 
   let address = addressOverride || usersAddress
