@@ -12,7 +12,7 @@ export const usePoolTokenData = (usersAddress, addressOverride, chainId = null) 
 
   const readProvider = useReadProvider(chainId)
 
-  let address = addressOverride || usersAddress
+  const address = addressOverride || usersAddress
 
   return useQuery(
     [QUERY_KEYS.poolTokenDataQuery, chainId, address],

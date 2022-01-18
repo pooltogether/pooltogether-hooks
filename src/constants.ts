@@ -47,6 +47,9 @@ export const GOVERNANCE_CONTRACT_ADDRESSES = {
     GovernanceToken: '0xc4E90a8Dc6CaAb329f08ED3C8abc6b197Cf0F40A',
     GovernanceReserve: '0xA5224da01a5A792946E4270a02457EB75412c84c',
     MerkleDistributor: '0x93a6540DcE05a4A5E5B906eB97bBCBb723768F2D'
+  },
+  137: {
+    GovernanceToken: '0x25788a1a171ec66da6502f9975a15b609ff54cf6'
   }
 }
 
