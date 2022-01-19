@@ -19,7 +19,8 @@ export const useSendTransaction = (
   poolToast: PoolToast,
   usersAddress: string,
   provider: Provider,
-  chainId: number
+  chainId: number,
+  sentryCaptureException?: (exception: any, captureContext?: any) => {}
 ) => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
 
@@ -68,7 +69,8 @@ export const useSendTransaction = (
       newTx,
       usersAddress,
       chainId,
-      callTx
+      callTx,
+      sentryCaptureException
     )
 
     return txId
@@ -116,7 +118,8 @@ const watchTransactionLifecycle = async (
   tx: Transaction,
   usersAddress: string,
   chainId: number,
-  callTransaction: () => Promise<TransactionResponse>
+  callTransaction: () => Promise<TransactionResponse>,
+  sentryCaptureException?: (exception: any, captureContext?: any) => {}
 ) => {
   let ethersTx: TransactionResponse
 
@@ -232,6 +235,12 @@ const watchTransactionLifecycle = async (
         usersAddress,
         chainId
       )
+
+      if (sentryCaptureException) {
+        console.log(sentryCaptureException)
+        console.log('sentryCaptureException')
+        sentryCaptureException(e)
+      }
 
       poolToast.error(
         `"${tx.name}" ${
