@@ -8,6 +8,7 @@ export {
   Amount,
   TokenBalance,
   TokenWithBalance,
+  TokenWithUsdBalance,
   TokenWithAllBalances,
   TokenBalances,
   TokenPrices,
@@ -81,7 +82,11 @@ export { useTokenHolder } from './hooks/useTokenHolder'
 export { useTotalClaimablePool } from './hooks/useTotalClaimablePool'
 
 // CoinGecko
-export { useCoingeckoTokenPrices } from './hooks/useCoingeckoTokenPrices'
+export {
+  getCoingeckoTokenPrices,
+  useCoingeckoTokenPrices,
+  useCoingeckoTokenPricesAcrossChains
+} from './hooks/useCoingeckoTokenPrices'
 export { useCoingeckoSimplePrices } from './hooks/useCoingeckoSimplePrices'
 export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
 export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'

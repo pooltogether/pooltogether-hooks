@@ -1,5 +1,6 @@
-import { ethers } from 'ethers'
+import { BigNumber, ethers } from 'ethers'
 
+// TODO: A token should have `chainId: number` to help uniquely identify it
 export interface Token {
   address: string
   symbol: string
@@ -18,6 +19,12 @@ export interface TokenBalance extends Amount {
 }
 
 export interface TokenWithBalance extends Token, TokenBalance {}
+
+export interface TokenWithUsdBalance extends TokenWithBalance {
+  usdPerToken: number
+  balanceUsd: Amount
+  balanceUsdScaled: BigNumber
+}
 
 export interface TokenWithAllBalances extends TokenWithBalance {
   totalSupply: string

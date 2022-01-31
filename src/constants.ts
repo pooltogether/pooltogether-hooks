@@ -62,5 +62,7 @@ export const COINGECKO_ASSET_PLATFORMS = Object.freeze({
   [NETWORK.mainnet]: 'ethereum',
   [NETWORK.bsc]: 'binance-smart-chain',
   [NETWORK.polygon]: 'polygon-pos',
-  [NETWORK.rinkeby]: 'rinkeby'
+  [NETWORK.celo]: 'celo',
+  [NETWORK.rinkeby]: 'rinkeby',
+  [NETWORK.mumbai]: 'mumbai'
 })

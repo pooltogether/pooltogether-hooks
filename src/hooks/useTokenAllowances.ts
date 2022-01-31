@@ -4,9 +4,10 @@ import { useQuery, useQueryClient } from 'react-query'
 import { sToMs } from '@pooltogether/utilities'
 
 import { ERC20Abi } from '../abis/ERC20Abi'
-import { QUERY_KEYS } from '../constants'
+import { NO_REFETCH, QUERY_KEYS } from '../constants'
 import { useReadProvider } from './useReadProvider'
 import { populatePerIdCache } from '../utils/populatePerIdCache'
+import { BigNumber } from 'ethers'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
@@ -47,9 +48,9 @@ export const useTokenAllowances = (
     async () =>
       await getTokenAllowances(readProvider, usersAddress, spenderAddress, tokenAddresses),
     {
+      ...NO_REFETCH,
       enabled,
-      onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data),
-      refetchInterval: sToMs(30)
+      onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
   )
 }
@@ -81,19 +82,15 @@ const getTokenAllowances = async (readProvider, usersAddress, spenderAddress, to
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(tokenContract.allowance(usersAddress, spenderAddress).decimals())
+    batchCalls.push(tokenContract.allowance(usersAddress, spenderAddress))
   })
   const response = await batch(readProvider, ...batchCalls)
-  const result = {}
+  const result: {
+    [tokenAddress: string]: BigNumber
+  } = {}
   Object.keys(response).map((tokenAddress) => {
     const allowanceUnformatted = response[tokenAddress].allowance[0]
-    const decimals = response[tokenAddress].decimals[0]
-    result[tokenAddress] = {
-      isAllowed: !allowanceUnformatted.isZero(),
-      allowance: formatUnits(allowanceUnformatted, decimals),
-      allowanceUnformatted,
-      decimals
-    }
+    result[tokenAddress] = allowanceUnformatted
   })
   return result
 }
