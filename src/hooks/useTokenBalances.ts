@@ -8,6 +8,7 @@ import { ERC20Abi } from '../abis/ERC20Abi'
 import { useReadProvider } from './useReadProvider'
 import { populatePerIdCache } from '../utils/populatePerIdCache'
 import { TokenBalances } from '../types/token'
+import { getAddress } from 'ethers/lib/utils'
 
 /**
  * Returns a dictionary keyed by the token addresses filled with
@@ -78,8 +79,22 @@ export const getTokenBalances = async (
     const totalSupply = formatUnits(totalSupplyUnformatted, decimals)
     const totalSupplyPretty = numberWithCommas(totalSupply)
 
-    result[tokenAddress] = {
-      address: tokenAddress,
+    result[tokenAddress.toLowerCase()] = {
+      address: tokenAddress.toLowerCase(),
+      hasBalance: !amountUnformatted.isZero(),
+      amount,
+      amountPretty,
+      amountUnformatted,
+      decimals,
+      name,
+      symbol,
+      totalSupply,
+      totalSupplyPretty,
+      totalSupplyUnformatted
+    }
+
+    result[getAddress(tokenAddress)] = {
+      address: getAddress(tokenAddress),
       hasBalance: !amountUnformatted.isZero(),
       amount,
       amountPretty,
