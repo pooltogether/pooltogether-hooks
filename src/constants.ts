@@ -64,5 +64,6 @@ export const COINGECKO_ASSET_PLATFORMS = Object.freeze({
   [NETWORK.polygon]: 'polygon-pos',
   [NETWORK.celo]: 'celo',
   [NETWORK.rinkeby]: 'rinkeby',
-  [NETWORK.mumbai]: 'mumbai'
+  [NETWORK.mumbai]: 'mumbai',
+  [NETWORK.avalanche]: 'avalanche'
 })
