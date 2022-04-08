@@ -74,6 +74,7 @@ export {
 export { useV3ExitFee } from './hooks/useV3ExitFee'
 
 // Tokens
+export { useTokens, useToken } from './hooks/useTokens'
 export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
 export { usePodShareBalance } from './hooks/usePodShareBalance'
 export { useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
