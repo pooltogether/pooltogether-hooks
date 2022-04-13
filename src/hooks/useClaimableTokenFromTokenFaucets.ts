@@ -5,11 +5,10 @@ import { useIsTestnets } from './useIsTestnets'
 
 import { QUERY_KEYS } from '../constants'
 import { useAllPools } from './usePools'
-import { useEnvReadProviders } from './useEnvReadProviders'
+import { useReadProvider } from './useReadProvider'
 
 import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
-import { useReadProvider } from '..'
 import { isAddress } from '@ethersproject/address'
 
 export const useClaimableTokenFromTokenFaucet = (chainId, tokenFaucetAddress, usersAddress) => {

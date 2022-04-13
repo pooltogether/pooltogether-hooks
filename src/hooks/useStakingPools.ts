@@ -8,9 +8,10 @@ import { NETWORK } from '@pooltogether/utilities'
 import { NO_REFETCH, QUERY_KEYS } from '../constants'
 import { TokenFaucetAbi } from '../abis/TokenFaucet_3_3_12'
 import { ERC20Abi } from '../abis/ERC20Abi'
-import { useIsTestnets, useReadProvider } from '..'
 import { prettyNumber } from './useUsersPrizePoolBalances'
 import { TokenWithBalance } from '../types/token'
+import { useIsTestnets } from './useIsTestnets'
+import { useReadProvider } from './useReadProvider'
 
 const ONE_MINUTE_IN_MILLISECONDS = 60000
 
