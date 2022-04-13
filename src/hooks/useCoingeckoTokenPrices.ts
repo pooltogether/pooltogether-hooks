@@ -3,8 +3,7 @@ import { getAddress, isAddress } from '@ethersproject/address'
 import { NETWORK } from '@pooltogether/utilities'
 
 import { NO_REFETCH, COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
-
-import { TokenPrices } from '../types/token'
+import { TokenPrice } from '../types/token'
 
 /**
  * Fetch token prices across multiple chains with a single hook
@@ -50,10 +49,11 @@ export const useCoingeckoTokenPricesAcrossChains = (contractAddresses: {
     isFetched,
     refetch,
     data: isFetched
-      ? queriesResult.reduce(
-          (data, queryResult) => ({ ...data, ...queryResult.data }),
-          {} as TokenPrices
-        )
+      ? (queriesResult.reduce((data, queryResult) => {
+          return { ...data, ...(queryResult.data as object) }
+        }, {}) as {
+          [address: string]: TokenPrice
+        })
       : null
   }
 }
@@ -92,7 +92,12 @@ export const useCoingeckoTokenPrices = (chainId: number, contractAddresses: stri
  * @param contractAddresses
  * @returns
  */
-export const getCoingeckoTokenPrices = async (chainId: number, contractAddresses: string[]) => {
+export const getCoingeckoTokenPrices = async (
+  chainId: number,
+  contractAddresses: string[]
+): Promise<{
+  [address: string]: TokenPrice
+}> => {
   const assetPlatform = COINGECKO_ASSET_PLATFORMS[chainId]
 
   // Hardcode some prices for Rinkeby & Mumbai testing
@@ -104,7 +109,7 @@ export const getCoingeckoTokenPrices = async (chainId: number, contractAddresses
       tokenPrices[getAddress(contractAddress)] = { usd: 1 }
       tokenPrices[contractAddress.toLowerCase()] = { usd: 1 }
       return tokenPrices
-    }, {} as TokenPrices)
+    }, {})
   }
 
   try {
@@ -112,8 +117,10 @@ export const getCoingeckoTokenPrices = async (chainId: number, contractAddresses
     url.searchParams.set('contract_addresses', contractAddresses.join(','))
     url.searchParams.set('vs_currencies', 'usd')
     const response = await fetch(url.toString())
-    const tokenPrices: TokenPrices = await response.json()
-    const tokenPricesFormatted: TokenPrices = {}
+    const tokenPrices = await response.json()
+    const tokenPricesFormatted: {
+      [address: string]: TokenPrice
+    } = {}
     Object.keys(tokenPrices).forEach((tokenAddress) => {
       const tokenPrice =
         tokenPrices[getAddress(tokenAddress)] || tokenPrices[tokenAddress.toLowerCase()]

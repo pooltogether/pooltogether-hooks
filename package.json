@@ -1,31 +1,80 @@
 {
   "name": "@pooltogether/hooks",
-  "version": "1.6.0",
-  "description": "Useful hooks for PoolTogether applications",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "repository": "https://github.com/ddesrosier/pooltogether-hooks.git",
   "author": "PoolTogether Inc.",
-  "module": "dist/index.js",
+  "description": "Useful hooks for PoolTogether applications",
+  "module": "dist/hooks.esm.js",
+  "version": "1.6.0",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "start": "rm -rf dist && tsc-watch --onSuccess \"yalc push\"",
-    "build": "rm -rf dist && tsc",
-    "watch": "yarn start",
-    "reinstall": "rm -rf node_modules/ && rm -rf dist/ && yarn install",
-    "prepublishOnly": "yarn build",
-    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags && yarn gitwarn",
-    "gitwarn": "echo '*******************' && echo 'Please push your changes to Git' && echo '*******************'",
-    "test": "jest",
-    "test:watch": "yarn run test --watch",
-    "test:cov": "jest --coverage --coverageDirectory=coverage && open ./coverage/index.html",
-    "link-local": "yarn link react && yarn link react-query && yarn link react-dom && yarn link jotai",
-    "unlink-local": "yarn unlink react && yarn unlink react-query && yarn unlink jotai && yarn install --force"
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/pooltogether/issues",
+    "email": "bugs@pooltogether.com"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/pooltogether/pooltogether-hooks",
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "url": "https://github.com/pooltogether/pooltogether-hooks",
+    "type": "git"
+  },
+  "scripts": {
+    "start": "tsdx watch --onSuccess \"yalc push\"",
+    "reinstall": "rm -rf node_modules && yarn install",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "test:watch": "tsdx test --watch",
+    "test:coverage": "tsdx test --coverage",
+    "lint": "tsdx lint src",
+    "lint:fix": "tsdx lint src --fix",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags && yarn gitwarn",
+    "gitwarn": "echo '*******************' && echo 'Please push your changes to Git' && echo '*******************'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint --fix"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "quoteProps": "consistent",
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "none"
+  },
+  "size-limit": [
+    {
+      "path": "dist/v4-client-js.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/v4-client-js.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^5.0.3",
+    "@types/lodash.memoize": "^4.1.6",
+    "husky": "^7.0.2",
+    "replace-in-files": "^3.0.0",
+    "size-limit": "^5.0.3",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typedoc": "^0.22.10",
+    "typedoc-plugin-markdown": "^3.11.11",
+    "typescript": "^4.4.4",
     "@pooltogether/current-pool-data": "^3.6.3",
     "@pooltogether/etherplex": "^1.1.4",
     "@pooltogether/evm-chains-extended": "^0.6.2",
@@ -49,8 +98,7 @@
     "react-dom": "^17.0.2",
     "react-query": "^3.34.0",
     "ts-jest": "^26.5.6",
-    "tsc-watch": "^4.2.9",
-    "typescript": "^4.2.4"
+    "tsc-watch": "^4.2.9"
   },
   "peerDependencies": {
     "@pooltogether/current-pool-data": "^3.6.3",
@@ -68,30 +116,5 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-query": "^3.34.0"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{ts,js}"
-    ],
-    "coverageReporters": [
-      "html"
-    ],
-    "moduleNameMapper": {
-      "^src/(.*)$": "<rootDir>/src/$1",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "verbose": true,
-    "testMatch": [
-      "**/__tests__/**/?(*.)+(spec|test).+(ts|tsx)"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "js",
-      "json"
-    ]
   }
 }

@@ -11,7 +11,6 @@ export {
   TokenWithUsdBalance,
   TokenWithAllBalances,
   TokenBalances,
-  TokenPrices,
   TokenPrice
 } from './types/token'
 export {

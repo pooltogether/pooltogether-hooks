@@ -36,10 +36,6 @@ export interface TokenBalances {
   [address: string]: TokenWithAllBalances
 }
 
-export interface TokenPrices {
-  [address: string]: TokenPrice
-}
-
 export interface TokenPrice {
   usd: number
 }
