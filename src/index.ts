@@ -133,5 +133,9 @@ export { useReducedMotion, useInitReducedMotion } from './hooks/useReducedMotion
 export { useScreenSize, ScreenSize } from './hooks/useScreenSize'
 export { useCookieOptions, useInitCookieOptions } from './hooks/useCookieOptions'
 
+// Governance
+export { useAllProposals } from './hooks/useAllProposals'
+export { useAllProposalsByStatus } from './hooks/useAllProposalsByStatus'
+
 // Constants
 export * as PT_HOOKS_CONSTANTS from './constants'

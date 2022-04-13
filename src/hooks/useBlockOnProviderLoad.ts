@@ -6,7 +6,7 @@ import { atom, useAtom } from 'jotai'
 
 const currentBlockAtom = atom({})
 
-export const getBlockNumber = async (readProvider, setCurrentBlock) => {
+const getBlockNumber = async (readProvider, setCurrentBlock) => {
   if (readProvider?.getBlockNumber) {
     const blockNumber = await readProvider.getBlockNumber()
 

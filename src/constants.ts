@@ -67,3 +67,26 @@ export const COINGECKO_ASSET_PLATFORMS = Object.freeze({
   [NETWORK.mumbai]: 'mumbai',
   [NETWORK.avalanche]: 'avalanche'
 })
+
+export enum ProposalStatus {
+  pending = 'pending',
+  active = 'active',
+  cancelled = 'cancelled',
+  defeated = 'defeated',
+  succeeded = 'succeeded',
+  queued = 'queued',
+  expired = 'expired',
+  executed = 'executed'
+}
+
+// Note: Order matches contracts
+export const PROPOSAL_STATES = [
+  ProposalStatus.pending,
+  ProposalStatus.active,
+  ProposalStatus.cancelled,
+  ProposalStatus.defeated,
+  ProposalStatus.succeeded,
+  ProposalStatus.queued,
+  ProposalStatus.expired,
+  ProposalStatus.executed
+]

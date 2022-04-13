@@ -1,15 +1,28 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "target": "ES2020",
-    "module": "CommonJS",
-    "strict": false,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "resolveJsonModule": true,
-    "inlineSourceMap": true,
     "skipLibCheck": true,
-    "declaration": true
+    "resolveJsonModule": true,
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "importHelpers": true,
+    // output .d.ts declaration files for consumers
+    "declaration": true,
+    // output .js.map sourcemap files for consumers
+    "sourceMap": true,
+    // match output dir to input dir. e.g. dist/index instead of dist/src/index
+    "rootDir": "./src",
+    // stricter type-checking for stronger correctness. Recommended by TS
+    "strict": false,
+    // use Node's module resolution algorithm, instead of the legacy TS one
+    "moduleResolution": "node",
+    // transpile JSX to React.createElement
+    "jsx": "react",
+    // interop between ESM and CJS modules. Recommended by TS
+    "esModuleInterop": true,
+    // error out if import and file system have a casing mismatch. Recommended by TS
+    "forceConsistentCasingInFileNames": true,
+    // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
+    "noEmit": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "src/__tests__"]
