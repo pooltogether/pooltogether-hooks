@@ -13,15 +13,6 @@ export {
   TokenBalances,
   TokenPrice
 } from './types/token'
-export {
-  PoolToast,
-  TransactionState,
-  TransactionStatus,
-  PreTransactionDetails,
-  TransactionCallbacks,
-  Transaction,
-  TransactionOptionalValues
-} from './types/transaction'
 
 // Common chain data
 export { getChain, formatNetworkForAddEthereumChain } from '@pooltogether/evm-chains-extended'
@@ -29,7 +20,7 @@ export { initProviderApiKeys } from '@pooltogether/utilities'
 export { useInitTheGraphApiKey } from './hooks/useInitTheGraphApiKey'
 export { useReadProvider } from './hooks/useReadProvider'
 export { useReadProviders } from './hooks/useReadProviders'
-export { useRefetchInterval } from './hooks/useRefetchInterval'
+export { useRefetchInterval, getRefetchInterval } from './hooks/useRefetchInterval'
 export { useGovernanceChainId } from './hooks/useGovernanceChainId'
 
 // Time
@@ -103,24 +94,10 @@ export {
 // Retro Claim
 export { useRetroactivePoolClaimData } from './hooks/useRetroactivePoolClaimData'
 
-// Transactions
-export {
-  readTransactions,
-  checkTransactionStatuses,
-  updateTransaction,
-  updateStorageWith,
-  clearPreviousTransactions,
-  createTransaction
-} from './hooks/transactions/helpers'
-export { transactionsAtom } from './hooks/transactions/constants'
-export { useTransaction } from './hooks/transactions/useTransaction'
-export { useSendTransaction } from './hooks/transactions/useSendTransaction'
-
 // Users Wallet
 export { useIsWalletMetamask } from './hooks/useIsWalletMetamask'
 export { useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
 export { useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
-export { useEnsName } from './hooks/useEnsName'
 export { useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
 
 // V4 Prize Pool / Tokens
