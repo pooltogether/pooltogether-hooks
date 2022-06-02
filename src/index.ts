@@ -22,6 +22,7 @@ export { useReadProvider } from './hooks/useReadProvider'
 export { useReadProviders } from './hooks/useReadProviders'
 export { useRefetchInterval, getRefetchInterval } from './hooks/useRefetchInterval'
 export { useGovernanceChainId } from './hooks/useGovernanceChainId'
+export { useNetworkHexColor } from './hooks/useNetworkHexColor'
 
 // Time
 export { useBlockOnProviderLoad } from './hooks/useBlockOnProviderLoad'
