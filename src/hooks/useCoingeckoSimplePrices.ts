@@ -12,7 +12,9 @@ export const SIMPLE_PRICES_CHAIN_ID_MAP = {
   56: 'binancecoin',
   97: 'binancecoin',
   43113: 'avalanche-2',
-  43114: 'avalanche-2'
+  43114: 'avalanche-2',
+  69: 'ethereum',
+  10: 'ethereum',
 }
 
 export const useCoingeckoSimplePrices = () => {
