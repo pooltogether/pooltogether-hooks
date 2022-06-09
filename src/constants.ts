@@ -65,7 +65,9 @@ export const COINGECKO_ASSET_PLATFORMS = Object.freeze({
   [NETWORK.celo]: 'celo',
   [NETWORK.rinkeby]: 'rinkeby',
   [NETWORK.mumbai]: 'mumbai',
-  [NETWORK.avalanche]: 'avalanche'
+  [NETWORK.avalanche]: 'avalanche',
+  [NETWORK.optimism]: 'optimistic-ethereum',
+  [NETWORK['optimism-kovan']]: 'optimistic-ethereum',
 })
 
 export enum ProposalStatus {
