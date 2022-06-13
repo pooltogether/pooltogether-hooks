@@ -8,13 +8,13 @@ export const useNetworkHexColor = (chainId: number) => {
 }
 
 export const NETWORK_MAPPING = Object.freeze({
-  [NETWORK.mainnet]: '#6182E4',
-  [NETWORK.rinkeby]: '#F2C35A',
-  [NETWORK.goerli]: '#419AEC',
-  [NETWORK.kovan]: '#886DF7',
-  [NETWORK.ropsten]: '#F25C8C',
+  [NETWORK.mainnet]: '#4b78ff',
+  [NETWORK.rinkeby]: '#e09e0a',
+  [NETWORK.goerli]: '#299cf0',
+  [NETWORK.kovan]: '#6e1afb',
+  [NETWORK.ropsten]: '#d11a48',
   [NETWORK.polygon]: '#7A53DE',
-  [NETWORK.mumbai]: '#9A73FE',
-  [NETWORK.avalanche]: '#DE4F47',
-  [NETWORK.fuji]: '#FE6F67'
+  [NETWORK.mumbai]: '#5b4397',
+  [NETWORK.avalanche]: '#e5382e',
+  [NETWORK.fuji]: '#b64116'
 })
