@@ -11,29 +11,26 @@ import { TokenBalances } from '../types/token'
 import { getAddress } from 'ethers/lib/utils'
 
 /**
- * Returns a dictionary keyed by the token addresses filled with
- * the provided addresses balances of the provided tokens
+ * Returns a dictionary keyed by the token addresses filled
  * @param chainId
- * @param address
  * @param tokenAddresses
  * @returns
  */
-export const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
+export const useTokens = (chainId: number, tokenAddresses: string[]) => {
   const readProvider = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
   const enabled =
-    Boolean(address) &&
     tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
     Array.isArray(tokenAddresses) &&
     tokenAddresses.length > 0 &&
     Boolean(chainId)
 
-  const getCacheKey = (id: (string | number)[]) => [QUERY_KEYS.tokenBalances, chainId, address, id]
+  const getCacheKey = (id: (string | number)[]) => [QUERY_KEYS.tokens, chainId, id]
 
   return useQuery(
     getCacheKey(tokenAddresses),
-    async () => await getTokenBalances(readProvider, address, tokenAddresses),
+    async () => await getTokens(readProvider, tokenAddresses),
     {
       enabled,
       // refetchInterval,
@@ -44,34 +41,29 @@ export const useTokenBalances = (chainId: number, address: string, tokenAddresse
 }
 
 /**
- * Returns the provided addresses balance of the provided token
+ * Returns the provided token
  * @param chainId
- * @param usersAddress
  * @param tokenAddress
  * @returns
  */
-export const useTokenBalance = (chainId: number, address: string, tokenAddress: string) => {
-  const { data: tokenBalances, ...queryData } = useTokenBalances(chainId, address, [tokenAddress])
+export const useToken = (chainId: number, tokenAddress: string) => {
+  const { data: tokenBalances, ...queryData } = useTokens(chainId, [tokenAddress])
   return { ...queryData, data: tokenBalances ? tokenBalances[tokenAddress] : null }
 }
 
-export const getTokenBalances = async (
+export const getTokens = async (
   readProvider,
-  address,
   tokenAddresses
 ): Promise<TokenBalances> => {
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol().totalSupply())
+    batchCalls.push(tokenContract.decimals().name().symbol().totalSupply())
   })
   const response = await batch(readProvider, ...batchCalls)
   const result = {}
   Object.keys(response).map((tokenAddress) => {
-    const amountUnformatted = response[tokenAddress].balanceOf[0]
     const decimals = response[tokenAddress].decimals[0]
-    const amount = formatUnits(amountUnformatted, decimals)
-    const amountPretty = numberWithCommas(amount)
     const name = response[tokenAddress].name[0]
     const symbol = response[tokenAddress].symbol[0]
     const totalSupplyUnformatted = response[tokenAddress].totalSupply[0]
@@ -80,10 +72,6 @@ export const getTokenBalances = async (
 
     result[tokenAddress.toLowerCase()] = {
       address: tokenAddress.toLowerCase(),
-      hasBalance: !amountUnformatted.isZero(),
-      amount,
-      amountPretty,
-      amountUnformatted,
       decimals,
       name,
       symbol,
@@ -94,10 +82,6 @@ export const getTokenBalances = async (
 
     result[getAddress(tokenAddress)] = {
       address: getAddress(tokenAddress),
-      hasBalance: !amountUnformatted.isZero(),
-      amount,
-      amountPretty,
-      amountUnformatted,
       decimals,
       name,
       symbol,

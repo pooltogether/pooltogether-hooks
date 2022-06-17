@@ -19,6 +19,7 @@ export const QUERY_KEYS = Object.freeze({
   usePoolsByChainId: 'usePoolsByChainId',
   userData: 'userData',
   userTicketData: 'userTicketData',
+  tokens: 'tokens',
   getCoingeckoTokenPrices: 'getCoingeckoTokenPrices',
   getCoingeckoSimplePrices: 'getCoingeckoSimplePrices',
   usersPodBalance: 'usersPodBalance',
