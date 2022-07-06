@@ -16,5 +16,8 @@ export const NETWORK_MAPPING = Object.freeze({
   [NETWORK.polygon]: '#7A53DE',
   [NETWORK.mumbai]: '#5b4397',
   [NETWORK.avalanche]: '#e5382e',
-  [NETWORK.fuji]: '#b64116'
+  [NETWORK.fuji]: '#b64116',
+  [NETWORK.optimism]: '#e61b1b',
+  [NETWORK['optimism-kovan']]: '#c60000',
 })
+
