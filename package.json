@@ -11,7 +11,10 @@
     "url": "https://github.com/pooltogether/issues",
     "email": "bugs@pooltogether.com"
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "homepage": "https://github.com/pooltogether/pooltogether-hooks",
   "engines": {
     "node": ">=16"
@@ -72,7 +75,7 @@
     "@types/js-cookie": "^2.2.6",
     "@types/lodash.memoize": "^4.1.6",
     "@types/node": "^15.0.2",
-    "beautiful-react-hooks": "^0.35.0",
+    "beautiful-react-hooks": "^3.6.2",
     "date-fns": "^2.23.0",
     "eth-revert-reason": "^1.0.3",
     "ethers": "^5.6.4",
@@ -103,7 +106,7 @@
     "@pooltogether/evm-chains-extended": "^0.7.0",
     "@pooltogether/utilities": "^0.4.0",
     "@pooltogether/v4-js-client": "^0.9.6",
-    "beautiful-react-hooks": "^0.35.0",
+    "beautiful-react-hooks": "^3.6.2",
     "date-fns": "^2.23.0",
     "ethers": "^5.6.4",
     "framer-motion": "^4.1.17",
