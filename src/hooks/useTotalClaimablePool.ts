@@ -31,7 +31,9 @@ export const useTotalClaimablePool = (address) => {
 
   const isFetched = claimableFromTokenFaucetIsFetched && retroPoolClaimDataIsFetched
 
-  const poolTokenAddress = GOVERNANCE_CONTRACT_ADDRESSES[poolTokenChainId].GovernanceToken.toLowerCase()
+  const poolTokenAddress = GOVERNANCE_CONTRACT_ADDRESSES[
+    poolTokenChainId
+  ].GovernanceToken.toLowerCase()
 
   let total
   if (isFetched) {
@@ -44,6 +46,6 @@ export const useTotalClaimablePool = (address) => {
 
   return {
     isFetched,
-    total,
+    total
   }
 }

@@ -63,7 +63,14 @@ export const getTokenBalances = async (
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol().totalSupply())
+    batchCalls.push(
+      tokenContract
+        .balanceOf(address)
+        .decimals()
+        .name()
+        .symbol()
+        .totalSupply()
+    )
   })
   const response = await batch(readProvider, ...batchCalls)
   const result = {}

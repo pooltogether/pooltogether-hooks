@@ -13,11 +13,9 @@ export const useGasCostEstimate = (gasAmount: BigNumber, chainId: number) => {
     error: pricesError
   } = useCoingeckoSimplePrices()
 
-  const {
-    data: gasCosts,
-    isFetched: gasCostsIsFetched,
-    error: gasCostsError
-  } = useGasCosts(chainId)
+  const { data: gasCosts, isFetched: gasCostsIsFetched, error: gasCostsError } = useGasCosts(
+    chainId
+  )
 
   const isFetched = pricesIsFetched && gasCostsIsFetched
   const error = gasCostsError || pricesError

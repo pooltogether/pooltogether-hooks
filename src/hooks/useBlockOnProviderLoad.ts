@@ -25,7 +25,7 @@ export const useBlockOnProviderLoad = () => {
 
   useEffect(() => {
     getBlockNumber(readProvider, setCurrentBlock)
-  }, [readProvider, chainId])
+  }, [readProvider, chainId, setCurrentBlock])
 
   return currentBlock
 }

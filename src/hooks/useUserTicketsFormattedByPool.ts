@@ -22,8 +22,9 @@ import { GraphQLClient } from 'graphql-request'
  * @returns
  */
 export const useUserTickets = (usersAddress) => {
-  const { data: userTicketsByChainIds, ...useQueryResponse } =
-    useUserTicketsByChainIds(usersAddress)
+  const { data: userTicketsByChainIds, ...useQueryResponse } = useUserTicketsByChainIds(
+    usersAddress
+  )
 
   return {
     ...useQueryResponse,
@@ -123,8 +124,10 @@ export const useUserTicketsByChainIdsSubgraph = (usersAddress, blockNumber = -1)
 export const useUserTicketsFormattedByPool = (usersAddress) => {
   const { data: poolsKeyedByChainId, ...allPoolsUseQueryResponse } = useAllPoolsKeyedByChainId()
 
-  const { data: userTicketsDataByChainIds, ...userTicketsUseQueryResponse } =
-    useUserTicketsByChainIds(usersAddress)
+  const {
+    data: userTicketsDataByChainIds,
+    ...userTicketsUseQueryResponse
+  } = useUserTicketsByChainIds(usersAddress)
 
   const formattedTickets = useMemo(
     () => formatTicketsByPool(userTicketsDataByChainIds, poolsKeyedByChainId),
@@ -221,8 +224,18 @@ export const getUserDataRpc = async (
         sponsorshipAddress
       )
 
-      batchCalls.push(etherplexTicketContract.balanceOf(usersAddress).decimals().totalSupply())
-      batchCalls.push(etherplexSponsorshipContract.balanceOf(usersAddress).decimals().totalSupply())
+      batchCalls.push(
+        etherplexTicketContract
+          .balanceOf(usersAddress)
+          .decimals()
+          .totalSupply()
+      )
+      batchCalls.push(
+        etherplexSponsorshipContract
+          .balanceOf(usersAddress)
+          .decimals()
+          .totalSupply()
+      )
     })
 
     const batchValues = await batch(readProvider, ...batchCalls)
