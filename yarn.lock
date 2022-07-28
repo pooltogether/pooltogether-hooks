@@ -1919,13 +1919,6 @@
     lodash.merge "^4.6.2"
     zen-observable-ts "^0.8.20"
 
-"@pooltogether/evm-chains-extended@^0.6.4-beta.1":
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.6.4.tgz#53bbeba4a79557b98c4e1b8e967f27a7b8f9637e"
-  integrity sha512-SkC7Yf9yCl6FRu32TWgFL/+Ue19/d8h7KnGWdfd55A1cpJasM4GFrujhZTY0jIQeJDc7x4DAueezRfwuO3Cu7A==
-  dependencies:
-    evm-chains "^0.2.0"
-
 "@pooltogether/evm-chains-extended@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@pooltogether/evm-chains-extended/-/evm-chains-extended-0.7.0.tgz#c802ab29e7bc68bde4a9059e1c2565734105de72"
@@ -1938,24 +1931,24 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.4.0.tgz#6fd342c16250fa2288b9280db28c41f4462ae8d6"
   integrity sha512-Nwbu7Gx8PKtXgczcPyqCFdaxk4zcgtdwKdbgR8TAAVxa/FayHYz6j8mwi71gVMfabBUHOJweCyKUJ1vbwveD7g==
 
-"@pooltogether/v4-client-js@1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@pooltogether/v4-client-js/-/v4-client-js-1.0.0-beta.5.tgz#b183b06475bae2d95f379a9f83a550ae30c385ea"
-  integrity sha512-POyUHKVtQC8v7zK1O7DZkVu8rWhvtiteKES0/6lHrCFTLJkrcdtdWXKLxP/ERqKoqRpaSCpEodLFtKa1kb0kZg==
+"@pooltogether/v4-client-js@1.0.0-beta.6":
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@pooltogether/v4-client-js/-/v4-client-js-1.0.0-beta.6.tgz#902d0d5f82f93a6220ceef872725f7ebc85886d9"
+  integrity sha512-VX33ochNXbX3ktEeyuozgG+UHUyl9Re8CCZ/mkZIPNKR8xjqslZ36MDTj3ZITs8GBNSA2xrNv7JMjhxeeb0C6w==
   dependencies:
     "@ethersproject/abi" "^5.1.0"
     "@pooltogether/contract-list-schema" "^0.1.4"
     "@pooltogether/etherplex" "^1.1.4"
-    "@pooltogether/evm-chains-extended" "^0.6.4-beta.1"
+    "@pooltogether/evm-chains-extended" "^0.7.0"
     "@pooltogether/utilities" "0.4.0"
-    "@pooltogether/v4-utils-js" "1.0.0-beta.2"
+    "@pooltogether/v4-utils-js" "1.0.0-beta.5"
     debug "^4.3.3"
     ethers "^5.4.6"
 
-"@pooltogether/v4-utils-js@1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@pooltogether/v4-utils-js/-/v4-utils-js-1.0.0-beta.2.tgz#1a368edebfde4e34722fa6bbd48c7bef11e29301"
-  integrity sha512-y3NzHU7Wb80mOYKeCsEds4/GltWOO4XnTzucsS/CNZgK6ZMFjaqjsFrf2O8Aev4CyISoFfMkfDEEdFyCB/vvrw==
+"@pooltogether/v4-utils-js@1.0.0-beta.5":
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@pooltogether/v4-utils-js/-/v4-utils-js-1.0.0-beta.5.tgz#b9a217b5cdd3f6e011023826c8b53542b537dfda"
+  integrity sha512-y4HnfYbqLKRVXRH2KFKypRwjLs0BceybqqhvbsdOA/tIFt6LgM1bjYbQ/MEclX6/ZGxJlmBwCoEQbBV5vbWVmA==
   dependencies:
     "@ethersproject/abi" "^5.5.0"
     "@ethersproject/address" "^5.5.0"
