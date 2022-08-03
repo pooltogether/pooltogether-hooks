@@ -18,7 +18,12 @@ import { getAddress } from 'ethers/lib/utils'
  * @param tokenAddresses
  * @returns
  */
-export const useTokenBalances = (chainId: number, address: string, tokenAddresses: string[]) => {
+export const useTokenBalances = (
+  chainId: number,
+  address: string,
+  tokenAddresses: string[],
+  refetchInterval?: number
+) => {
   const readProvider = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
@@ -36,7 +41,7 @@ export const useTokenBalances = (chainId: number, address: string, tokenAddresse
     async () => await getTokenBalances(readProvider, address, tokenAddresses),
     {
       enabled,
-      // refetchInterval,
+      refetchInterval,
       ...NO_REFETCH,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
@@ -50,8 +55,18 @@ export const useTokenBalances = (chainId: number, address: string, tokenAddresse
  * @param tokenAddress
  * @returns
  */
-export const useTokenBalance = (chainId: number, address: string, tokenAddress: string) => {
-  const { data: tokenBalances, ...queryData } = useTokenBalances(chainId, address, [tokenAddress])
+export const useTokenBalance = (
+  chainId: number,
+  address: string,
+  tokenAddress: string,
+  refetchInterval?: number
+) => {
+  const { data: tokenBalances, ...queryData } = useTokenBalances(
+    chainId,
+    address,
+    [tokenAddress],
+    refetchInterval
+  )
   return { ...queryData, data: tokenBalances ? tokenBalances[tokenAddress] : null }
 }
 
@@ -63,7 +78,14 @@ export const getTokenBalances = async (
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(tokenContract.balanceOf(address).decimals().name().symbol().totalSupply())
+    batchCalls.push(
+      tokenContract
+        .balanceOf(address)
+        .decimals()
+        .name()
+        .symbol()
+        .totalSupply()
+    )
   })
   const response = await batch(readProvider, ...batchCalls)
   const result = {}
@@ -78,22 +100,8 @@ export const getTokenBalances = async (
     const totalSupply = formatUnits(totalSupplyUnformatted, decimals)
     const totalSupplyPretty = numberWithCommas(totalSupply)
 
-    result[tokenAddress.toLowerCase()] = {
-      address: tokenAddress.toLowerCase(),
-      hasBalance: !amountUnformatted.isZero(),
-      amount,
-      amountPretty,
-      amountUnformatted,
-      decimals,
-      name,
-      symbol,
-      totalSupply,
-      totalSupplyPretty,
-      totalSupplyUnformatted
-    }
-
-    result[getAddress(tokenAddress)] = {
-      address: getAddress(tokenAddress),
+    result[tokenAddress] = {
+      address: tokenAddress,
       hasBalance: !amountUnformatted.isZero(),
       amount,
       amountPretty,
