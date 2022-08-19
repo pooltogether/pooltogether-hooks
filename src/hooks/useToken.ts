@@ -51,14 +51,17 @@ export const useToken = (chainId: number, tokenAddress: string) => {
   return { ...queryData, data: tokenBalances ? tokenBalances[tokenAddress] : null }
 }
 
-export const getTokens = async (
-  readProvider,
-  tokenAddresses
-): Promise<TokenBalances> => {
+export const getTokens = async (readProvider, tokenAddresses): Promise<TokenBalances> => {
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
-    batchCalls.push(tokenContract.decimals().name().symbol().totalSupply())
+    batchCalls.push(
+      tokenContract
+        .decimals()
+        .name()
+        .symbol()
+        .totalSupply()
+    )
   })
   const response = await batch(readProvider, ...batchCalls)
   const result = {}

@@ -102,14 +102,11 @@ export { useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
 export { useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
 export { useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
 
-// V4 Prize Pool / Tokens
-export { usePrizePoolTokens } from './hooks/usePrizePoolTokens'
-export { useUsersPrizePoolBalances } from './hooks/useUsersPrizePoolBalances'
-
 // UI
 export { useReducedMotion, useInitReducedMotion } from './hooks/useReducedMotion'
 export { useScreenSize, ScreenSize } from './hooks/useScreenSize'
 export { useCookieOptions, useInitCookieOptions } from './hooks/useCookieOptions'
+export { useOnScroll } from './hooks/useOnScroll'
 
 // Governance
 export { useAllProposals } from './hooks/useAllProposals'
