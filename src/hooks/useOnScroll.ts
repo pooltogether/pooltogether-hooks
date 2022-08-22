@@ -8,7 +8,7 @@ export const useOnScroll = (options: {
   onScrollTop?: () => void
   onScrollDown?: () => void
 }) => {
-  const [prevScrollTop, setScrollTop] = useState(window.scrollY)
+  const [prevScrollTop, setScrollTop] = useState(typeof window !== 'undefined' ? window.scrollY : 0)
   const onWindowScroll = useWindowScroll()
   const { onScroll, onScrollDown, onScrollUp, onScrollTop } = options
 
