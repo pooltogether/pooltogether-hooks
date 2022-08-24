@@ -50,7 +50,7 @@ export const GOVERNANCE_CONTRACT_ADDRESSES = {
     MerkleDistributor: '0x93a6540DcE05a4A5E5B906eB97bBCBb723768F2D'
   },
   137: {
-    GovernanceToken: '0x25788a1a171ec66da6502f9975a15b609ff54cf6'
+    GovernanceToken: '0x25788a1a171ec66Da6502f9975a15B609fF54CF6'
   }
 }
 
@@ -64,11 +64,11 @@ export const COINGECKO_ASSET_PLATFORMS = Object.freeze({
   [NETWORK.bsc]: 'binance-smart-chain',
   [NETWORK.polygon]: 'polygon-pos',
   [NETWORK.celo]: 'celo',
-  [NETWORK.rinkeby]: 'rinkeby',
+  [NETWORK.goerli]: 'goerli',
   [NETWORK.mumbai]: 'mumbai',
   [NETWORK.avalanche]: 'avalanche',
   [NETWORK.optimism]: 'optimistic-ethereum',
-  [NETWORK['optimism-kovan']]: 'optimistic-ethereum',
+  [NETWORK['optimism-goerli']]: 'optimistic-ethereum',
 })
 
 export enum ProposalStatus {
