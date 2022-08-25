@@ -100,9 +100,9 @@ export const getCoingeckoTokenPrices = async (
 }> => {
   const assetPlatform = COINGECKO_ASSET_PLATFORMS[chainId]
 
-  // Hardcode some prices for Rinkeby & Mumbai testing
+  // Hardcode some prices for Goerli & Mumbai testing
   if (
-    assetPlatform === COINGECKO_ASSET_PLATFORMS[NETWORK.rinkeby] ||
+    assetPlatform === COINGECKO_ASSET_PLATFORMS[NETWORK.goerli] ||
     assetPlatform === COINGECKO_ASSET_PLATFORMS[NETWORK.mumbai]
   ) {
     return contractAddresses.reduce((tokenPrices, contractAddress) => {

@@ -21,7 +21,7 @@ const isTestnetsAtom = atom(getStoredIsTestnetsCookie())
  * Determines the current environment based on a cookie & the users wallet.
  * Controlled by a toggle in settings. Toggle was chosen over watching a users
  * wallet for simplicity around all of the edge cases.
- * ex. a user loads /pools/rinkeby but with their wallet connected to BSC.
+ * ex. a user loads /pools/goerli but with their wallet connected to BSC.
  * @returns object
  */
 export const useIsTestnets = () => {
