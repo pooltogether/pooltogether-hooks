@@ -3,7 +3,7 @@
   "author": "PoolTogether Inc.",
   "description": "Useful hooks for PoolTogether applications",
   "module": "dist/hooks.esm.js",
-  "version": "1.11.0-beta.2",
+  "version": "1.11.0-beta.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
