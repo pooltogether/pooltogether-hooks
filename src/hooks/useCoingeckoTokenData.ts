@@ -7,7 +7,7 @@ import { COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../con
 export const useCoingeckoTokenData = (chainId, contractAddress) => {
   const validNetworks = Object.keys(COINGECKO_ASSET_PLATFORMS)
 
-  const isValidNetwork = validNetworks.includes(chainId.toString()) && chainId !== NETWORK.rinkeby
+  const isValidNetwork = validNetworks.includes(chainId.toString()) && chainId !== NETWORK.goerli
   const isValidAddress = isAddress(contractAddress)
 
   const assetPlatform = COINGECKO_ASSET_PLATFORMS[chainId]

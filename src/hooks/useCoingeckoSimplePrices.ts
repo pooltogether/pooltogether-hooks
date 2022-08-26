@@ -5,6 +5,7 @@ import { COINGECKO_API_URL, QUERY_KEYS } from '../constants'
 export const SIMPLE_PRICES_CHAIN_ID_MAP = {
   1: 'ethereum',
   4: 'ethereum',
+  5: 'ethereum',
   137: 'matic-network',
   80001: 'matic-network',
   42220: 'celo',
@@ -13,8 +14,10 @@ export const SIMPLE_PRICES_CHAIN_ID_MAP = {
   97: 'binancecoin',
   43113: 'avalanche-2',
   43114: 'avalanche-2',
-  69: 'ethereum',
+  420: 'ethereum',
   10: 'ethereum',
+  42161: 'ethereum',
+  421613: 'ethereum',
 }
 
 export const useCoingeckoSimplePrices = () => {

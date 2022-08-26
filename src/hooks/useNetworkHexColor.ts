@@ -18,6 +18,6 @@ export const NETWORK_MAPPING = Object.freeze({
   [NETWORK.avalanche]: '#e5382e',
   [NETWORK.fuji]: '#b64116',
   [NETWORK.optimism]: '#e61b1b',
-  [NETWORK['optimism-kovan']]: '#c60000',
+  [NETWORK['optimism-goerli']]: '#c60000',
 })
 
