@@ -4,6 +4,7 @@ import { NETWORK } from '@pooltogether/utilities'
 
 import { NO_REFETCH, COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
 import { TokenPrice } from '../types/token'
+import { useMemo } from 'react'
 
 /**
  * Fetch token prices across multiple chains with a single hook
@@ -42,20 +43,23 @@ export const useCoingeckoTokenPricesAcrossChains = (contractAddresses: {
     })
   )
 
-  const isFetched = queriesResult?.every((queryResult) => queryResult.isFetched)
-  const refetch = async () => queriesResult?.forEach((queryResult) => queryResult.refetch())
+  return useMemo(() => {
+    const isFetched = queriesResult?.every((queryResult) => queryResult.isFetched)
+    const refetch = async () => queriesResult?.forEach((queryResult) => queryResult.refetch())
 
-  return {
-    isFetched,
-    refetch,
-    data: isFetched
-      ? (queriesResult.reduce((data, queryResult) => {
-          return { ...data, ...(queryResult.data as object) }
-        }, {}) as {
-          [address: string]: TokenPrice
-        })
-      : null
-  }
+    return {
+      isFetched,
+      refetch,
+      data:
+        queriesResult?.reduce((data, queryResult) => {
+          if (queryResult.isFetched && !!queryResult.data && typeof queryResult.data === 'object') {
+            return { ...data, ...queryResult.data }
+          } else {
+            return data
+          }
+        }, {} as { [address: string]: TokenPrice }) || ({} as { [address: string]: TokenPrice })
+    }
+  }, [queriesResult])
 }
 
 export const useCoingeckoTokenPrices = (chainId: number, contractAddresses: string[]) => {
@@ -109,7 +113,7 @@ export const getCoingeckoTokenPrices = async (
       tokenPrices[getAddress(contractAddress)] = { usd: 1 }
       tokenPrices[contractAddress.toLowerCase()] = { usd: 1 }
       return tokenPrices
-    }, {})
+    }, {} as { [address: string]: TokenPrice })
   }
 
   try {
@@ -130,6 +134,6 @@ export const getCoingeckoTokenPrices = async (
     return tokenPricesFormatted
   } catch (e) {
     console.error(e.message)
-    return undefined
+    return {}
   }
 }

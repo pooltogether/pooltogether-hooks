@@ -2,12 +2,8 @@ import { batch, contract } from '@pooltogether/etherplex'
 import { useQuery } from 'react-query'
 import { BigNumber } from 'ethers'
 import { Provider } from '@ethersproject/abstract-provider'
-import { BaseProvider } from '@ethersproject/providers'
-
-import PrizePoolAbi from '../abis/PrizePool_3_3_0'
-import { NO_REFETCH } from '../constants'
-import { useReadProvider } from './useReadProvider'
-import { sToMs } from '@pooltogether/utilities'
+import PrizePoolAbi from '../../abis/PrizePool_3_3_0'
+import { useReadProvider } from '../useReadProvider'
 
 export function useV3ExitFee(
   chainId: number,

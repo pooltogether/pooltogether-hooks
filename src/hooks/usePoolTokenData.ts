@@ -8,7 +8,7 @@ import { useReadProvider } from './useReadProvider'
 import { DelegateableERC20Abi } from '../abis/DelegateableERC20Abi'
 
 export const usePoolTokenData = (usersAddress, addressOverride, chainId = null) => {
-  chainId = chainId || useGovernanceChainId()
+  chainId = useGovernanceChainId()
 
   const readProvider = useReadProvider(chainId)
 
@@ -32,7 +32,10 @@ const getPoolTokenData = async (provider, chainId, usersAddress) => {
   try {
     const poolChainData = await batch(
       provider,
-      poolContract.balanceOf(usersAddress).decimals().totalSupply()
+      poolContract
+        .balanceOf(usersAddress)
+        .decimals()
+        .totalSupply()
     )
 
     const totalSupplyBN = poolChainData.pool.totalSupply[0]

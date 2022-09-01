@@ -8,7 +8,7 @@ import { getTimeBreakdown, msToSeconds } from '@pooltogether/utilities'
  * @param {number} countBy Optional param for how often this function should run (default to every second)
  * @returns {object} time representation broken down into days, hours, minutes, seconds and secondsLeft (remaining)
  */
-export const useTimeCountdown = (initialSecondsLeft, countBy = 1000) => {
+export const useTimeCountdown = (initialSecondsLeft: number, countBy = 1000) => {
   const [secondsLeft, setSecondsLeft] = useState(initialSecondsLeft < 0 ? 0 : initialSecondsLeft)
 
   useInterval(() => {

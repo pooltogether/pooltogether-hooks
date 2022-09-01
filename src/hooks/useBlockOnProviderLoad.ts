@@ -3,10 +3,15 @@ import { useGovernanceChainId } from './useGovernanceChainId'
 import { useReadProvider } from './useReadProvider'
 
 import { atom, useAtom } from 'jotai'
+import { Provider } from '@ethersproject/abstract-provider'
+import { Block } from '@ethersproject/abstract-provider'
 
 const currentBlockAtom = atom({})
 
-const getBlockNumber = async (readProvider, setCurrentBlock) => {
+const getBlockNumber = async (
+  readProvider: Provider,
+  setCurrentBlock: (block: Block & { blockNumber: number }) => void
+) => {
   if (readProvider?.getBlockNumber) {
     const blockNumber = await readProvider.getBlockNumber()
 

@@ -17,7 +17,7 @@ export const SIMPLE_PRICES_CHAIN_ID_MAP = {
   420: 'ethereum',
   10: 'ethereum',
   42161: 'ethereum',
-  421613: 'ethereum',
+  421613: 'ethereum'
 }
 
 export const useCoingeckoSimplePrices = () => {

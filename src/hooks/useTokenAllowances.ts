@@ -1,8 +1,5 @@
 import { batch, contract } from '@pooltogether/etherplex'
-import { formatUnits } from '@ethersproject/units'
 import { useQuery, useQueryClient } from 'react-query'
-import { sToMs } from '@pooltogether/utilities'
-
 import { ERC20Abi } from '../abis/ERC20Abi'
 import { NO_REFETCH, QUERY_KEYS } from '../constants'
 import { useReadProvider } from './useReadProvider'

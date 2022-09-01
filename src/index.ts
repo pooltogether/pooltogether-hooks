@@ -3,16 +3,11 @@ export { APP_ENVIRONMENTS, useIsTestnets, getStoredIsTestnetsCookie } from './ho
 export { usePodChainIds } from './hooks/usePodChainIds'
 
 // Types
-export {
-  Token,
-  Amount,
-  TokenBalance,
-  TokenWithBalance,
-  TokenWithUsdBalance,
-  TokenWithAllBalances,
-  TokenBalances,
-  TokenPrice
-} from './types/token'
+export * from './types/token'
+
+// Utils
+export { getAmountFromBigNumber } from './utils/getAmountFromBigNumber'
+export { getAppEnvString } from './utils/getAppEnvString'
 
 // Common chain data
 export { getChain, formatNetworkForAddEthereumChain } from '@pooltogether/evm-chains-extended'
@@ -30,39 +25,17 @@ export { useTimeCountdown } from './hooks/useTimeCountdown'
 export { usePrizePeriodTimeLeft } from './hooks/usePrizePeriodTimeLeft'
 export { usePrizePeriod } from './hooks/usePrizePeriod'
 
-// V3 Pool Data
-export {
-  useAllPools,
-  useAllPoolsKeyedByChainId,
-  usePoolByChainId,
-  useCurrentPool,
-  usePoolByAddress,
-  usePoolBySymbol,
-  useGovernancePools,
-  useRouterChainId
-} from './hooks/usePools'
-export {
-  useUserTickets,
-  useUserTicketsByChainIds,
-  useUserTicketsByChainIdsRpc,
-  useUserTicketsByChainIdsSubgraph,
-  useUserTicketsFormattedByPool,
-  usePlayerTotalPoolDepositValue,
-  useUserTicketsByPool,
-  getUserDataRpc,
-  getUserDataSubgraph,
-  formatTicketsByPool
-} from './hooks/useUserTicketsFormattedByPool'
-export { usePooltogetherTotalPrizesV3, usePooltogetherTvlV3 } from './hooks/usePoolTogetherTvl'
-export { getPoolsByChainIds } from './fetchers/getPools'
-export {
-  UserLPChainData,
-  useStakingPools,
-  useUserLPChainData,
-  useStakingPoolChainData,
-  DEXES
-} from './hooks/useStakingPools'
-export { useV3ExitFee } from './hooks/useV3ExitFee'
+// V3 Pool Hooks (August 31st 2022)
+export * from './hooks/v3/useLPTokenUsdValue'
+export * from './hooks/v3/useTokenFaucetData'
+export * from './hooks/v3/useUsersV3PrizePoolBalance'
+export * from './hooks/v3/useV3ChainIds'
+export * from './hooks/v3/useAllUsersV3Balances'
+export * from './hooks/v3/usePodExitFee'
+export * from './hooks/v3/useUsersTokenFaucetRewards'
+export * from './hooks/v3/useUsersV3PrizePoolBalances'
+export * from './hooks/v3/useV3PrizePools'
+export * from './hooks/v3/useV3ExitFee'
 
 // Tokens
 export { useTokens, useToken, getTokens } from './hooks/useToken'
@@ -70,8 +43,6 @@ export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
 export { usePodShareBalance } from './hooks/usePodShareBalance'
 export { useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
 export { usePoolTokenData } from './hooks/usePoolTokenData'
-export { useTokenHolder } from './hooks/useTokenHolder'
-export { useTotalClaimablePool } from './hooks/useTotalClaimablePool'
 
 // CoinGecko
 export {
@@ -86,12 +57,6 @@ export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
 // Gas
 export { useGasCostEstimate } from './hooks/useGasCostEstimate'
 export { useGasCosts } from './hooks/useGasCosts'
-
-// TokenFaucets
-export {
-  useClaimableTokenFromTokenFaucet,
-  useClaimableTokenFromTokenFaucets
-} from './hooks/useClaimableTokenFromTokenFaucets'
 
 // Retro Claim
 export { useRetroactivePoolClaimData } from './hooks/useRetroactivePoolClaimData'
@@ -116,4 +81,4 @@ export { useAllProposals } from './hooks/useAllProposals'
 export { useAllProposalsByStatus } from './hooks/useAllProposalsByStatus'
 
 // Constants
-export * as PT_HOOKS_CONSTANTS from './constants'
+export * from './constants'
