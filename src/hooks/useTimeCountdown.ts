@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useInterval } from 'beautiful-react-hooks'
+import useInterval from 'beautiful-react-hooks/useInterval'
 import { getTimeBreakdown, msToSeconds } from '@pooltogether/utilities'
 
 /**
