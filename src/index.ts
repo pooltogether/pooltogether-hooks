@@ -58,10 +58,8 @@ export { useRetroactivePoolClaimData } from './hooks/governance/useRetroactivePo
 export { usePrizePoolTokens } from './hooks/v4/usePrizePoolTokens'
 export { useUsersPrizePoolBalances } from './hooks/v4/useUsersPrizePoolBalances'
 
-// UI
-export { useScreenSize, ScreenSize } from './hooks/app/useScreenSize'
+// Shared UI Hook.
 export { useCookieOptions, useInitCookieOptions } from './hooks/app/useCookieOptions'
-export { useWindowFocus } from './hooks/app/useWindowFocus'
 
 // Governance
 export { useAllProposals } from './hooks/governance/useAllProposals'

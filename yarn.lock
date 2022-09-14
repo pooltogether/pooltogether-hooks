@@ -2431,10 +2431,10 @@
   dependencies:
     evm-chains "^0.2.0"
 
-"@pooltogether/utilities@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.6.1.tgz#a0ee2eac626eb1b64f65ce42cf99ba2a9407a6ea"
-  integrity sha512-gz214RgqF9busqa7uCkyxbnPJW5AeFeG/F0kTIrdH8Tbi00EL/hBmauKUMx7iDmhAUIbD2w2vLMjbzKn7gSZOw==
+"@pooltogether/utilities@0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@pooltogether/utilities/-/utilities-0.6.2.tgz#71a4e6dd56c6f0a03feea95b4f3a1b8eeee04329"
+  integrity sha512-vGqf8wqdKbP3Sk0xsF8W6wkRJgyPEGCIyeH1YM3kPjzNn4mCMAc08tGlBtq0CvjkvaNwWgLAMv2/L7Jh//wbbw==
 
 "@pooltogether/utilities@^0.5.0":
   version "0.5.1"

@@ -13,6 +13,10 @@ export const useCookieOptions = (): CookieAttributes => {
   }
 }
 
+/**
+ * Call once
+ * @param domain
+ */
 export const useInitCookieOptions = (domain: string) => {
   const [, setDomain] = useAtom(domainAtom)
   useEffect(() => {
