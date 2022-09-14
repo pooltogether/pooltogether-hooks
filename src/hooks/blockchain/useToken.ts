@@ -7,7 +7,7 @@ import { ERC20Abi } from '../../abis/ERC20Abi'
 import { populatePerIdCache } from '../../utils/populatePerIdCache'
 import { BigNumber } from 'ethers'
 import { BaseProvider } from '@ethersproject/providers'
-import { useReadProvider } from '@pooltogether/wallet-connection'
+import { useReadProvider } from '@pooltogether/wallet-connection/dist/hooks/useReadProvider'
 
 /**
  * Returns a dictionary keyed by the token addresses filled with token data.

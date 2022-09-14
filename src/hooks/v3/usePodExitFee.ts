@@ -1,6 +1,6 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { batch, contract } from '@pooltogether/etherplex'
-import { getReadProvider } from '@pooltogether/wallet-connection'
+import { getReadProvider } from '@pooltogether/wallet-connection/dist/utilities/getReadProvider'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { ERC20Abi } from '../../abis/ERC20Abi'

@@ -4,7 +4,7 @@ import { ERC20Abi } from '../../abis/ERC20Abi'
 import { NO_REFETCH, QUERY_KEYS } from '../../constants'
 import { populatePerIdCache } from '../../utils/populatePerIdCache'
 import { BigNumber } from 'ethers'
-import { getReadProvider } from '@pooltogether/wallet-connection'
+import { getReadProvider } from '@pooltogether/wallet-connection/dist/utilities/getReadProvider'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with

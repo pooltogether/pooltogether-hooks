@@ -6,7 +6,7 @@ import { QUERY_KEYS } from '../../constants'
 import { useGovernanceChainId } from './useGovernanceChainId'
 import { MerkleDistributorAbi } from '../../abis/MerkleDistributor'
 import { GOVERNANCE_CONTRACT_ADDRESSES } from '@pooltogether/utilities'
-import { getReadProvider } from '@pooltogether/wallet-connection'
+import { getReadProvider } from '@pooltogether/wallet-connection/dist/utilities/getReadProvider'
 
 export const useRetroactivePoolClaimData = (address) => {
   const { refetch, data, isFetching, isFetched, error } = useFetchRetroactivePoolClaimData(address)
