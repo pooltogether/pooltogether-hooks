@@ -5,7 +5,7 @@ import { batch, contract } from '@pooltogether/etherplex'
 import { GovernorAlphaAbi } from '../../abis/GovernorAlphaABI'
 import { NO_REFETCH, PROPOSAL_STATES, ProposalStatus } from '../../constants'
 import { NETWORK } from '@pooltogether/utilities'
-import { getReadProvider } from '@pooltogether/wallet-connection/dist/utilities/getReadProvider'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 
 export interface Proposal {
   id: string
