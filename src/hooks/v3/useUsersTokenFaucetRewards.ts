@@ -1,11 +1,11 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { batch, contract } from '@pooltogether/etherplex'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { TokenFaucetAbi } from '../../abis/TokenFaucet_3_3_12'
 import { Token, TokenWithBalance, TokenWithUsdBalance } from '../../types/token'
 import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
-import { useReadProvider } from '../useReadProvider'
 import { useTokenFaucetData } from './useTokenFaucetData'
 import { V3PrizePool } from './useV3PrizePools'
 
@@ -16,7 +16,7 @@ export const useUsersTokenFaucetRewards = (
   tokenFaucetAddress: string,
   underlyingToken: TokenWithUsdBalance
 ) => {
-  const provider = useReadProvider(chainId)
+  const provider = getReadProvider(chainId)
 
   const { data: tokenFaucetData, isFetched: isTokenFaucetDataFetched } = useTokenFaucetData(
     chainId,

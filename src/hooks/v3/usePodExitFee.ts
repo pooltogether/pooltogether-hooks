@@ -1,11 +1,11 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { batch, contract } from '@pooltogether/etherplex'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { PodAbi } from '../../abis/PodAbi'
 import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
-import { useReadProvider } from '../useReadProvider'
 
 export const usePodExitFee = (
   chainId: number,
@@ -14,7 +14,7 @@ export const usePodExitFee = (
   amountToWithdrawUnformatted: BigNumber,
   decimals: string
 ) => {
-  const provider = useReadProvider(chainId)
+  const provider = getReadProvider(chainId)
 
   return useQuery(
     ['usePodExitFee', chainId, podAddress, amountToWithdrawUnformatted?.toString()],

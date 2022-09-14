@@ -1,5 +1,5 @@
 import { NETWORK } from '@pooltogether/utilities'
-import { useIsTestnets } from './useIsTestnets'
+import { useIsTestnets } from '../app/useIsTestnets'
 
 export const useGovernanceChainId = () => {
   const { isTestnets } = useIsTestnets()

@@ -1,11 +1,11 @@
-import { PrizePool } from '@pooltogether/v4-js-client'
+import { PrizePool } from '@pooltogether/v4-client-js'
 import { formatUnits } from '@ethersproject/units'
 import { numberWithCommas } from '@pooltogether/utilities'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 
-import { TokenWithBalance } from '../types/token'
-import { useRefetchInterval } from './useRefetchInterval'
+import { TokenWithBalance } from '../../types/token'
+import { useRefetchInterval } from '../blockchain/useRefetchInterval'
 import { PrizePoolTokens, usePrizePoolTokens } from './usePrizePoolTokens'
 
 export interface UsersPrizePoolBalances {

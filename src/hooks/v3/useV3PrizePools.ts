@@ -1,15 +1,15 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { getAddress } from '@ethersproject/address'
 import { batch, Context, contract } from '@pooltogether/etherplex'
+import { V3 } from '@pooltogether/utilities'
+import { getReadProviders } from '@pooltogether/wallet-connection'
 import { useQuery } from 'react-query'
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { PodAbi } from '../../abis/PodAbi'
 import PrizePool_3_3_0 from '../../abis/PrizePool_3_3_0'
 import { PrizeStrategyAbi_3_4_4 } from '../../abis/PrizeStrategy_3_4_4'
-import { V3 } from '../../constants'
 import { Amount, Token } from '../../types/token'
 import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
-import { useReadProviders } from '../useReadProviders'
 import { useV3ChainIds } from './useV3ChainIds'
 
 export interface PodToken extends Token {
@@ -41,7 +41,7 @@ export interface V3PrizePool {
  */
 export const useV3PrizePools = () => {
   const chainIds = useV3ChainIds()
-  const providers = useReadProviders(chainIds)
+  const providers = getReadProviders(chainIds)
   return useQuery(['useV3PrizePools', chainIds], () => getV3PrizePools(chainIds, providers))
 }
 

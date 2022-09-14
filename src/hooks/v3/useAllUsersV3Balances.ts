@@ -6,10 +6,10 @@ import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
 import { useQueries } from 'react-query'
 import { PodToken, useV3PrizePools, V3PrizePool } from './useV3PrizePools'
 import { Amount, Token, TokenPrice, TokenWithUsdBalance } from '../../types/token'
-import { useReadProviders } from '../useReadProviders'
-import { useCoingeckoTokenPricesAcrossChains } from '../useCoingeckoTokenPrices'
+import { useCoingeckoTokenPricesAcrossChains } from '../coingecko/useCoingeckoTokenPrices'
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { BigNumber } from 'ethers'
+import { getReadProviders } from '@pooltogether/wallet-connection'
 
 /**
  * Fetch users balances for all tokens in all prize pools
@@ -19,7 +19,7 @@ import { BigNumber } from 'ethers'
 export const useAllUsersV3Balances = (usersAddress: string) => {
   const { data: v3PrizePools, isFetched } = useV3PrizePools()
   const chainIds = isFetched ? Object.keys(v3PrizePools).map(Number) : []
-  const providers = useReadProviders(chainIds)
+  const providers = getReadProviders(chainIds)
   const {
     data: tokenPrices,
     isFetched: isTokenPricesFetched

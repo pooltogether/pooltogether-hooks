@@ -1,15 +1,14 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { formatUnits } from '@ethersproject/units'
 import { batch, Context, contract } from '@pooltogether/etherplex'
-import { amountMultByUsd } from '@pooltogether/utilities'
+import { amountMultByUsd, SECONDS_PER_DAY } from '@pooltogether/utilities'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { TokenFaucetAbi } from '../../abis/TokenFaucet_3_3_12'
-import { SECONDS_PER_DAY } from '../../constants'
 import { Token, TokenWithUsdBalance } from '../../types/token'
-import { getCoingeckoTokenPrices } from '../useCoingeckoTokenPrices'
-import { useReadProvider } from '../useReadProvider'
+import { getCoingeckoTokenPrices } from '../coingecko/useCoingeckoTokenPrices'
 import { V3PrizePool } from './useV3PrizePools'
 
 export const useTokenFaucetData = (
@@ -18,24 +17,22 @@ export const useTokenFaucetData = (
   prizePool: V3PrizePool,
   underlyingToken: TokenWithUsdBalance
 ) => {
-  const provider = useReadProvider(chainId)
-
   const enabled = !!underlyingToken?.usdPerToken
 
   return useQuery(
     ['useTokenFaucetData', chainId, tokenFaucetAddress],
-    () => getTokenFaucetData(provider, chainId, tokenFaucetAddress, prizePool, underlyingToken),
+    () => getTokenFaucetData(chainId, tokenFaucetAddress, prizePool, underlyingToken),
     { enabled }
   )
 }
 
 const getTokenFaucetData = async (
-  provider: Provider,
   chainId: number,
   tokenFaucetAddress: string,
   prizePool: V3PrizePool,
   underlyingToken: TokenWithUsdBalance
 ) => {
+  const provider = getReadProvider(chainId)
   let batchRequests: Context[] = []
 
   // Fetch data from token faucet

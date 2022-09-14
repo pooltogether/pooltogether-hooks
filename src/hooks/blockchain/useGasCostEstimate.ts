@@ -1,7 +1,10 @@
 import { BigNumber } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
 
-import { SIMPLE_PRICES_CHAIN_ID_MAP, useCoingeckoSimplePrices } from './useCoingeckoSimplePrices'
+import {
+  SIMPLE_PRICES_CHAIN_ID_MAP,
+  useCoingeckoSimplePrices
+} from '../coingecko/useCoingeckoSimplePrices'
 import { useGasCosts } from './useGasCosts'
 
 // Makes use of Coingecko for USD prices (of ether, matic, etc) and PoolTogether's gas API result

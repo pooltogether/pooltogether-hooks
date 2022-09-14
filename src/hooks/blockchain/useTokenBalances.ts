@@ -2,12 +2,11 @@ import { batch, contract } from '@pooltogether/etherplex'
 import { formatUnits } from '@ethersproject/units'
 import { useQuery, useQueryClient } from 'react-query'
 import { numberWithCommas } from '@pooltogether/utilities'
-
-import { NO_REFETCH, QUERY_KEYS } from '../constants'
-import { ERC20Abi } from '../abis/ERC20Abi'
-import { useReadProvider } from './useReadProvider'
-import { populatePerIdCache } from '../utils/populatePerIdCache'
-import { TokenBalances } from '../types/token'
+import { NO_REFETCH, QUERY_KEYS } from '../../constants'
+import { ERC20Abi } from '../../abis/ERC20Abi'
+import { populatePerIdCache } from '../../utils/populatePerIdCache'
+import { TokenBalances } from '../../types/token'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 
 /**
  * Returns a dictionary keyed by the token addresses filled with
@@ -23,7 +22,6 @@ export const useTokenBalances = (
   tokenAddresses: string[],
   refetchInterval?: number
 ) => {
-  const readProvider = useReadProvider(chainId)
   const queryClient = useQueryClient()
 
   const enabled =
@@ -37,7 +35,7 @@ export const useTokenBalances = (
 
   return useQuery(
     getCacheKey(tokenAddresses),
-    async () => await getTokenBalances(readProvider, address, tokenAddresses),
+    async () => await getTokenBalances(chainId, address, tokenAddresses),
     {
       enabled,
       refetchInterval,
@@ -70,9 +68,9 @@ export const useTokenBalance = (
 }
 
 export const getTokenBalances = async (
-  readProvider,
-  address,
-  tokenAddresses
+  chainId: number,
+  address: string,
+  tokenAddresses: string[]
 ): Promise<TokenBalances> => {
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
@@ -86,6 +84,7 @@ export const getTokenBalances = async (
         .totalSupply()
     )
   })
+  const readProvider = getReadProvider(chainId)
   const response = await batch(readProvider, ...batchCalls)
   const result = {}
   Object.keys(response).map((tokenAddress) => {

@@ -1,4 +1,4 @@
-import { APP_ENVIRONMENTS, getStoredIsTestnetsCookie } from '../hooks/useIsTestnets'
+import { APP_ENVIRONMENTS, getStoredIsTestnetsCookie } from '../hooks/app/useIsTestnets'
 
 export const getAppEnvString = () => {
   const isTestnets = getStoredIsTestnetsCookie()

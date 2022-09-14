@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 
-import { COINGECKO_API_URL, QUERY_KEYS } from '../constants'
+import { COINGECKO_API_URL, QUERY_KEYS } from '../../constants'
 
 export const SIMPLE_PRICES_CHAIN_ID_MAP = {
   1: 'ethereum',

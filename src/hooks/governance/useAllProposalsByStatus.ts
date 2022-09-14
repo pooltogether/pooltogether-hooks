@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { ProposalStatus } from '../constants'
+import { ProposalStatus } from '../../constants'
 import { Proposal, useAllProposals } from './useAllProposals'
 
 export function useAllProposalsByStatus() {

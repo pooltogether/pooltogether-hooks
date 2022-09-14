@@ -2,8 +2,13 @@ import { useQueries, useQuery } from 'react-query'
 import { getAddress, isAddress } from '@ethersproject/address'
 import { NETWORK } from '@pooltogether/utilities'
 
-import { NO_REFETCH, COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
-import { TokenPrice } from '../types/token'
+import {
+  NO_REFETCH,
+  COINGECKO_API_URL,
+  COINGECKO_ASSET_PLATFORMS,
+  QUERY_KEYS
+} from '../../constants'
+import { TokenPrice } from '../../types/token'
 import { useMemo } from 'react'
 
 /**

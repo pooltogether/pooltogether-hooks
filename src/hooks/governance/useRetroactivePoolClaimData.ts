@@ -2,11 +2,11 @@ import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
 import { ethers } from 'ethers'
 import { isAddress } from '@ethersproject/address'
-
-import { GOVERNANCE_CONTRACT_ADDRESSES, QUERY_KEYS } from '../constants'
+import { QUERY_KEYS } from '../../constants'
 import { useGovernanceChainId } from './useGovernanceChainId'
-import { useReadProvider } from './useReadProvider'
-import { MerkleDistributorAbi } from '../abis/MerkleDistributor'
+import { MerkleDistributorAbi } from '../../abis/MerkleDistributor'
+import { GOVERNANCE_CONTRACT_ADDRESSES } from '@pooltogether/utilities'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 
 export const useRetroactivePoolClaimData = (address) => {
   const { refetch, data, isFetching, isFetched, error } = useFetchRetroactivePoolClaimData(address)
@@ -23,7 +23,7 @@ export const useRetroactivePoolClaimData = (address) => {
 
 const useFetchRetroactivePoolClaimData = (usersAddress) => {
   const chainId = useGovernanceChainId()
-  const readProvider = useReadProvider(chainId)
+  const readProvider = getReadProvider(chainId)
 
   return useQuery(
     [QUERY_KEYS.retroactivePoolClaimDataQuery, usersAddress, chainId],

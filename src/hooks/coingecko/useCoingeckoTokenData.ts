@@ -2,9 +2,20 @@ import { useQuery } from 'react-query'
 import { isAddress } from '@ethersproject/address'
 import { NETWORK } from '@pooltogether/utilities'
 
-import { COINGECKO_API_URL, COINGECKO_ASSET_PLATFORMS, QUERY_KEYS } from '../constants'
+const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
+const COINGECKO_ASSET_PLATFORMS = Object.freeze({
+  [NETWORK.mainnet]: 'ethereum',
+  [NETWORK.bsc]: 'binance-smart-chain',
+  [NETWORK.polygon]: 'polygon-pos',
+  [NETWORK.celo]: 'celo',
+  [NETWORK.goerli]: 'goerli',
+  [NETWORK.mumbai]: 'mumbai',
+  [NETWORK.avalanche]: 'avalanche',
+  [NETWORK.optimism]: 'optimistic-ethereum',
+  [NETWORK['optimism-goerli']]: 'optimistic-ethereum'
+})
 
-export const useCoingeckoTokenData = (chainId, contractAddress) => {
+export const useCoingeckoTokenData = (chainId: number, contractAddress: string) => {
   const validNetworks = Object.keys(COINGECKO_ASSET_PLATFORMS)
 
   const isValidNetwork = validNetworks.includes(chainId.toString()) && chainId !== NETWORK.goerli
@@ -15,7 +26,7 @@ export const useCoingeckoTokenData = (chainId, contractAddress) => {
   const enabled = Boolean(contractAddress) && isValidAddress && isValidNetwork && Boolean(chainId)
 
   return useQuery(
-    [QUERY_KEYS.getCoingeckoTokenData, contractAddress, chainId],
+    ['useCoingeckoTokenData', contractAddress, chainId],
     async () => await getCoingeckoTokenData(assetPlatform, contractAddress),
     {
       staleTime: Infinity,
@@ -29,11 +40,12 @@ export const useCoingeckoTokenData = (chainId, contractAddress) => {
   )
 }
 
-const getCoingeckoTokenData = async (assetPlatform, contractAddress) => {
+const getCoingeckoTokenData = async (assetPlatform: string, contractAddress: string) => {
   try {
     const response = await fetch(
       `${COINGECKO_API_URL}/coins/${assetPlatform}/contract/${contractAddress}`
     )
+    console.log({ response })
     return await response.json()
   } catch (e) {
     console.warn(e.message)

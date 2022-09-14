@@ -1,6 +1,9 @@
 // Multi Chain Utilities
-export { APP_ENVIRONMENTS, useIsTestnets, getStoredIsTestnetsCookie } from './hooks/useIsTestnets'
-export { usePodChainIds } from './hooks/usePodChainIds'
+export {
+  APP_ENVIRONMENTS,
+  useIsTestnets,
+  getStoredIsTestnetsCookie
+} from './hooks/app/useIsTestnets'
 
 // Types
 export * from './types/token'
@@ -10,22 +13,14 @@ export { getAmountFromBigNumber } from './utils/getAmountFromBigNumber'
 export { getAppEnvString } from './utils/getAppEnvString'
 
 // Common chain data
-export { getChain, formatNetworkForAddEthereumChain } from '@pooltogether/evm-chains-extended'
-export { initProviderApiKeys } from '@pooltogether/utilities'
-export { useInitTheGraphApiKey } from './hooks/useInitTheGraphApiKey'
-export { useReadProvider } from './hooks/useReadProvider'
-export { useReadProviders } from './hooks/useReadProviders'
-export { useRefetchInterval, getRefetchInterval } from './hooks/useRefetchInterval'
-export { useGovernanceChainId } from './hooks/useGovernanceChainId'
-export { useNetworkHexColor } from './hooks/useNetworkHexColor'
+export { useInitTheGraphApiKey } from './hooks/app/useInitTheGraphApiKey'
+export { useRefetchInterval, getRefetchInterval } from './hooks/blockchain/useRefetchInterval'
+export { useGovernanceChainId } from './hooks/governance/useGovernanceChainId'
 
 // Time
-export { useBlockOnProviderLoad } from './hooks/useBlockOnProviderLoad'
-export { useTimeCountdown } from './hooks/useTimeCountdown'
-export { usePrizePeriodTimeLeft } from './hooks/usePrizePeriodTimeLeft'
-export { usePrizePeriod } from './hooks/usePrizePeriod'
+export { useTimeCountdown } from './hooks/app/useTimeCountdown'
 
-// V3 Pool Hooks (August 31st 2022)
+// V3 Pool Hooks
 export * from './hooks/v3/useLPTokenUsdValue'
 export * from './hooks/v3/useTokenFaucetData'
 export * from './hooks/v3/useUsersV3PrizePoolBalance'
@@ -38,47 +33,39 @@ export * from './hooks/v3/useV3PrizePools'
 export * from './hooks/v3/useV3ExitFee'
 
 // Tokens
-export { useTokens, useToken, getTokens } from './hooks/useToken'
-export { useTokenBalances, useTokenBalance } from './hooks/useTokenBalances'
-export { usePodShareBalance } from './hooks/usePodShareBalance'
-export { useTokenAllowances, useTokenAllowance } from './hooks/useTokenAllowances'
-export { usePoolTokenData } from './hooks/usePoolTokenData'
+export { useTokens, useToken, getTokens } from './hooks/blockchain/useToken'
+export { useTokenBalances, useTokenBalance } from './hooks/blockchain/useTokenBalances'
+export { useTokenAllowances, useTokenAllowance } from './hooks/blockchain/useTokenAllowances'
 
 // CoinGecko
 export {
   getCoingeckoTokenPrices,
   useCoingeckoTokenPrices,
   useCoingeckoTokenPricesAcrossChains
-} from './hooks/useCoingeckoTokenPrices'
-export { useCoingeckoSimplePrices } from './hooks/useCoingeckoSimplePrices'
-export { useCoingeckoTokenData } from './hooks/useCoingeckoTokenData'
-export { useCoingeckoTokenImage } from './hooks/useCoingeckoTokenImage'
+} from './hooks/coingecko/useCoingeckoTokenPrices'
+export { useCoingeckoSimplePrices } from './hooks/coingecko/useCoingeckoSimplePrices'
+export { useCoingeckoTokenData } from './hooks/coingecko/useCoingeckoTokenData'
+export { useCoingeckoTokenImage } from './hooks/coingecko/useCoingeckoTokenImage'
 
 // Gas
-export { useGasCostEstimate } from './hooks/useGasCostEstimate'
-export { useGasCosts } from './hooks/useGasCosts'
+export { useGasCostEstimate } from './hooks/blockchain/useGasCostEstimate'
+export { useGasCosts } from './hooks/blockchain/useGasCosts'
 
 // Retro Claim
-export { useRetroactivePoolClaimData } from './hooks/useRetroactivePoolClaimData'
-
-// Users Wallet
-export { useIsWalletMetamask } from './hooks/useIsWalletMetamask'
-export { useAddNetworkToMetamask } from './hooks/useAddNetworkToMetamask'
-export { useIsWalletOnNetwork } from './hooks/useIsWalletOnNetwork'
-export { useIsWalletOnSupportedNetwork } from './hooks/useIsWalletOnSupportedNetwork'
+export { useRetroactivePoolClaimData } from './hooks/governance/useRetroactivePoolClaimData'
 
 // V4 Prize Pool / Tokens
-export { usePrizePoolTokens } from './hooks/usePrizePoolTokens'
-export { useUsersPrizePoolBalances } from './hooks/useUsersPrizePoolBalances'
+export { usePrizePoolTokens } from './hooks/v4/usePrizePoolTokens'
+export { useUsersPrizePoolBalances } from './hooks/v4/useUsersPrizePoolBalances'
 
 // UI
-export { useReducedMotion, useInitReducedMotion } from './hooks/useReducedMotion'
-export { useScreenSize, ScreenSize } from './hooks/useScreenSize'
-export { useCookieOptions, useInitCookieOptions } from './hooks/useCookieOptions'
+export { useScreenSize, ScreenSize } from './hooks/app/useScreenSize'
+export { useCookieOptions, useInitCookieOptions } from './hooks/app/useCookieOptions'
+export { useWindowFocus } from './hooks/app/useWindowFocus'
 
 // Governance
-export { useAllProposals } from './hooks/useAllProposals'
-export { useAllProposalsByStatus } from './hooks/useAllProposalsByStatus'
+export { useAllProposals } from './hooks/governance/useAllProposals'
+export { useAllProposalsByStatus } from './hooks/governance/useAllProposalsByStatus'
 
 // Constants
 export * from './constants'

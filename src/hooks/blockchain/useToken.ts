@@ -2,38 +2,38 @@ import { batch, contract } from '@pooltogether/etherplex'
 import { formatUnits } from '@ethersproject/units'
 import { useQuery, useQueryClient } from 'react-query'
 import { numberWithCommas } from '@pooltogether/utilities'
-
-import { NO_REFETCH, QUERY_KEYS } from '../constants'
-import { ERC20Abi } from '../abis/ERC20Abi'
-import { useReadProvider } from './useReadProvider'
-import { populatePerIdCache } from '../utils/populatePerIdCache'
-import { TokenBalances } from '../types/token'
-import { getAddress } from 'ethers/lib/utils'
+import { NO_REFETCH, QUERY_KEYS } from '../../constants'
+import { ERC20Abi } from '../../abis/ERC20Abi'
+import { populatePerIdCache } from '../../utils/populatePerIdCache'
+import { BigNumber } from 'ethers'
+import { BaseProvider } from '@ethersproject/providers'
+import { useReadProvider } from '@pooltogether/wallet-connection'
 
 /**
- * Returns a dictionary keyed by the token addresses filled
+ * Returns a dictionary keyed by the token addresses filled with token data.
+ * Stores token data in the cache.
  * @param chainId
  * @param tokenAddresses
  * @returns
  */
 export const useTokens = (chainId: number, tokenAddresses: string[]) => {
-  const readProvider = useReadProvider(chainId)
   const queryClient = useQueryClient()
+  const readProvider = useReadProvider(chainId)
 
   const enabled =
-    tokenAddresses.reduce((aggregate, current) => aggregate && Boolean(current), true) &&
+    tokenAddresses.every((tokenAddress) => !!tokenAddress && typeof tokenAddress === 'string') &&
     Array.isArray(tokenAddresses) &&
     tokenAddresses.length > 0 &&
-    Boolean(chainId)
+    Boolean(chainId) &&
+    !!readProvider
 
   const getCacheKey = (id: (string | number)[]) => [QUERY_KEYS.tokens, chainId, id]
 
   return useQuery(
     getCacheKey(tokenAddresses),
-    async () => await getTokens(readProvider, tokenAddresses),
+    async () => await getTokens(chainId, tokenAddresses, readProvider),
     {
       enabled,
-      // refetchInterval,
       ...NO_REFETCH,
       onSuccess: (data) => populatePerIdCache(queryClient, getCacheKey, data)
     }
@@ -41,7 +41,7 @@ export const useTokens = (chainId: number, tokenAddresses: string[]) => {
 }
 
 /**
- * Returns the provided token
+ * Returns the requested token data.
  * @param chainId
  * @param tokenAddress
  * @returns
@@ -51,7 +51,11 @@ export const useToken = (chainId: number, tokenAddress: string) => {
   return { ...queryData, data: tokenBalances ? tokenBalances[tokenAddress] : null }
 }
 
-export const getTokens = async (readProvider, tokenAddresses): Promise<TokenBalances> => {
+export const getTokens = async (
+  chainId: number,
+  tokenAddresses: string[],
+  provider: BaseProvider
+) => {
   const batchCalls = []
   tokenAddresses.map((tokenAddress) => {
     const tokenContract = contract(tokenAddress, ERC20Abi, tokenAddress)
@@ -63,8 +67,18 @@ export const getTokens = async (readProvider, tokenAddresses): Promise<TokenBala
         .totalSupply()
     )
   })
-  const response = await batch(readProvider, ...batchCalls)
-  const result = {}
+  const response = await batch(provider, ...batchCalls)
+  const result: {
+    [tokenAddress: string]: {
+      address: string
+      decimals: number
+      name: string
+      symbol: string
+      totalSupply: string
+      totalSupplyPretty: string
+      totalSupplyUnformatted: BigNumber
+    }
+  } = {}
   Object.keys(response).map((tokenAddress) => {
     const decimals = response[tokenAddress].decimals[0]
     const name = response[tokenAddress].name[0]
@@ -73,18 +87,8 @@ export const getTokens = async (readProvider, tokenAddresses): Promise<TokenBala
     const totalSupply = formatUnits(totalSupplyUnformatted, decimals)
     const totalSupplyPretty = numberWithCommas(totalSupply)
 
-    result[tokenAddress.toLowerCase()] = {
-      address: tokenAddress.toLowerCase(),
-      decimals,
-      name,
-      symbol,
-      totalSupply,
-      totalSupplyPretty,
-      totalSupplyUnformatted
-    }
-
-    result[getAddress(tokenAddress)] = {
-      address: getAddress(tokenAddress),
+    result[tokenAddress] = {
+      address: tokenAddress,
       decimals,
       name,
       symbol,

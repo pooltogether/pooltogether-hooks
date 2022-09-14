@@ -1,4 +1,4 @@
-import { useTheGraphApiKey } from './useInitTheGraphApiKey'
+import { useTheGraphApiKey } from '../app/useInitTheGraphApiKey'
 
 const POOLTOGETHER_GOVERNANCE_GRAPH_URIS = {
   1: (apiKey) =>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { atom, useAtom } from 'jotai'
 
-export const theGraphApiKeyAtom = atom<string>('')
+const theGraphApiKeyAtom = atom<string>('')
 
 export const useTheGraphApiKey = () => {
   const [graphApiKey] = useAtom(theGraphApiKeyAtom)

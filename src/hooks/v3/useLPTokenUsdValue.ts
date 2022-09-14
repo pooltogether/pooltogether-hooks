@@ -1,9 +1,8 @@
-import { V3 } from '../../constants'
 import { formatUnits } from '@ethersproject/units'
-import { calculateLPTokenPrice } from '@pooltogether/utilities'
+import { calculateLPTokenPrice, V3 } from '@pooltogether/utilities'
 import { V3PrizePool } from './useV3PrizePools'
-import { useCoingeckoTokenPrices } from '../useCoingeckoTokenPrices'
-import { useTokenBalances } from '../useTokenBalances'
+import { useCoingeckoTokenPrices } from '../coingecko/useCoingeckoTokenPrices'
+import { useTokenBalances } from '../blockchain/useTokenBalances'
 
 /**
  * NOTE: Relies on constants for getting tokens in the LP pair so we can start fetching the token prices faster & use the coingecko token price cache

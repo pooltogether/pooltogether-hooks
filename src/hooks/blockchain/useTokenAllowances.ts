@@ -1,10 +1,10 @@
 import { batch, contract } from '@pooltogether/etherplex'
 import { useQuery, useQueryClient } from 'react-query'
-import { ERC20Abi } from '../abis/ERC20Abi'
-import { NO_REFETCH, QUERY_KEYS } from '../constants'
-import { useReadProvider } from './useReadProvider'
-import { populatePerIdCache } from '../utils/populatePerIdCache'
+import { ERC20Abi } from '../../abis/ERC20Abi'
+import { NO_REFETCH, QUERY_KEYS } from '../../constants'
+import { populatePerIdCache } from '../../utils/populatePerIdCache'
 import { BigNumber } from 'ethers'
+import { getReadProvider } from '@pooltogether/wallet-connection'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
@@ -21,7 +21,7 @@ export const useTokenAllowances = (
   spenderAddress: string,
   tokenAddresses: string[]
 ) => {
-  const readProvider = useReadProvider(chainId)
+  const readProvider = getReadProvider(chainId)
   const queryClient = useQueryClient()
 
   const enabled =
