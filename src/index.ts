@@ -17,9 +17,6 @@ export { useInitTheGraphApiKey } from './hooks/app/useInitTheGraphApiKey'
 export { useRefetchInterval, getRefetchInterval } from './hooks/blockchain/useRefetchInterval'
 export { useGovernanceChainId } from './hooks/governance/useGovernanceChainId'
 
-// Time
-export { useTimeCountdown } from './hooks/app/useTimeCountdown'
-
 // V3 Pool Hooks
 export * from './hooks/v3/useLPTokenUsdValue'
 export * from './hooks/v3/useTokenFaucetData'
