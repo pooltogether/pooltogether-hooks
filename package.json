@@ -3,7 +3,7 @@
   "author": "PoolTogether Inc.",
   "description": "Useful hooks for PoolTogether applications",
   "module": "dist/hooks.esm.js",
-  "version": "1.13.2",
+  "version": "1.13.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -74,7 +74,8 @@
     "@types/js-cookie": "^2.2.6",
     "@types/lodash.memoize": "^4.1.6",
     "@types/node": "^15.0.2",
-    "@types/react": "17",
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
     "beautiful-react-hooks": "^3.6.2",
     "date-fns": "^2.23.0",
     "eth-revert-reason": "^1.0.3",
@@ -86,8 +87,8 @@
     "jest": "^26.6.3",
     "jotai": "^1.4.3",
     "js-cookie": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-query": "^3.34.0",
     "replace-in-files": "^3.0.0",
     "size-limit": "^5.0.3",
@@ -97,7 +98,7 @@
     "tslib": "^2.3.1",
     "typedoc": "^0.22.10",
     "typedoc-plugin-markdown": "^3.11.11",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.3"
   },
   "peerDependencies": {
     "@pooltogether/etherplex": "^1.1.4",
@@ -109,8 +110,8 @@
     "graphql-tag": "^2.12.5",
     "jotai": "^1.4.3",
     "js-cookie": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-query": "^3.34.0"
   }
 }
