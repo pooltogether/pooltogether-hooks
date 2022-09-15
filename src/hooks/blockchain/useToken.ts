@@ -1,6 +1,6 @@
 import { batch, contract } from '@pooltogether/etherplex'
 import { formatUnits } from '@ethersproject/units'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient, UseQueryResult } from 'react-query'
 import { numberWithCommas } from '@pooltogether/utilities'
 import { NO_REFETCH, QUERY_KEYS } from '../../constants'
 import { ERC20Abi } from '../../abis/ERC20Abi'
@@ -46,9 +46,35 @@ export const useTokens = (chainId: number, tokenAddresses: string[]) => {
  * @param tokenAddress
  * @returns
  */
-export const useToken = (chainId: number, tokenAddress: string) => {
-  const { data: tokenBalances, ...queryData } = useTokens(chainId, [tokenAddress])
-  return { ...queryData, data: tokenBalances ? tokenBalances[tokenAddress] : null }
+export const useToken = (
+  chainId: number,
+  tokenAddress: string
+): {
+  data: {
+    address: string
+    decimals: string
+    name: string
+    symbol: string
+    totalSupply: string
+    totalSupplyPretty: string
+    totalSupplyUnformatted: BigNumber
+  }
+} & Omit<
+  UseQueryResult<{
+    [tokenAddress: string]: {
+      address: string
+      decimals: string
+      name: string
+      symbol: string
+      totalSupply: string
+      totalSupplyPretty: string
+      totalSupplyUnformatted: BigNumber
+    }
+  }>,
+  'data'
+> => {
+  const result = useTokens(chainId, [tokenAddress])
+  return { ...result, data: result.data?.[tokenAddress] }
 }
 
 export const getTokens = async (
@@ -71,7 +97,7 @@ export const getTokens = async (
   const result: {
     [tokenAddress: string]: {
       address: string
-      decimals: number
+      decimals: string
       name: string
       symbol: string
       totalSupply: string

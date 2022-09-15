@@ -1,11 +1,11 @@
 import { batch, contract } from '@pooltogether/etherplex'
 import { formatUnits } from '@ethersproject/units'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient, UseQueryResult } from 'react-query'
 import { numberWithCommas } from '@pooltogether/utilities'
 import { NO_REFETCH, QUERY_KEYS } from '../../constants'
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { populatePerIdCache } from '../../utils/populatePerIdCache'
-import { TokenBalances } from '../../types/token'
+import { TokenBalances, TokenWithAllBalances } from '../../types/token'
 import { getReadProvider } from '@pooltogether/wallet-connection'
 
 /**
@@ -57,7 +57,7 @@ export const useTokenBalance = (
   address: string,
   tokenAddress: string,
   refetchInterval?: number
-) => {
+): { data: TokenWithAllBalances } & Omit<UseQueryResult<TokenBalances>, 'data'> => {
   const { data: tokenBalances, ...queryData } = useTokenBalances(
     chainId,
     address,
