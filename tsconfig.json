@@ -1,4 +1,5 @@
 {
+  "include": ["src", "types"],
   "compilerOptions": {
     "skipLibCheck": true,
     "resolveJsonModule": true,
@@ -13,6 +14,13 @@
     "rootDir": "./src",
     // stricter type-checking for stronger correctness. Recommended by TS
     "strict": false,
+    // linter checks for common issues
+    "noImplicitReturns": false,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    // noUnused* overlap with @typescript-eslint/no-unused-vars, can disable if duplicative
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     // use Node's module resolution algorithm, instead of the legacy TS one
     "moduleResolution": "node",
     // transpile JSX to React.createElement
@@ -23,7 +31,5 @@
     "forceConsistentCasingInFileNames": true,
     // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
     "noEmit": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/__tests__"]
+  }
 }
