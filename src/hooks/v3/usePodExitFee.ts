@@ -1,11 +1,11 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { batch, contract } from '@pooltogether/etherplex'
+import { getAmountFromUnformatted } from '@pooltogether/utilities'
 import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { PodAbi } from '../../abis/PodAbi'
-import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
 
 export const usePodExitFee = (
   chainId: number,
@@ -48,8 +48,8 @@ const getPodExitFee = async (
 
   const response = await batch(provider, ...batchCalls)
 
-  const float = getAmountFromBigNumber(response[underlyingTokenAddress].balanceOf[0], decimals)
-  const exitFee = getAmountFromBigNumber(response[podAddress].getEarlyExitFee[0], decimals)
+  const float = getAmountFromUnformatted(response[underlyingTokenAddress].balanceOf[0], decimals)
+  const exitFee = getAmountFromUnformatted(response[podAddress].getEarlyExitFee[0], decimals)
 
   return { decimals, float, exitFee }
 }

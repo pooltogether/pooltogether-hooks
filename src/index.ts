@@ -9,7 +9,6 @@ export {
 export * from './types/token'
 
 // Utils
-export { getAmountFromBigNumber } from './utils/getAmountFromBigNumber'
 export { getAppEnvString } from './utils/getAppEnvString'
 
 // Common chain data

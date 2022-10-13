@@ -12,6 +12,7 @@ export interface Amount {
   amount: string
   amountUnformatted: BigNumber
   amountPretty: string
+  decimals: string
 }
 
 export interface TokenBalance extends Amount {

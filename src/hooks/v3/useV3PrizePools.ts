@@ -1,7 +1,7 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { getAddress } from '@ethersproject/address'
 import { batch, Context, contract } from '@pooltogether/etherplex'
-import { V3 } from '@pooltogether/utilities'
+import { getAmountFromUnformatted, V3 } from '@pooltogether/utilities'
 import { getReadProviders } from '@pooltogether/wallet-connection'
 import { useQuery } from 'react-query'
 import { ERC20Abi } from '../../abis/ERC20Abi'
@@ -9,7 +9,6 @@ import { PodAbi } from '../../abis/PodAbi'
 import PrizePool_3_3_0 from '../../abis/PrizePool_3_3_0'
 import { PrizeStrategyAbi_3_4_4 } from '../../abis/PrizeStrategy_3_4_4'
 import { Amount, Token } from '../../types/token'
-import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
 import { useV3ChainIds } from './useV3ChainIds'
 
 export interface PodToken extends Token {
@@ -261,7 +260,7 @@ const makePodToken = (tokenAddress: string, etherplexTokenResponse): PodToken =>
     symbol: etherplexTokenResponse.symbol[0],
     name: etherplexTokenResponse.name[0],
     decimals: etherplexTokenResponse.decimals[0],
-    pricePerShare: getAmountFromBigNumber(
+    pricePerShare: getAmountFromUnformatted(
       etherplexTokenResponse.getPricePerShare[0],
       etherplexTokenResponse.decimals[0]
     )

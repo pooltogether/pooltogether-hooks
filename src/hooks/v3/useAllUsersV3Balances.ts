@@ -1,8 +1,11 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { parseUnits } from '@ethersproject/units'
 import { batch, Context, contract } from '@pooltogether/etherplex'
-import { amountMultByUsd, toScaledUsdBigNumber } from '@pooltogether/utilities'
-import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
+import {
+  amountMultByUsd,
+  toScaledUsdBigNumber,
+  getAmountFromUnformatted
+} from '@pooltogether/utilities'
 import { useQueries } from 'react-query'
 import { PodToken, useV3PrizePools, V3PrizePool } from './useV3PrizePools'
 import { Amount, Token, TokenPrice, TokenWithUsdBalance } from '../../types/token'
@@ -158,11 +161,11 @@ const makeTokenWithUsdBalance = (
   etherplexBalanceOfResults
 ): TokenWithUsdBalance => {
   const balanceUnformatted = etherplexBalanceOfResults[token.address].balanceOf[0]
-  const balance = getAmountFromBigNumber(balanceUnformatted, token.decimals)
+  const balance = getAmountFromUnformatted(balanceUnformatted, token.decimals)
   const balanceUsdUnformatted = usdPerToken
     ? amountMultByUsd(balanceUnformatted, usdPerToken)
     : BigNumber.from(0)
-  const balanceUsd = getAmountFromBigNumber(balanceUsdUnformatted, token.decimals)
+  const balanceUsd = getAmountFromUnformatted(balanceUsdUnformatted, token.decimals)
   const balanceUsdScaled = toScaledUsdBigNumber(balanceUsd.amount)
   return {
     ...token,
@@ -188,7 +191,7 @@ const makePodStablecoinTokenWithUsdBalance = (
   etherplexBalanceOfResults
 ): TokenWithUsdBalance => {
   const balanceUnformatted = etherplexBalanceOfResults[token.address].balanceOf[0]
-  const balance = getAmountFromBigNumber(balanceUnformatted, token.decimals)
+  const balance = getAmountFromUnformatted(balanceUnformatted, token.decimals)
   const balanceUsdUnformatted = usdPerToken
     ? amountMultByUsd(
         balanceUnformatted
@@ -199,7 +202,7 @@ const makePodStablecoinTokenWithUsdBalance = (
         usdPerToken
       )
     : BigNumber.from(0)
-  const balanceUsd = getAmountFromBigNumber(balanceUsdUnformatted, token.decimals)
+  const balanceUsd = getAmountFromUnformatted(balanceUsdUnformatted, token.decimals)
   const balanceUsdScaled = toScaledUsdBigNumber(balanceUsd.amount)
   return {
     ...token,

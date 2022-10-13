@@ -45,7 +45,6 @@ const getCoingeckoTokenData = async (assetPlatform: string, contractAddress: str
     const response = await fetch(
       `${COINGECKO_API_URL}/coins/${assetPlatform}/contract/${contractAddress}`
     )
-    console.log({ response })
     return await response.json()
   } catch (e) {
     console.warn(e.message)

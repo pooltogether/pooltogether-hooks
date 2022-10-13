@@ -1,11 +1,11 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { batch, contract } from '@pooltogether/etherplex'
+import { getAmountFromUnformatted } from '@pooltogether/utilities'
 import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
 import { TokenFaucetAbi } from '../../abis/TokenFaucet_3_3_12'
 import { Token, TokenWithBalance, TokenWithUsdBalance } from '../../types/token'
-import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
 import { useTokenFaucetData } from './useTokenFaucetData'
 import { V3PrizePool } from './useV3PrizePools'
 
@@ -53,7 +53,7 @@ const getTokenFaucetRewards = async (
   const tokenFaucetResults = await batch(provider, tokenFaucetContract.claim(usersAddress))
 
   const claimableAmountUnformatted: BigNumber = tokenFaucetResults[tokenFaucetAddress].claim[0]
-  const claimableAmount = getAmountFromBigNumber(claimableAmountUnformatted, dripToken.decimals)
+  const claimableAmount = getAmountFromUnformatted(claimableAmountUnformatted, dripToken.decimals)
 
   return {
     ...claimableAmount,

@@ -1,7 +1,7 @@
+import { getAmountFromUnformatted } from '@pooltogether/utilities'
 import { BigNumber } from 'ethers'
 import { useMemo } from 'react'
 import { Amount, TokenWithUsdBalance } from '../../types/token'
-import { getAmountFromBigNumber } from '../../utils/getAmountFromBigNumber'
 import { useAllUsersV3Balances } from './useAllUsersV3Balances'
 import { V3PrizePool } from './useV3PrizePools'
 
@@ -42,7 +42,7 @@ export const useUsersV3PrizePoolBalances = (usersAddress: string) => {
       }
     })
 
-    const totalValueUsd = getAmountFromBigNumber(totalValueUsdScaled, '2')
+    const totalValueUsd = getAmountFromUnformatted(totalValueUsdScaled, '2')
 
     return {
       isFetching,
