@@ -165,7 +165,10 @@ const makeTokenWithUsdBalance = (
   const balanceUsdUnformatted = usdPerToken
     ? amountMultByUsd(balanceUnformatted, usdPerToken)
     : BigNumber.from(0)
-  const balanceUsd = getAmountFromUnformatted(balanceUsdUnformatted, token.decimals)
+  const balanceUsd = getAmountFromUnformatted(balanceUsdUnformatted, token.decimals, {
+    style: 'currency',
+    currency: 'USD'
+  })
   const balanceUsdScaled = toScaledUsdBigNumber(balanceUsd.amount)
   return {
     ...token,
@@ -202,7 +205,10 @@ const makePodStablecoinTokenWithUsdBalance = (
         usdPerToken
       )
     : BigNumber.from(0)
-  const balanceUsd = getAmountFromUnformatted(balanceUsdUnformatted, token.decimals)
+  const balanceUsd = getAmountFromUnformatted(balanceUsdUnformatted, token.decimals, {
+    style: 'currency',
+    currency: 'USD'
+  })
   const balanceUsdScaled = toScaledUsdBigNumber(balanceUsd.amount)
   return {
     ...token,

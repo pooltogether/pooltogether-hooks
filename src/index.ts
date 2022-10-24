@@ -51,8 +51,16 @@ export { useGasCosts } from './hooks/blockchain/useGasCosts'
 export { useRetroactivePoolClaimData } from './hooks/governance/useRetroactivePoolClaimData'
 
 // V4 Prize Pool / Tokens
-export { usePrizePoolTokens } from './hooks/v4/usePrizePoolTokens'
-export { useUsersPrizePoolBalances } from './hooks/v4/useUsersPrizePoolBalances'
+export {
+  usePrizePoolTokens,
+  getPrizePoolTokens,
+  getPrizePoolTokensQueryKey
+} from './hooks/v4/usePrizePoolTokens'
+export {
+  useUsersPrizePoolBalances,
+  getUsersPrizePoolBalances,
+  getUsersPrizePoolBalancesQueryKey
+} from './hooks/v4/useUsersPrizePoolBalances'
 
 // Shared UI Hook.
 export { useCookieOptions, useInitCookieOptions } from './hooks/app/useCookieOptions'
