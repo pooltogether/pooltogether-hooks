@@ -20,7 +20,8 @@ export const QUERY_KEYS = Object.freeze({
   getCoingeckoTokenPrices: 'getCoingeckoTokenPrices',
   getCoingeckoSimplePrices: 'getCoingeckoSimplePrices',
   usersPodBalance: 'usersPodBalance',
-  uniswapLPStakingPool: 'uniswapLPStakingPool'
+  uniswapLPStakingPool: 'uniswapLPStakingPool',
+  getCoingeckoExchangeRates: 'getCoingeckoExchangeRates'
 })
 
 export const NO_REFETCH = Object.freeze({
