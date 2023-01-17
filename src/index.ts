@@ -42,6 +42,7 @@ export {
 export { useCoingeckoSimplePrices } from './hooks/coingecko/useCoingeckoSimplePrices'
 export { useCoingeckoTokenData } from './hooks/coingecko/useCoingeckoTokenData'
 export { useCoingeckoTokenImage } from './hooks/coingecko/useCoingeckoTokenImage'
+export { useCoingeckoExchangeRates } from './hooks/coingecko/useCoingeckoExchangeRates'
 
 // Gas
 export { useGasCostEstimate } from './hooks/blockchain/useGasCostEstimate'
