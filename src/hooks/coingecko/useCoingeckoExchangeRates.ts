@@ -1,17 +1,22 @@
-import { useQuery } from 'react-query'
+import { useQuery, UseQueryResult } from 'react-query'
 
 import { COINGECKO_API_URL, NO_REFETCH, QUERY_KEYS } from '../../constants'
 
-export const useCoingeckoExchangeRates = async () => {
-  return useQuery(
-    [QUERY_KEYS.getCoingeckoExchangeRates],
-    async () => await getCoingeckoExchangeRates(),
-    {
-      staleTime: Infinity,
-      enabled: true,
-      ...NO_REFETCH
-    }
-  )
+interface CoingeckoExchangeRates {
+  [id: string]: {
+    name: string
+    unit: string
+    value: number
+    type: 'crypto' | 'fiat' | 'commodity'
+  }
+}
+
+export const useCoingeckoExchangeRates = (): UseQueryResult<CoingeckoExchangeRates, unknown> => {
+  return useQuery([QUERY_KEYS.getCoingeckoExchangeRates], async () => await getCoingeckoExchangeRates(), {
+    staleTime: Infinity,
+    enabled: true,
+    ...NO_REFETCH
+  })
 }
 
 const getCoingeckoExchangeRates = async () => {
