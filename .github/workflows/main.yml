@@ -48,6 +48,6 @@ jobs:
         run: yarn lint
 
       - name: Publish
-        run: yarn build
+        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_KEY }}
