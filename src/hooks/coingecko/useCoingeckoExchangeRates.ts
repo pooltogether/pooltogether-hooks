@@ -19,7 +19,7 @@ export const useCoingeckoExchangeRates = (): UseQueryResult<CoingeckoExchangeRat
   })
 }
 
-const getCoingeckoExchangeRates = async () => {
+export const getCoingeckoExchangeRates = async () => {
   try {
     const url = new URL(`${COINGECKO_API_URL}/exchange_rates`)
     const response = await fetch(url.toString())
