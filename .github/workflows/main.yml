@@ -5,10 +5,10 @@ on:
       - main
 jobs:
   check:
-    name: Deploy new package version to NPM
+    name: Check package.json version
     runs-on: ubuntu-latest
     outputs:
-      changed: steps.check.outputs.changed
+      changed: ${{ steps.check.outputs.changed }}
 
     steps:
       - name: Checkout repo
