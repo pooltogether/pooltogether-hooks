@@ -17,7 +17,7 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - id: Check version
+      - name: Check version
         uses: EndBug/version-check@v2
         with:
           file-url: https://unpkg.com/your-package@latest/package.json
