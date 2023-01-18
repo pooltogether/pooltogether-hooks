@@ -4,11 +4,15 @@ import { CoingeckoExchangeRates } from 'src/types'
 import { COINGECKO_API_URL, NO_REFETCH, QUERY_KEYS } from '../../constants'
 
 export const useCoingeckoExchangeRates = (): UseQueryResult<CoingeckoExchangeRates, unknown> => {
-  return useQuery([QUERY_KEYS.getCoingeckoExchangeRates], async () => await getCoingeckoExchangeRates(), {
-    staleTime: Infinity,
-    enabled: true,
-    ...NO_REFETCH
-  })
+  return useQuery(
+    [QUERY_KEYS.getCoingeckoExchangeRates],
+    async () => await getCoingeckoExchangeRates(),
+    {
+      staleTime: Infinity,
+      enabled: true,
+      ...NO_REFETCH
+    }
+  )
 }
 
 export const getCoingeckoExchangeRates = async () => {
