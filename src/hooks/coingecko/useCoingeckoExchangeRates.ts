@@ -1,15 +1,7 @@
-import { useQuery, UseQueryResult } from 'react-query'
+import { useQuery } from 'react-query'
+import { CoingeckoExchangeRates } from 'src/types'
 
 import { COINGECKO_API_URL, NO_REFETCH, QUERY_KEYS } from '../../constants'
-
-interface CoingeckoExchangeRates {
-  [id: string]: {
-    name: string
-    unit: string
-    value: number
-    type: 'crypto' | 'fiat' | 'commodity'
-  }
-}
 
 export const useCoingeckoExchangeRates = () => {
   return useQuery([QUERY_KEYS.getCoingeckoExchangeRates], async () => await getCoingeckoExchangeRates(), {

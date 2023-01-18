@@ -6,7 +6,7 @@ export {
 } from './hooks/app/useIsTestnets'
 
 // Types
-export * from './types/token'
+export * from './types'
 
 // Utils
 export { getAppEnvString } from './utils/getAppEnvString'
