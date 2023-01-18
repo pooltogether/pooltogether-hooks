@@ -20,7 +20,7 @@ jobs:
       - name: Check version
         uses: EndBug/version-check@v2
         with:
-          file-url: https://unpkg.com/your-package@latest/package.json
+          file-url: https://unpkg.com/@pooltogether/hooks@latest/package.json
           static-checking: localIsNew
 
       - name: Install
