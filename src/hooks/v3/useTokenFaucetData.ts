@@ -5,6 +5,7 @@ import { amountMultByUsd, SECONDS_PER_DAY } from '@pooltogether/utilities'
 import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
+
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { TokenFaucetAbi } from '../../abis/TokenFaucet_3_3_12'
 import { Token, TokenWithUsdBalance } from '../../types/token'

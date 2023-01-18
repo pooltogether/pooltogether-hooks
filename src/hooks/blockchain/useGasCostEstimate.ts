@@ -1,5 +1,5 @@
-import { BigNumber } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
+import { BigNumber } from 'ethers'
 
 import {
   SIMPLE_PRICES_CHAIN_ID_MAP,

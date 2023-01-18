@@ -1,6 +1,7 @@
 import { getAmountFromUnformatted } from '@pooltogether/utilities'
 import { BigNumber } from 'ethers'
 import { useMemo } from 'react'
+
 import { Amount, TokenWithUsdBalance } from '../../types/token'
 import { useAllUsersV3Balances } from './useAllUsersV3Balances'
 import { V3PrizePool } from './useV3PrizePools'

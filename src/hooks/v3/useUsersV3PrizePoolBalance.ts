@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+
 import { useAllUsersV3Balances } from './useAllUsersV3Balances'
 
 export const useUsersV3PrizePoolBalance = (

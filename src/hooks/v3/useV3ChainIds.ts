@@ -1,4 +1,5 @@
 import { V3 } from '@pooltogether/utilities'
+
 import { getAppEnvString } from '../../utils/getAppEnvString'
 
 export const useV3ChainIds = () => {

@@ -4,6 +4,7 @@ import { getAmountFromUnformatted } from '@pooltogether/utilities'
 import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
+
 import { TokenFaucetAbi } from '../../abis/TokenFaucet_3_3_12'
 import { Token, TokenWithBalance, TokenWithUsdBalance } from '../../types/token'
 import { useTokenFaucetData } from './useTokenFaucetData'

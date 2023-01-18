@@ -4,6 +4,7 @@ import { batch, Context, contract } from '@pooltogether/etherplex'
 import { getAmountFromUnformatted, V3 } from '@pooltogether/utilities'
 import { getReadProviders } from '@pooltogether/wallet-connection'
 import { useQuery } from 'react-query'
+
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { PodAbi } from '../../abis/PodAbi'
 import PrizePool_3_3_0 from '../../abis/PrizePool_3_3_0'

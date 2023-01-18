@@ -1,5 +1,6 @@
-import Cookies from 'js-cookie'
 import { atom, useAtom } from 'jotai'
+import Cookies from 'js-cookie'
+
 import { useCookieOptions } from './useCookieOptions'
 
 const APP_ENVIRONMENT_KEY = '_useTestnets'

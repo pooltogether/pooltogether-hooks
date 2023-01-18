@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
 import { atom, useAtom } from 'jotai'
 import { CookieAttributes } from 'js-cookie'
+import { useEffect } from 'react'
 
 const domainAtom = atom<string>('')
 

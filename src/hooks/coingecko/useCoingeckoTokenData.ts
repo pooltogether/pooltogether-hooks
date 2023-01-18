@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query'
 import { isAddress } from '@ethersproject/address'
 import { NETWORK } from '@pooltogether/utilities'
+import { useQuery } from 'react-query'
 
 const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
 const COINGECKO_ASSET_PLATFORMS = Object.freeze({

@@ -1,10 +1,11 @@
 import { batch, contract } from '@pooltogether/etherplex'
+import { getReadProvider } from '@pooltogether/wallet-connection'
+import { BigNumber } from 'ethers'
 import { useQuery, useQueryClient } from 'react-query'
+
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { NO_REFETCH, QUERY_KEYS } from '../../constants'
 import { populatePerIdCache } from '../../utils/populatePerIdCache'
-import { BigNumber } from 'ethers'
-import { getReadProvider } from '@pooltogether/wallet-connection'
 
 /**
  * Returns a dictionary keyed by the provided token addresses filled with
