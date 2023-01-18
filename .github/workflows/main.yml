@@ -1,0 +1,35 @@
+name: CD
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Deploy new package version to NPM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - id: Check version
+        uses: EndBug/version-check@v2
+        with:
+          file-url: https://unpkg.com/your-package@latest/package.json
+          static-checking: localIsNew
+
+      - name: Install
+        run: yarn
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Publish
+        run: yarn build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_KEY }}
