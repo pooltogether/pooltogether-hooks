@@ -11,7 +11,7 @@ interface CoingeckoExchangeRates {
   }
 }
 
-export const useCoingeckoExchangeRates = (): UseQueryResult<CoingeckoExchangeRates, unknown> => {
+export const useCoingeckoExchangeRates = () => {
   return useQuery([QUERY_KEYS.getCoingeckoExchangeRates], async () => await getCoingeckoExchangeRates(), {
     staleTime: Infinity,
     enabled: true,
@@ -23,7 +23,7 @@ export const getCoingeckoExchangeRates = async () => {
   try {
     const url = new URL(`${COINGECKO_API_URL}/exchange_rates`)
     const response = await fetch(url.toString())
-    const exchangeRates = (await response.json()).rates
+    const exchangeRates: CoingeckoExchangeRates = (await response.json()).rates
 
     return exchangeRates
   } catch (e) {
