@@ -6,7 +6,7 @@ export {
 } from './hooks/app/useIsTestnets'
 
 // Types
-export * from './types/token'
+export * from './types'
 
 // Utils
 export { getAppEnvString } from './utils/getAppEnvString'
@@ -42,6 +42,7 @@ export {
 export { useCoingeckoSimplePrices } from './hooks/coingecko/useCoingeckoSimplePrices'
 export { useCoingeckoTokenData } from './hooks/coingecko/useCoingeckoTokenData'
 export { useCoingeckoTokenImage } from './hooks/coingecko/useCoingeckoTokenImage'
+export { useCoingeckoExchangeRates, getCoingeckoExchangeRates } from './hooks/coingecko/useCoingeckoExchangeRates'
 
 // Gas
 export { useGasCostEstimate } from './hooks/blockchain/useGasCostEstimate'
