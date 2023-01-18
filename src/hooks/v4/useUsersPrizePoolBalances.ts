@@ -1,7 +1,8 @@
-import { PrizePool } from '@pooltogether/v4-client-js'
 import { formatUnits } from '@ethersproject/units'
 import { formatUnformattedBigNumberForDisplay } from '@pooltogether/utilities'
+import { PrizePool } from '@pooltogether/v4-client-js'
 import { useQuery } from 'react-query'
+
 import { Token } from '../../types/token'
 import { useRefetchInterval } from '../blockchain/useRefetchInterval'
 import { usePrizePoolTokens } from './usePrizePoolTokens'

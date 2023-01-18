@@ -1,12 +1,13 @@
-import { batch, contract } from '@pooltogether/etherplex'
 import { formatUnits } from '@ethersproject/units'
-import { useQuery, useQueryClient, UseQueryResult } from 'react-query'
+import { batch, contract } from '@pooltogether/etherplex'
 import { numberWithCommas } from '@pooltogether/utilities'
-import { NO_REFETCH, QUERY_KEYS } from '../../constants'
-import { ERC20Abi } from '../../abis/ERC20Abi'
-import { populatePerIdCache } from '../../utils/populatePerIdCache'
-import { TokenBalances, TokenWithAllBalances } from '../../types/token'
 import { getReadProvider } from '@pooltogether/wallet-connection'
+import { useQuery, useQueryClient, UseQueryResult } from 'react-query'
+
+import { ERC20Abi } from '../../abis/ERC20Abi'
+import { NO_REFETCH, QUERY_KEYS } from '../../constants'
+import { TokenBalances, TokenWithAllBalances } from '../../types/token'
+import { populatePerIdCache } from '../../utils/populatePerIdCache'
 
 /**
  * Returns a dictionary keyed by the token addresses filled with

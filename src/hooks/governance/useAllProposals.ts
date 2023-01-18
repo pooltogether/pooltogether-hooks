@@ -1,11 +1,12 @@
-import gql from 'graphql-tag'
-import { request } from 'graphql-request'
-import { useQuery } from 'react-query'
 import { batch, contract } from '@pooltogether/etherplex'
-import { GovernorAlphaAbi } from '../../abis/GovernorAlphaABI'
-import { NO_REFETCH, PROPOSAL_STATES, ProposalStatus } from '../../constants'
 import { NETWORK } from '@pooltogether/utilities'
 import { getReadProvider } from '@pooltogether/wallet-connection'
+import { request } from 'graphql-request'
+import gql from 'graphql-tag'
+import { useQuery } from 'react-query'
+
+import { GovernorAlphaAbi } from '../../abis/GovernorAlphaABI'
+import { NO_REFETCH, PROPOSAL_STATES, ProposalStatus } from '../../constants'
 
 export interface Proposal {
   id: string

@@ -4,6 +4,7 @@ import { getAmountFromUnformatted } from '@pooltogether/utilities'
 import { getReadProvider } from '@pooltogether/wallet-connection'
 import { BigNumber } from 'ethers'
 import { useQuery } from 'react-query'
+
 import { ERC20Abi } from '../../abis/ERC20Abi'
 import { PodAbi } from '../../abis/PodAbi'
 

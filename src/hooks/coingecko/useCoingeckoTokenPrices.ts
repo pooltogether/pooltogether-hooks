@@ -1,6 +1,7 @@
-import { useQueries, useQuery } from 'react-query'
 import { getAddress, isAddress } from '@ethersproject/address'
 import { NETWORK } from '@pooltogether/utilities'
+import { useMemo } from 'react'
+import { useQueries, useQuery } from 'react-query'
 
 import {
   NO_REFETCH,
@@ -9,7 +10,6 @@ import {
   QUERY_KEYS
 } from '../../constants'
 import { TokenPrice } from '../../types/token'
-import { useMemo } from 'react'
 
 /**
  * Fetch token prices across multiple chains with a single hook

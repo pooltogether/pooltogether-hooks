@@ -1,5 +1,6 @@
 import { PrizePool } from '@pooltogether/v4-client-js'
 import { useQuery } from 'react-query'
+
 import { NO_REFETCH } from '../../constants'
 import { Token } from '../../types/token'
 

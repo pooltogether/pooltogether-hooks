@@ -6,13 +6,14 @@ import {
   toScaledUsdBigNumber,
   getAmountFromUnformatted
 } from '@pooltogether/utilities'
+import { getReadProviders } from '@pooltogether/wallet-connection'
+import { BigNumber } from 'ethers'
 import { useQueries } from 'react-query'
-import { PodToken, useV3PrizePools, V3PrizePool } from './useV3PrizePools'
+
+import { ERC20Abi } from '../../abis/ERC20Abi'
 import { Amount, Token, TokenPrice, TokenWithUsdBalance } from '../../types/token'
 import { useCoingeckoTokenPricesAcrossChains } from '../coingecko/useCoingeckoTokenPrices'
-import { ERC20Abi } from '../../abis/ERC20Abi'
-import { BigNumber } from 'ethers'
-import { getReadProviders } from '@pooltogether/wallet-connection'
+import { PodToken, useV3PrizePools, V3PrizePool } from './useV3PrizePools'
 
 /**
  * Fetch users balances for all tokens in all prize pools

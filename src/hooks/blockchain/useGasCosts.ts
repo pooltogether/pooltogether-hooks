@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query'
+
 import { useRefetchInterval } from './useRefetchInterval'
 
 export const useGasCosts = (chainId: number) => {
