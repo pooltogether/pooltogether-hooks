@@ -19,9 +19,15 @@ export const getCoingeckoExchangeRates = async () => {
   try {
     const url = new URL(`${COINGECKO_API_URL}/exchange_rates`)
     const response = await fetch(url.toString())
-    const exchangeRates: CoingeckoExchangeRates = (await response.json()).rates
+    const jsonResponse = await response.json()
+    const exchangeRates: CoingeckoExchangeRates = jsonResponse.rates
 
-    return exchangeRates
+    if (!!exchangeRates) {
+      return exchangeRates
+    } else {
+      console.error(jsonResponse.status)
+      return undefined
+    }
   } catch (e) {
     console.error(e.message)
     return undefined
